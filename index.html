@@ -3,117 +3,480 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Magistral Confecciones - Pulseras Pandora</title>
+  <meta name="description" content="Charms by Sthefy - Pulseras y charms Pandora exclusivos en Paraguay. Diseños elegantes y únicos. Envío a todo el país.">
+  <meta name="keywords" content="charms, pulseras, Pandora, joyería, Paraguay, Sthefy">
+  <meta name="author" content="Charms by Sthefy">
+  <meta property="og:title" content="Charms by Sthefy - Pulseras Pandora Paraguay">
+  <meta property="og:description" content="Descubre nuestra colección exclusiva de pulseras y charms Pandora. Envío a todo Paraguay.">
+  <meta property="og:type" content="website">
+  <title>Charms by Sthefy | Pulseras Pandora Paraguay</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <!-- HEADER -->
-  <header class="header">
-    <div class="logo">
-      <img src="logoCharms.jpg" alt="Logo Charms Paraguay">
-      <span>Magistral Confecciones</span>
+  <header class="header" id="header">
+    <div class="container">
+      <div class="logo">
+        <img src="logoCharms.jpg" alt="Charms by Sthefy Logo" loading="lazy">
+        <div class="logo-text">
+          <span class="logo-title">Charms</span>
+          <span class="logo-subtitle">by Sthefy</span>
+        </div>
+      </div>
+      <nav class="nav" id="navMenu">
+        <a href="#inicio" class="nav-link active">Inicio</a>
+        <a href="#coleccion" class="nav-link">Colección</a>
+        <a href="#nosotros" class="nav-link">Nosotros</a>
+        <a href="#testimonios" class="nav-link">Testimonios</a>
+        <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20información%20sobre%20las%20pulseras%20y%20charms" class="btn-whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i> Contactar
+        </a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-    <nav class="nav" id="navMenu">
-      <a href="#coleccion">Colección</a>
-      <a href="#comunidad">Comunidad</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#contacto" class="btn">Comprar</a>
-    </nav>
-    <button class="menu-toggle" id="menuToggle">☰</button>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Pulseras y charms Pandora exclusivos</h1>
-      <p>Diseños elegantes y únicos que hacen brillar tu estilo. Encuentra tu combinación perfecta y crea tu pulsera soñada.</p>
-      <a href="#coleccion" class="btn">Explorar colección</a>
+  <!-- HERO SECTION -->
+  <section id="inicio" class="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-gem"></i> Joyería Exclusiva en Paraguay
+        </div>
+        <h1 class="hero-title">
+          Crea tu historia con <span class="highlight">charms únicos</span>
+        </h1>
+        <p class="hero-description">
+          Pulseras y charms Pandora de alta calidad. Diseños exclusivos que reflejan tu personalidad. 
+          <strong>Envío gratis en Asunción y Gran Asunción.</strong>
+        </p>
+        <div class="hero-buttons">
+          <a href="#coleccion" class="btn btn-primary">
+            <i class="fas fa-shopping-bag"></i> Ver Colección
+          </a>
+          <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20hacer%20un%20pedido" class="btn btn-secondary" target="_blank">
+            <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Clientas felices</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Calidad garantizada</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">24h</span>
+            <span class="stat-label">Envío rápido</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="image-wrapper">
+          <img src="assets/pulseras/4.jpg" alt="Colección de pulseras Pandora" loading="lazy">
+          <div class="floating-card">
+            <i class="fas fa-star"></i>
+            <span>Más vendido</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="hero-img">
-      <img src="assets\pulseras\4.jpg " alt="Pulseras Pandora">
+    <div class="scroll-indicator">
+      <a href="#coleccion">
+        <i class="fas fa-chevron-down"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">
+            <i class="fas fa-shipping-fast"></i>
+          </div>
+          <h3>Envío Rápido</h3>
+          <p>Entrega en 24-48 horas en todo Paraguay</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Garantía de Calidad</h3>
+          <p>Materiales premium y acabados perfectos</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Diseños Exclusivos</h3>
+          <p>Charms únicos que no encontrarás en otro lugar</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">
+            <i class="fas fa-hand-holding-usd"></i>
+          </div>
+          <h3>Precios Accesibles</h3>
+          <p>La mejor calidad al mejor precio del mercado</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- COLECCIÓN -->
   <section id="coleccion" class="coleccion">
-    <h2>Colección Destacada</h2>
-    <div class="grid">
-      <!-- Producto 1 -->
-      <div class="card">
-        <img src="assets\pulseras\40.jpg" alt="Pulsera Pandora Charm 1">
-        <h3>Pulsera Elegance</h3>
-        <p class="price">Gs. 150.000</p>
-        <a href="https://wa.me/595972887699?text=Hola!%20Quiero%20la%20Pulsera%20Elegance" 
-     class="btn-comprar" target="_blank">🛒 Comprar</a>
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Nuestra Selección</span>
+        <h2 class="section-title">Colección Destacada</h2>
+        <p class="section-description">Cada pieza está cuidadosamente seleccionada para brindarte elegancia y estilo único.</p>
       </div>
-      <!-- Producto 2 -->
-      <div class="card">
-        <img src="assets\pulseras\41.jpg" alt="Pulsera Pandora Charm 2">
-        <h3>Pulsera Luxury</h3>
-        <p class="price">Gs. 150.000</p>
-        <a href="https://wa.me/595972887699?text=Hola!%20Quiero%20la%20Pulsera%20Elegance" 
-     class="btn-comprar" target="_blank">🛒 Comprar</a>
+
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="charms">Charms</button>
+        <button class="filter-btn" data-filter="pulseras">Pulseras</button>
+        <button class="filter-btn" data-filter="acero">Joyas de Acero</button>
       </div>
-      <!-- Producto 3 -->
-      <div class="card">
-        <img src="assets\pulseras\13.jpg" alt="Pulsera Pandora Charm 3">
-        <h3>Pulsera Trendy</h3>
-        <p class="price">Gs. 150.000</p>
-        <a href="https://wa.me/595972887699?text=Hola!%20Quiero%20la%20Pulsera%20Elegance" 
-     class="btn-comprar" target="_blank">🛒 Comprar</a>
-      </div> 
-      <!-- Producto 4 -->
-      <div class="card">
-        <img src="assets\pulseras\43.jpg" alt="Pulsera Pandora Charm 4">
-        <h3>Pulsera Charms Mix</h3>
-        <p class="price">Gs. 150.000</p>
-        <a href="https://wa.me/595972887699?text=Hola!%20Quiero%20la%20Pulsera%20Elegance" 
-     class="btn-comprar" target="_blank">🛒 Comprar</a>
+
+      <div class="products-grid">
+        <!-- Producto 1 -->
+        <article class="product-card" data-category="elegance">
+          <div class="product-badge">Más Popular</div>
+          <div class="product-image">
+            <img src="assets/pulseras/40.jpg" alt="Pulsera Elegance" loading="lazy">
+            <div class="product-overlay">
+              <button class="btn-quickview" onclick="quickView('Pulsera Elegance', '150000', 'assets/pulseras/40.jpg')">
+                <i class="fas fa-eye"></i> Vista rápida
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Pulsera Elegance</h3>
+            <p class="product-description">Diseño clásico con charms delicados</p>
+            <div class="product-footer">
+              <span class="product-price">Gs. 150.000</span>
+              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Elegance%20(Gs.%20150.000)" class="btn-buy" target="_blank">
+                <i class="fab fa-whatsapp"></i> Comprar
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Producto 2 -->
+        <article class="product-card" data-category="luxury">
+          <div class="product-image">
+            <img src="assets/pulseras/41.jpg" alt="Pulsera Luxury" loading="lazy">
+            <div class="product-overlay">
+              <button class="btn-quickview" onclick="quickView('Pulsera Luxury', '150000', 'assets/pulseras/41.jpg')">
+                <i class="fas fa-eye"></i> Vista rápida
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Pulsera Luxury</h3>
+            <p class="product-description">Estilo sofisticado para ocasiones especiales</p>
+            <div class="product-footer">
+              <span class="product-price">Gs. 150.000</span>
+              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Luxury%20(Gs.%20150.000)" class="btn-buy" target="_blank">
+                <i class="fab fa-whatsapp"></i> Comprar
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Producto 3 -->
+        <article class="product-card" data-category="trendy">
+          <div class="product-image">
+            <img src="assets/pulseras/13.jpg" alt="Pulsera Trendy" loading="lazy">
+            <div class="product-overlay">
+              <button class="btn-quickview" onclick="quickView('Pulsera Trendy', '150000', 'assets/pulseras/13.jpg')">
+                <i class="fas fa-eye"></i> Vista rápida
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Pulsera Trendy</h3>
+            <p class="product-description">Moderna y versátil para el día a día</p>
+            <div class="product-footer">
+              <span class="product-price">Gs. 150.000</span>
+              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Trendy%20(Gs.%20150.000)" class="btn-buy" target="_blank">
+                <i class="fab fa-whatsapp"></i> Comprar
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Producto 4 -->
+        <article class="product-card" data-category="luxury">
+          <div class="product-badge">Nuevo</div>
+          <div class="product-image">
+            <img src="assets/pulseras/43.jpg" alt="Pulsera Charms Mix" loading="lazy">
+            <div class="product-overlay">
+              <button class="btn-quickview" onclick="quickView('Pulsera Charms Mix', '150000', 'assets/pulseras/43.jpg')">
+                <i class="fas fa-eye"></i> Vista rápida
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Pulsera Charms Mix</h3>
+            <p class="product-description">Combinación única de charms variados</p>
+            <div class="product-footer">
+              <span class="product-price">Gs. 150.000</span>
+              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Charms%20Mix%20(Gs.%20150.000)" class="btn-buy" target="_blank">
+                <i class="fab fa-whatsapp"></i> Comprar
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Producto 5 -->
+        <article class="product-card" data-category="elegance">
+          <div class="product-image">
+            <img src="assets/pulseras/10.jpg" alt="Pulsera Sweetheart" loading="lazy">
+            <div class="product-overlay">
+              <button class="btn-quickview" onclick="quickView('Pulsera Sweetheart', '150000', 'assets/pulseras/10.jpg')">
+                <i class="fas fa-eye"></i> Vista rápida
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Pulsera Sweetheart</h3>
+            <p class="product-description">Romántica y delicada, perfecta para regalar</p>
+            <div class="product-footer">
+              <span class="product-price">Gs. 150.000</span>
+              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Sweetheart%20(Gs.%20150.000)" class="btn-buy" target="_blank">
+                <i class="fab fa-whatsapp"></i> Comprar
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Producto 6 -->
+        <article class="product-card" data-category="trendy">
+          <div class="product-image">
+            <img src="assets/pulseras/9.jpg" alt="Pulsera Sweetheart Gold" loading="lazy">
+            <div class="product-overlay">
+              <button class="btn-quickview" onclick="quickView('Pulsera Sweetheart Gold', '150000', 'assets/pulseras/9.jpg')">
+                <i class="fas fa-eye"></i> Vista rápida
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Pulsera Sweetheart Gold</h3>
+            <p class="product-description">Edición especial con detalles dorados</p>
+            <div class="product-footer">
+              <span class="product-price">Gs. 150.000</span>
+              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Sweetheart%20Gold%20(Gs.%20150.000)" class="btn-buy" target="_blank">
+                <i class="fab fa-whatsapp"></i> Comprar
+              </a>
+            </div>
+          </div>
+        </article>
       </div>
-      <!-- Producto 5 -->
-      <div class="card">
-        <img src="assets\pulseras\10.jpg" alt="Pulsera Pandora Charm 5">
-        <h3>Pulsera Sweetheart</h3>
-        <p class="price">Gs. 150.000</p>
-          <a href="https://wa.me/595972887699?text=Hola!%20Quiero%20la%20Pulsera%20Elegance" 
-     class="btn-comprar" target="_blank">🛒 Comprar</a>
-      </div>
-       <!-- Producto 6 -->
-      <div class="card">
-        <img src="assets\pulseras\9.jpg" alt="Pulsera Pandora Charm 5">
-        <h3>Pulsera Sweetheart</h3>
-        <p class="price">Gs. 150.000</p>
-          <a href="https://wa.me/595972887699?text=Hola!%20Quiero%20la%20Pulsera%20Elegance" 
-     class="btn-comprar" target="_blank">🛒 Comprar</a>
+
+      <div class="section-footer">
+        <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20ver%20más%20modelos%20de%20pulseras" class="btn btn-outline" target="_blank">
+          <i class="fas fa-plus"></i> Ver catálogo completo
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- COMUNIDAD -->
-  <section id="comunidad" class="comunidad">
-    <h2>Lo que dicen nuestras clientas</h2>
-    <div class="testimonios">
-      <div class="testimonio">
-        <p>"Me encantó la pulsera, cada charm es precioso y el envío fue super rápido."</p>
-        <span>— Ana, Asunción</span>
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="nosotros">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="logoCharms.jpg" alt="Charms by Sthefy" loading="lazy">
+          <div class="experience-badge">
+            <span class="years">+5</span>
+            <span class="text">Años de<br>experiencia</span>
+          </div>
+        </div>
+        <div class="about-content">
+          <span class="section-badge">Sobre Nosotros</span>
+          <h2>La magia de los charms en Paraguay</h2>
+          <p>
+            En <strong>Charms by Sthefy</strong> nos apasiona crear pulseras únicas que cuenten historias. 
+            Cada charm es cuidadosamente seleccionado para garantizar la más alta calidad y diseño.
+          </p>
+          <p>
+            Somos una empresa paraguaya dedicada a brindarte joyería elegante a precios accesibles. 
+            Nuestro compromiso es tu satisfacción.
+          </p>
+          <ul class="about-list">
+            <li><i class="fas fa-check-circle"></i> Material: Plata 925 y acero inoxidable</li>
+            <li><i class="fas fa-check-circle"></i> Garantía de 6 meses en todas las piezas</li>
+            <li><i class="fas fa-check-circle"></i> Envío a todo Paraguay</li>
+            <li><i class="fas fa-check-circle"></i> Atención personalizada por WhatsApp</li>
+          </ul>
+          <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20conocer%20más%20sobre%20Charms%20by%20Sthefy" class="btn btn-primary" target="_blank">
+            <i class="fab fa-whatsapp"></i> Hablar con Sthefy
+          </a>
+        </div>
       </div>
-      <div class="testimonio">
-        <p>"Compré unos charms para mi novia y la atención fue excelente. Muy recomendables."</p>
-        <span>— Carlos, Encarnación</span>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section id="testimonios" class="testimonios">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Testimonios</span>
+        <h2 class="section-title">Lo que dicen nuestras clientas</h2>
       </div>
-      <div class="testimonio">
-        <p>"Mi pulsera quedó tal cual quería, super elegante y de calidad."</p>
-        <span>— Mariana, Ciudad del Este</span>
+      <div class="testimonios-grid">
+        <div class="testimonio-card">
+          <div class="testimonio-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonio-text">"Me encantó la pulsera, cada charm es precioso y el envío fue super rápido. La atención de Sthefy es excelente, me ayudó a elegir los charms perfectos."</p>
+          <div class="testimonio-author">
+            <div class="author-avatar">A</div>
+            <div class="author-info">
+              <span class="author-name">Ana</span>
+              <span class="author-location"><i class="fas fa-map-marker-alt"></i> Asunción</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonio-card">
+          <div class="testimonio-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonio-text">"Compré unos charms para mi novia y la atención fue excelente. Llegó todo perfecto y empaquetado muy lindo. Muy recomendables."</p>
+          <div class="testimonio-author">
+            <div class="author-avatar">C</div>
+            <div class="author-info">
+              <span class="author-name">Carlos</span>
+              <span class="author-location"><i class="fas fa-map-marker-alt"></i> Encarnación</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonio-card">
+          <div class="testimonio-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonio-text">"Mi pulsera quedó tal cual quería, super elegante y de calidad. Ya quiero comprar más charms para combinar. ¡Gracias Sthefy!"</p>
+          <div class="testimonio-author">
+            <div class="author-avatar">M</div>
+            <div class="author-info">
+              <span class="author-name">Mariana</span>
+              <span class="author-location"><i class="fas fa-map-marker-alt"></i> Ciudad del Este</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <h2>¿Lista para crear tu pulsera soñada?</h2>
+        <p>Escríbeme por WhatsApp y te ayudo a elegir los charms perfectos para ti</p>
+        <a href="https://wa.me/595973779707?text=Hola%20Sthefy!%20Quiero%20crear%20mi%20pulsera%20soñada" class="btn btn-whatsapp-large" target="_blank">
+          <i class="fab fa-whatsapp"></i> Escribir por WhatsApp
+        </a>
+        <span class="cta-note">Respuesta inmediata • Atención personalizada</span>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2025 Magistral Confecciones | Todos los derechos reservados</p>
-    <p class="muted">Contacto: +595 972 887 699 | Instagram: @charms_py</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="logoCharms.jpg" alt="Charms by Sthefy" class="footer-logo">
+          <p>Pulseras y charms Pandora exclusivos en Paraguay. Calidad garantizada y envío a todo el país.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/595973779707" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Enlaces rápidos</h4>
+          <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#coleccion">Colección</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#testimonios">Testimonios</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Atención al cliente</h4>
+          <ul>
+            <li><a href="https://wa.me/595973779707">Contacto</a></li>
+            <li><a href="#">Envíos</a></li>
+            <li><a href="#">Garantía</a></li>
+            <li><a href="#">Preguntas frecuentes</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contacto</h4>
+          <p><i class="fab fa-whatsapp"></i> +595 973 779 707</p>
+          <p><i class="fab fa-instagram"></i> @charms_py</p>
+          <p><i class="fas fa-map-marker-alt"></i> Paraguay</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Charms by Sthefy. Todos los derechos reservados.</p>
+        <p class="footer-credit">Hecho con <i class="fas fa-heart"></i> en Paraguay</p>
+      </div>
+    </div>
   </footer>
+
+  <!-- Quick View Modal -->
+  <div id="quickViewModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div class="modal-body">
+        <img id="modalImg" src="" alt="">
+        <div class="modal-info">
+          <h3 id="modalTitle"></h3>
+          <p class="modal-price" id="modalPrice"></p>
+          <p class="modal-description">Pulsera con charms de alta calidad. Material: Plata 925 y acero inoxidable. Incluye caja de regalo.</p>
+          <a id="modalBtn" href="#" class="btn btn-primary" target="_blank">
+            <i class="fab fa-whatsapp"></i> Comprar ahora
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <script src="script.js"></script>
 </body>
