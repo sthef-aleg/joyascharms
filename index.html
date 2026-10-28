@@ -3,507 +3,551 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Charms by Sthefy - Pulseras y charms Pandora exclusivos en Paraguay. Diseños elegantes y únicos. Envío a todo el país.">
-  <meta name="keywords" content="charms, pulseras, Pandora, joyería, Paraguay, Sthefy">
-  <meta name="author" content="Charms by Sthefy">
-  <meta property="og:title" content="Charms by Sthefy - Pulseras Pandora Paraguay">
-  <meta property="og:description" content="Descubre nuestra colección exclusiva de pulseras y charms Pandora. Envío a todo Paraguay.">
-  <meta property="og:type" content="website">
-  <title>Charms by Sthefy | Pulseras Pandora Paraguay</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Sthefy Joyas en Acero | Catálogo Online en Tiempo Real</title>
+  <meta name="description" content="Joyas en Acero Quirúrgico 316L, Dijes Italianos y Bijouterie Fina. Catálogo con stock y precios en tiempo real. Asunción, Paraguay.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-  <!-- HEADER -->
-  <header class="header" id="header">
-    <div class="container">
-      <div class="logo">
-        <img src="logoCharms.jpg" alt="Charms by Sthefy Logo" loading="lazy">
-        <div class="logo-text">
-          <span class="logo-title">Charms</span>
-          <span class="logo-subtitle">by Sthefy</span>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              olive: '#2d3d27',
+              oliveDark: '#1e2a1a',
+              oliveLight: '#45583b',
+              gold: '#d4af37',
+              goldHover: '#b89628',
+              pinkAccent: '#f3c4c9',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Smooth transitions and scrollbar */
+    html { scroll-behavior: smooth; }
+    .gold-shimmer {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%);
+    }
+  </style>
+<script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
+<body class="bg-[#fafaf8] text-stone-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-brand-oliveDark text-stone-200 text-xs py-2 px-4 border-b border-brand-olive text-center flex items-center justify-center gap-3">
+    <span class="inline-flex items-center gap-1.5 font-medium text-amber-300">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      Stock y Precios Actualizados en Vivo
+    </span>
+    <span class="text-stone-400 hidden sm:inline">·</span>
+    <span class="hidden sm:inline">Acero Quirúrgico 316L Hipoalergénico e Inalterable</span>
+    <span class="text-stone-400 hidden md:inline">·</span>
+    <span class="hidden md:inline">Envíos a todo Paraguay</span>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="sticky top-0 z-30 bg-brand-olive text-stone-100 shadow-md border-b border-[#3b4f33]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Logo & Brand Name -->
+        <a href="#" class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-[#45583b] border-2 border-pink-300/60 overflow-hidden flex items-center justify-center shadow-inner">
+            <span class="font-serif text-2xl font-bold text-pink-200">SJ</span>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2">
+              <span class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-pink-200">Sthefy</span>
+              <span class="font-serif text-xs uppercase tracking-widest text-amber-300 font-semibold">Joyas en Acero</span>
+            </div>
+            <p class="text-[11px] text-stone-300/80">joyascharms.online · Catálogo Oficial</p>
+          </div>
+        </a>
+
+        <!-- Contact & WhatsApp CTA -->
+        <div class="flex items-center gap-3">
+          <a id="btn-whatsapp-header" href="https://wa.me/595981123456" target="_blank" rel="noopener noreferrer" 
+             class="px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold text-xs sm:text-sm shadow-sm flex items-center gap-2 transition-all hover:scale-105">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span class="hidden sm:inline">Atención por WhatsApp</span>
+            <span class="sm:hidden">WhatsApp</span>
+          </a>
         </div>
       </div>
-      <nav class="nav" id="navMenu">
-        <a href="#inicio" class="nav-link active">Inicio</a>
-        <a href="#coleccion" class="nav-link">Colección</a>
-        <a href="#nosotros" class="nav-link">Nosotros</a>
-        <a href="#testimonios" class="nav-link">Testimonios</a>
-        <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20información%20sobre%20las%20pulseras%20y%20charms" class="btn-whatsapp" target="_blank">
-          <i class="fab fa-whatsapp"></i> Contactar
-        </a>
-      </nav>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section id="inicio" class="hero">
-    <div class="hero-bg"></div>
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <i class="fas fa-gem"></i> Joyería Exclusiva en Paraguay
-        </div>
-        <h1 class="hero-title">
-          Crea tu historia con <span class="highlight">charms únicos</span>
-        </h1>
-        <p class="hero-description">
-          Pulseras y charms Pandora de alta calidad. Diseños exclusivos que reflejan tu personalidad. 
-          <strong>Envío gratis en Asunción y Gran Asunción.</strong>
-        </p>
-        <div class="hero-buttons">
-          <a href="#coleccion" class="btn btn-primary">
-            <i class="fas fa-shopping-bag"></i> Ver Colección
-          </a>
-          <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20hacer%20un%20pedido" class="btn btn-secondary" target="_blank">
-            <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
-          </a>
-        </div>
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-number">500+</span>
-            <span class="stat-label">Clientas felices</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">100%</span>
-            <span class="stat-label">Calidad garantizada</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">24h</span>
-            <span class="stat-label">Envío rápido</span>
-          </div>
-        </div>
+  <!-- Hero Banner -->
+  <section class="bg-gradient-to-b from-[#2d3d27] to-[#1e2a1a] text-stone-100 py-12 px-4 border-b border-[#3b4f33]">
+    <div class="max-w-4xl mx-auto text-center space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/40 text-xs font-semibold">
+        ✨ Colección Actualizada · Acero Quirúrgico 316L
       </div>
-      <div class="hero-image">
-        <div class="image-wrapper">
-          <img src="assets/pulseras/4.jpg" alt="Colección de pulseras Pandora" loading="lazy">
-          <div class="floating-card">
-            <i class="fas fa-star"></i>
-            <span>Más vendido</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="scroll-indicator">
-      <a href="#coleccion">
-        <i class="fas fa-chevron-down"></i>
-      </a>
-    </div>
-  </section>
+      <h1 class="font-serif text-3xl sm:text-5xl font-bold text-pink-100 tracking-tight leading-tight">
+        Joyas que no se manchan ni pierden el brillo
+      </h1>
+      <p class="text-stone-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Resistentes al agua, sudor y perfumes. Hipoalergénicas para uso diario. Consulta disponibilidad inmediata o solicita tu pedido con entrega a domicilio.
+      </p>
 
-  <!-- FEATURES -->
-  <section class="features">
-    <div class="container">
-      <div class="features-grid">
-        <div class="feature">
-          <div class="feature-icon">
-            <i class="fas fa-shipping-fast"></i>
-          </div>
-          <h3>Envío Rápido</h3>
-          <p>Entrega en 24-48 horas en todo Paraguay</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <i class="fas fa-shield-alt"></i>
-          </div>
-          <h3>Garantía de Calidad</h3>
-          <p>Materiales premium y acabados perfectos</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <i class="fas fa-heart"></i>
-          </div>
-          <h3>Diseños Exclusivos</h3>
-          <p>Charms únicos que no encontrarás en otro lugar</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <i class="fas fa-hand-holding-usd"></i>
-          </div>
-          <h3>Precios Accesibles</h3>
-          <p>La mejor calidad al mejor precio del mercado</p>
-        </div>
+      <!-- Live Sync Indicator Badge -->
+      <div class="pt-2 flex items-center justify-center gap-2 text-xs text-stone-300">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <span id="sync-status-text">Conectando con base de datos en tiempo real...</span>
       </div>
     </div>
   </section>
 
-  <!-- COLECCIÓN -->
-  <section id="coleccion" class="coleccion">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-badge">Nuestra Selección</span>
-        <h2 class="section-title">Colección Destacada</h2>
-        <p class="section-description">Cada pieza está cuidadosamente seleccionada para brindarte elegancia y estilo único.</p>
+  <!-- Main Catalog Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+    
+    <!-- Filter and Search Bar -->
+    <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-stone-200/80 space-y-4">
+      
+      <!-- Search Input + Stock toggle -->
+      <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+        <div class="relative flex-1">
+          <svg class="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input 
+            type="text" 
+            id="search-input"
+            placeholder="Buscar por nombre, código SKU o material..." 
+            class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all bg-stone-50/50"
+          >
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0">
+          <label class="flex items-center gap-2 text-xs font-semibold text-stone-700 cursor-pointer select-none">
+            <input type="checkbox" id="only-stock-checkbox" class="w-4 h-4 text-emerald-600 rounded border-stone-300 focus:ring-emerald-500">
+            <span>Solo en stock</span>
+          </label>
+
+          <span class="text-stone-300 hidden sm:inline">|</span>
+
+          <span id="product-count-badge" class="text-xs text-stone-500 font-medium">
+            Cargando joyas...
+          </span>
+        </div>
       </div>
 
-      <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="all">Todos</button>
-        <button class="filter-btn" data-filter="charms">Charms</button>
-        <button class="filter-btn" data-filter="pulseras">Pulseras</button>
-        <button class="filter-btn" data-filter="acero">Joyas de Acero</button>
+      <!-- Category Filter Pills -->
+      <div id="category-pills" class="flex items-center gap-2 overflow-x-auto pb-1 text-xs no-scrollbar">
+        <!-- Rendered dynamically -->
       </div>
-
-      <div class="products-grid">
-        <!-- Producto 1 -->
-        <article class="product-card" data-category="pulseras">
-          <div class="product-badge">Más Popular</div>
-          <div class="product-image">
-            <img src="assets/pulseras/40.jpg" alt="Pulsera Elegance" loading="lazy">
-            <div class="product-overlay">
-              <button class="btn-quickview" onclick="quickView('Pulsera Elegance', '150000', 'assets/pulseras/40.jpg')">
-                <i class="fas fa-eye"></i> Vista rápida
-              </button>
-            </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Pulsera Elegance</h3>
-            <p class="product-description">Diseño clásico con charms delicados</p>
-            <div class="product-footer">
-              <span class="product-price">Gs. 150.000</span>
-              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Elegance%20(Gs.%20150.000)" class="btn-buy" target="_blank">
-                <i class="fab fa-whatsapp"></i> Comprar
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Producto 2 -->
-        <article class="product-card" data-category="pulseras">
-          <div class="product-image">
-            <img src="assets/pulseras/41.jpg" alt="Pulsera Luxury" loading="lazy">
-            <div class="product-overlay">
-              <button class="btn-quickview" onclick="quickView('Pulsera Luxury', '150000', 'assets/pulseras/41.jpg')">
-                <i class="fas fa-eye"></i> Vista rápida
-              </button>
-            </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Pulsera Luxury</h3>
-            <p class="product-description">Estilo sofisticado para ocasiones especiales</p>
-            <div class="product-footer">
-              <span class="product-price">Gs. 150.000</span>
-              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Luxury%20(Gs.%20150.000)" class="btn-buy" target="_blank">
-                <i class="fab fa-whatsapp"></i> Comprar
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Producto 3 -->
-        <article class="product-card" data-category="pulseras">
-          <div class="product-image">
-            <img src="assets/pulseras/13.jpg" alt="Pulsera Trendy" loading="lazy">
-            <div class="product-overlay">
-              <button class="btn-quickview" onclick="quickView('Pulsera Trendy', '150000', 'assets/pulseras/13.jpg')">
-                <i class="fas fa-eye"></i> Vista rápida
-              </button>
-            </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Pulsera Trendy</h3>
-            <p class="product-description">Moderna y versátil para el día a día</p>
-            <div class="product-footer">
-              <span class="product-price">Gs. 150.000</span>
-              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Trendy%20(Gs.%20150.000)" class="btn-buy" target="_blank">
-                <i class="fab fa-whatsapp"></i> Comprar
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Producto 4 -->
-        <article class="product-card" data-category="luxury">
-          <div class="product-badge">Nuevo</div>
-          <div class="product-image">
-            <img src="assets/pulseras/43.jpg" alt="Pulsera Charms Mix" loading="lazy">
-            <div class="product-overlay">
-              <button class="btn-quickview" onclick="quickView('Pulsera Charms Mix', '150000', 'assets/pulseras/43.jpg')">
-                <i class="fas fa-eye"></i> Vista rápida
-              </button>
-            </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Pulsera Charms Mix</h3>
-            <p class="product-description">Combinación única de charms variados</p>
-            <div class="product-footer">
-              <span class="product-price">Gs. 150.000</span>
-              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Charms%20Mix%20(Gs.%20150.000)" class="btn-buy" target="_blank">
-                <i class="fab fa-whatsapp"></i> Comprar
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Producto 5 -->
-        <article class="product-card" data-category="elegance">
-          <div class="product-image">
-            <img src="assets/pulseras/10.jpg" alt="Pulsera Sweetheart" loading="lazy">
-            <div class="product-overlay">
-              <button class="btn-quickview" onclick="quickView('Pulsera Sweetheart', '150000', 'assets/pulseras/10.jpg')">
-                <i class="fas fa-eye"></i> Vista rápida
-              </button>
-            </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Pulsera Sweetheart</h3>
-            <p class="product-description">Romántica y delicada, perfecta para regalar</p>
-            <div class="product-footer">
-              <span class="product-price">Gs. 150.000</span>
-              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Sweetheart%20(Gs.%20150.000)" class="btn-buy" target="_blank">
-                <i class="fab fa-whatsapp"></i> Comprar
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Producto 6 -->
-        <article class="product-card" data-category="trendy">
-          <div class="product-image">
-            <img src="assets/pulseras/9.jpg" alt="Pulsera Sweetheart Gold" loading="lazy">
-            <div class="product-overlay">
-              <button class="btn-quickview" onclick="quickView('Pulsera Sweetheart Gold', '150000', 'assets/pulseras/9.jpg')">
-                <i class="fas fa-eye"></i> Vista rápida
-              </button>
-            </div>
-          </div>
-          <div class="product-info">
-            <h3 class="product-name">Pulsera Sweetheart Gold</h3>
-            <p class="product-description">Edición especial con detalles dorados</p>
-            <div class="product-footer">
-              <span class="product-price">Gs. 150.000</span>
-              <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20la%20Pulsera%20Sweetheart%20Gold%20(Gs.%20150.000)" class="btn-buy" target="_blank">
-                <i class="fab fa-whatsapp"></i> Comprar
-              </a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-
-    <article class="product-card" data-category="charms">
-  <div class="product-badge">Charm</div>
-
-  <div class="product-image">
-    <img src="assets/dijes charms/4.jpg" alt="Charm">
-  </div>
-
-  <div class="product-info">
-    <h3 class="product-name">Charm Corazón</h3>
-    <p class="product-description">
-      Compatible con pulseras tipo Pandora
-    </p>
-
-    <div class="product-footer">
-      <span class="product-price">Gs. 95.000</span>
-
-      <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20el%20Charm%20Corazón"
-         class="btn-buy"
-         target="_blank">
-        <i class="fab fa-whatsapp"></i> Comprar
-      </a>
     </div>
-  </div>
-</article>
 
-      <div class="section-footer">
-        <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20ver%20más%20modelos%20de%20pulseras" class="btn btn-outline" target="_blank">
-          <i class="fas fa-plus"></i> Ver catálogo completo
+    <!-- Product Grid -->
+    <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <!-- Loading Skeleton Cards -->
+      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse">
+        <div class="aspect-square bg-stone-200 rounded-xl"></div>
+        <div class="h-4 bg-stone-200 rounded w-3/4"></div>
+        <div class="h-5 bg-stone-200 rounded w-1/2"></div>
+      </div>
+      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse">
+        <div class="aspect-square bg-stone-200 rounded-xl"></div>
+        <div class="h-4 bg-stone-200 rounded w-3/4"></div>
+        <div class="h-5 bg-stone-200 rounded w-1/2"></div>
+      </div>
+      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse">
+        <div class="aspect-square bg-stone-200 rounded-xl"></div>
+        <div class="h-4 bg-stone-200 rounded w-3/4"></div>
+        <div class="h-5 bg-stone-200 rounded w-1/2"></div>
+      </div>
+      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse">
+        <div class="aspect-square bg-stone-200 rounded-xl"></div>
+        <div class="h-4 bg-stone-200 rounded w-3/4"></div>
+        <div class="h-5 bg-stone-200 rounded w-1/2"></div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-dashed border-stone-300">
+      <div class="w-16 h-16 mx-auto mb-4 text-stone-400">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+      </div>
+      <h3 class="text-base font-semibold text-stone-800">No se encontraron joyas</h3>
+      <p class="text-sm text-stone-500 mt-1">Prueba con otra palabra clave o selecciona otra categoría.</p>
+      <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold rounded-lg transition-colors">
+        Restablecer filtros
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Product Detail Modal -->
+  <div id="product-modal" class="fixed inset-0 z-50 bg-stone-950/70 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-stone-200 flex flex-col max-h-[90vh]">
+      <div class="relative bg-stone-100 aspect-square max-h-80 flex items-center justify-center overflow-hidden">
+        <img id="modal-image" src="" alt="" class="w-full h-full object-contain">
+        <button onclick="closeProductModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-stone-900/60 hover:bg-stone-900 text-white flex items-center justify-center transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <span id="modal-category-badge" class="absolute bottom-4 left-4 text-xs font-semibold px-3 py-1 rounded-full bg-brand-olive text-stone-100"></span>
+      </div>
+
+      <div class="p-6 space-y-4 overflow-y-auto">
+        <div>
+          <span id="modal-sku" class="text-xs font-mono text-stone-400 uppercase tracking-wider"></span>
+          <h2 id="modal-name" class="font-serif text-2xl font-bold text-stone-900 mt-1 leading-snug"></h2>
+        </div>
+
+        <div class="flex items-baseline justify-between border-y border-stone-100 py-3">
+          <div>
+            <span class="text-xs text-stone-500 block">Precio Contado</span>
+            <span id="modal-price" class="font-serif text-2xl font-bold text-amber-600"></span>
+          </div>
+          <div id="modal-stock-badge" class="text-right">
+            <!-- In stock or out of stock -->
+          </div>
+        </div>
+
+        <div class="space-y-2 text-xs text-stone-600">
+          <p id="modal-description" class="leading-relaxed"></p>
+          <div class="grid grid-cols-2 gap-2 pt-2">
+            <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-200/60">
+              <span class="font-semibold block text-stone-700">Material Noble:</span>
+              <span id="modal-material">Acero Quirúrgico 316L</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-stone-50 border border-stone-200/60">
+              <span class="font-semibold block text-stone-700">Garantía:</span>
+              <span>Inalterable e hipoalergénico</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp Buy Button -->
+        <a id="modal-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" 
+           class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2 transition-all">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          <span>Pedir esta Joya por WhatsApp</span>
         </a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- NOSOTROS -->
-  <section id="nosotros" class="nosotros">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-image">
-          <img src="logoCharms.jpg" alt="Charms by Sthefy" loading="lazy">
-          <div class="experience-badge">
-            <span class="years">+5</span>
-            <span class="text">Años de<br>experiencia</span>
-          </div>
+  <!-- Footer -->
+  <footer class="bg-brand-oliveDark text-stone-400 py-12 px-4 border-t border-brand-olive text-xs">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-1 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-2 text-stone-200">
+          <span class="font-serif font-bold text-lg text-pink-200">Sthefy Joyas en Acero</span>
+          <span>·</span>
+          <span>joyascharms.online</span>
         </div>
-        <div class="about-content">
-          <span class="section-badge">Sobre Nosotros</span>
-          <h2>La magia de los charms en Paraguay</h2>
-          <p>
-            En <strong>Charms by Sthefy</strong> nos apasiona crear pulseras únicas que cuenten historias. 
-            Cada charm es cuidadosamente seleccionado para garantizar la más alta calidad y diseño.
-          </p>
-          <p>
-            Somos una empresa paraguaya dedicada a brindarte joyería elegante a precios accesibles. 
-            Nuestro compromiso es tu satisfacción.
-          </p>
-          <ul class="about-list">
-            <li><i class="fas fa-check-circle"></i> Material: Plata 925 y acero inoxidable</li>
-            <li><i class="fas fa-check-circle"></i> Garantía de 6 meses en todas las piezas</li>
-            <li><i class="fas fa-check-circle"></i> Envío a todo Paraguay</li>
-            <li><i class="fas fa-check-circle"></i> Atención personalizada por WhatsApp</li>
-          </ul>
-          <a href="https://wa.me/595973779707?text=Hola!%20Quiero%20conocer%20más%20sobre%20Charms%20by%20Sthefy" class="btn btn-primary" target="_blank">
-            <i class="fab fa-whatsapp"></i> Hablar con Sthefy
-          </a>
-        </div>
+        <p class="text-stone-400">Catálogo directo conectado con el sistema de inventario oficial.</p>
+        <p class="text-stone-500 text-[11px]">Asunción, Paraguay · Envíos a todo el país</p>
       </div>
-    </div>
-  </section>
 
-  <!-- TESTIMONIOS -->
-  <section id="testimonios" class="testimonios">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-badge">Testimonios</span>
-        <h2 class="section-title">Lo que dicen nuestras clientas</h2>
-      </div>
-      <div class="testimonios-grid">
-        <div class="testimonio-card">
-          <div class="testimonio-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonio-text">"Me encantó la pulsera, cada charm es precioso y el envío fue super rápido. La atención de Sthefy es excelente, me ayudó a elegir los charms perfectos."</p>
-          <div class="testimonio-author">
-            <div class="author-avatar">A</div>
-            <div class="author-info">
-              <span class="author-name">Ana</span>
-              <span class="author-location"><i class="fas fa-map-marker-alt"></i> Asunción</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonio-card">
-          <div class="testimonio-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonio-text">"Compré unos charms para mi novia y la atención fue excelente. Llegó todo perfecto y empaquetado muy lindo. Muy recomendables."</p>
-          <div class="testimonio-author">
-            <div class="author-avatar">C</div>
-            <div class="author-info">
-              <span class="author-name">Carlos</span>
-              <span class="author-location"><i class="fas fa-map-marker-alt"></i> Encarnación</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonio-card">
-          <div class="testimonio-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonio-text">"Mi pulsera quedó tal cual quería, super elegante y de calidad. Ya quiero comprar más charms para combinar. ¡Gracias Sthefy!"</p>
-          <div class="testimonio-author">
-            <div class="author-avatar">M</div>
-            <div class="author-info">
-              <span class="author-name">Mariana</span>
-              <span class="author-location"><i class="fas fa-map-marker-alt"></i> Ciudad del Este</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA SECTION -->
-  <section class="cta">
-    <div class="container">
-      <div class="cta-content">
-        <h2>¿Lista para crear tu pulsera soñada?</h2>
-        <p>Escríbeme por WhatsApp y te ayudo a elegir los charms perfectos para ti</p>
-        <a href="https://wa.me/595973779707?text=Hola%20Sthefy!%20Quiero%20crear%20mi%20pulsera%20soñada" class="btn btn-whatsapp-large" target="_blank">
-          <i class="fab fa-whatsapp"></i> Escribir por WhatsApp
-        </a>
-        <span class="cta-note">Respuesta inmediata • Atención personalizada</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <img src="logoCharms.jpg" alt="Charms by Sthefy" class="footer-logo">
-          <p>Pulseras y charms Pandora exclusivos en Paraguay. Calidad garantizada y envío a todo el país.</p>
-          <div class="social-links">
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://wa.me/595973779707" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <h4>Enlaces rápidos</h4>
-          <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#coleccion">Colección</a></li>
-            <li><a href="#nosotros">Nosotros</a></li>
-            <li><a href="#testimonios">Testimonios</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Atención al cliente</h4>
-          <ul>
-            <li><a href="https://wa.me/595973779707">Contacto</a></li>
-            <li><a href="#">Envíos</a></li>
-            <li><a href="#">Garantía</a></li>
-            <li><a href="#">Preguntas frecuentes</a></li>
-          </ul>
-        </div>
-        <div class="footer-contact">
-          <h4>Contacto</h4>
-          <p><i class="fab fa-whatsapp"></i> +595 973 779 707</p>
-          <p><i class="fab fa-instagram"></i> @charms_py</p>
-          <p><i class="fas fa-map-marker-alt"></i> Paraguay</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Charms by Sthefy. Todos los derechos reservados.</p>
-        <p class="footer-credit">Hecho con <i class="fas fa-heart"></i> en Paraguay</p>
+      <div class="flex items-center gap-6">
+        <a href="https://instagram.com" target="_blank" class="hover:text-amber-300 transition-colors">Instagram</a>
+        <a href="https://wa.me/595981123456" target="_blank" class="hover:text-amber-300 transition-colors">WhatsApp</a>
+        <a href="#top" class="hover:text-amber-300 transition-colors">Volver arriba ↑</a>
       </div>
     </div>
   </footer>
 
-  <!-- Quick View Modal -->
-  <div id="quickViewModal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-      <div class="modal-body">
-        <img id="modalImg" src="" alt="">
-        <div class="modal-info">
-          <h3 id="modalTitle"></h3>
-          <p class="modal-price" id="modalPrice"></p>
-          <p class="modal-description">Pulsera con charms de alta calidad. Material: Plata 925 y acero inoxidable. Incluye caja de regalo.</p>
-          <a id="modalBtn" href="#" class="btn btn-primary" target="_blank">
-            <i class="fab fa-whatsapp"></i> Comprar ahora
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Firebase Integration Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  <!-- Back to top button -->
-  <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+    // 1. Firebase Configuration for Sthefy Joyas
+    const firebaseConfig = {
+      projectId: "reverberant-overview-501dl",
+      appId: "1:780922365540:web:62f3aacbef4683bad32171",
+      apiKey: "AIzaSyBuRbFjqg4VT9LDP57B8V51o26TcM1-zII",
+      authDomain: "reverberant-overview-501dl.firebaseapp.com"
+    };
 
-  <script src="script.js"></script>
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app, "ai-studio-sthefyjoyascontr-b78219b3-4b1d-4d71-83c2-47c9c728a9f0");
+
+    // Store state
+    let allProducts = [];
+    let selectedCategory = 'todos';
+    let searchQuery = '';
+    let onlyInStock = false;
+    const whatsappPhone = '595981123456'; // Número de WhatsApp para pedidos
+
+    const categoryLabels = {
+      todos: 'Todos',
+      anillos: 'Anillos',
+      collares: 'Collares & Cadenas',
+      aros: 'Aros & Argollas',
+      pulseras: 'Pulseras & Charms',
+      tobilleras: 'Tobilleras',
+      dijes: 'Dijes & Medallas',
+      sets: 'Sets & Conjuntos',
+      relojes: 'Relojes',
+      accesorios: 'Accesorios'
+    };
+
+    const materialLabels = {
+      acero_quirurgico_316l: 'Acero Quirúrgico 316L',
+      acero_dorado_pvd: 'Acero Dorado PVD',
+      acero_rose_gold: 'Acero Rose Gold',
+      bijouterie_fina: 'Bijouterie Fina',
+      cristal_strass: 'Cristal & Strass',
+      perlas_fantasia: 'Perlas'
+    };
+
+    // Format currency to Guaraníes (₲)
+    function formatMoney(amount) {
+      if (!amount && amount !== 0) return '₲ 0';
+      return '₲ ' + Math.round(amount).toLocaleString('es-PY');
+    }
+
+    // Render Categories
+    function renderCategories() {
+      const pillsContainer = document.getElementById('category-pills');
+      pillsContainer.innerHTML = '';
+
+      // Count products per category
+      const counts = { todos: allProducts.length };
+      allProducts.forEach(p => {
+        counts[p.category] = (counts[p.category] || 0) + 1;
+      });
+
+      const categoriesToShow = ['todos', 'anillos', 'collares', 'aros', 'pulseras', 'tobilleras', 'dijes', 'sets'];
+
+      categoriesToShow.forEach(cat => {
+        const count = counts[cat] || 0;
+        const btn = document.createElement('button');
+        const isSelected = selectedCategory === cat;
+        btn.className = `px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
+          isSelected 
+            ? 'bg-brand-olive text-amber-300 shadow-sm border border-brand-oliveLight' 
+            : 'bg-stone-100 text-stone-600 hover:bg-stone-200 hover:text-stone-900 border border-transparent'
+        }`;
+        btn.innerHTML = `<span>${categoryLabels[cat] || cat}</span> <span class="text-[10px] opacity-70">(${count})</span>`;
+        btn.onclick = () => {
+          selectedCategory = cat;
+          renderCategories();
+          renderProducts();
+        };
+        pillsContainer.appendChild(btn);
+      });
+    }
+
+    // Render Product Cards
+    function renderProducts() {
+      const grid = document.getElementById('products-grid');
+      const emptyState = document.getElementById('empty-state');
+      const countBadge = document.getElementById('product-count-badge');
+
+      // Filter products
+      const filtered = allProducts.filter(p => {
+        // Category filter
+        if (selectedCategory !== 'todos' && p.category !== selectedCategory) return false;
+
+        // Stock filter
+        if (onlyInStock && p.stock <= 0) return false;
+
+        // Search filter
+        if (searchQuery.trim()) {
+          const q = searchQuery.toLowerCase();
+          const matchName = (p.name || '').toLowerCase().includes(q);
+          const matchSku = (p.sku || '').toLowerCase().includes(q);
+          const matchMaterial = (p.material || '').toLowerCase().includes(q);
+          if (!matchName && !matchSku && !matchMaterial) return false;
+        }
+
+        return true;
+      });
+
+      countBadge.textContent = `${filtered.length} joyas mostradas`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      grid.innerHTML = filtered.map(product => {
+        const hasPhoto = Boolean(product.imageUrl);
+        const photoSrc = product.imageUrl || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80';
+        const inStock = product.stock > 0;
+        const matText = materialLabels[product.material] || 'Acero Quirúrgico';
+        const priceFormatted = formatMoney(product.sellingPrice);
+
+        // WhatsApp prefilled message
+        const waText = encodeURIComponent(`¡Hola Sthefy Joyas! Quiero comprar la joya: ${product.name} (Código: ${product.sku}) por ${priceFormatted}. ¿Tienen disponible para entrega?`);
+        const waLink = `https://wa.me/${whatsappPhone}?text=${waText}`;
+
+        return `
+          <div class="bg-white rounded-2xl border border-stone-200/80 overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col group">
+            
+            <!-- Product Image -->
+            <div class="relative aspect-square bg-stone-100 overflow-hidden cursor-pointer" onclick="openProductModal('${product.id}')">
+              <img 
+                src="${photoSrc}" 
+                alt="${product.name}" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              >
+              
+              <!-- Badges -->
+              <div class="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-900/75 text-stone-100 backdrop-blur-xs font-mono">
+                  ${product.sku}
+                </span>
+                ${!inStock ? `
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-600 text-white shadow-xs">
+                    Agotado
+                  </span>
+                ` : `
+                  <span class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-emerald-700/80 text-emerald-100 backdrop-blur-xs">
+                    ${product.stock} disp.
+                  </span>
+                `}
+              </div>
+
+              ${product.category === 'anillos' && product.hasSizes ? `
+                <span class="absolute bottom-2.5 right-2.5 text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-400 text-stone-950 shadow-xs">
+                  Con talles
+                </span>
+              ` : ''}
+            </div>
+
+            <!-- Product Details -->
+            <div class="p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <span class="text-[11px] font-medium text-amber-700 block line-clamp-1">
+                  ${matText}
+                </span>
+                <h3 class="font-semibold text-xs sm:text-sm text-stone-900 line-clamp-2 mt-0.5 leading-snug cursor-pointer group-hover:text-amber-800 transition-colors" onclick="openProductModal('${product.id}')">
+                  ${product.name}
+                </h3>
+              </div>
+
+              <div class="pt-2 border-t border-stone-100 flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] text-stone-400 block uppercase">Precio</span>
+                  <span class="font-bold text-sm sm:text-base text-stone-900 font-serif">
+                    ${priceFormatted}
+                  </span>
+                </div>
+
+                <a 
+                  href="${waLink}" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  title="Pedir por WhatsApp"
+                  class="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs"
+                >
+                  <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                  <span class="hidden sm:inline">Pedir</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Modal Details Opener
+    window.openProductModal = function(id) {
+      const p = allProducts.find(item => item.id === id);
+      if (!p) return;
+
+      document.getElementById('modal-image').src = p.imageUrl || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80';
+      document.getElementById('modal-sku').textContent = `CÓDIGO: ${p.sku}`;
+      document.getElementById('modal-name').textContent = p.name;
+      document.getElementById('modal-price').textContent = formatMoney(p.sellingPrice);
+      document.getElementById('modal-category-badge').textContent = categoryLabels[p.category] || p.category;
+      document.getElementById('modal-material').textContent = materialLabels[p.material] || 'Acero Quirúrgico 316L';
+      document.getElementById('modal-description').textContent = p.description || 'Pieza forjada en acero quirúrgico 316L hipoalergénico. Resiste el agua dulce, salada, perfumes y cremas sin oscurecerse ni irritar la piel.';
+
+      const stockBadge = document.getElementById('modal-stock-badge');
+      if (p.stock > 0) {
+        stockBadge.innerHTML = `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>${p.stock} disponibles</span>`;
+      } else {
+        stockBadge.innerHTML = `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200">Agotado temporalmente</span>`;
+      }
+
+      const waText = encodeURIComponent(`Hola Sthefy Joyas, quiero consultar sobre la pieza: ${p.name} (SKU: ${p.sku}) con precio de ${formatMoney(p.sellingPrice)}.`);
+      document.getElementById('modal-whatsapp-btn').href = `https://wa.me/${whatsappPhone}?text=${waText}`;
+
+      document.getElementById('product-modal').classList.remove('hidden');
+      document.getElementById('product-modal').classList.add('flex');
+    };
+
+    window.closeProductModal = function() {
+      document.getElementById('product-modal').classList.add('hidden');
+      document.getElementById('product-modal').classList.remove('flex');
+    };
+
+    window.resetFilters = function() {
+      selectedCategory = 'todos';
+      searchQuery = '';
+      onlyInStock = false;
+      document.getElementById('search-input').value = '';
+      document.getElementById('only-stock-checkbox').checked = false;
+      renderCategories();
+      renderProducts();
+    };
+
+    // Event Listeners
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderProducts();
+    });
+
+    document.getElementById('only-stock-checkbox').addEventListener('change', (e) => {
+      onlyInStock = e.target.checked;
+      renderProducts();
+    });
+
+    // Close modal on background click
+    document.getElementById('product-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'product-modal') {
+        window.closeProductModal();
+      }
+    });
+
+    // 2. Real-time Firebase Firestore Listener
+    // Whenever products are added, edited, photographed, or sold in Sthefy Joyas app, this triggers instantly!
+    const syncStatusEl = document.getElementById('sync-status-text');
+    
+    try {
+      const colRef = collection(db, 'products');
+      onSnapshot(colRef, (snapshot) => {
+        const prods = [];
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          // Safety: Do not display wholesale cost on customer website
+          const { costPrice, ...publicData } = data;
+          prods.push(publicData);
+        });
+
+        // Sort by SKU or name
+        prods.sort((a, b) => (a.sku || '').localeCompare(b.sku || '', undefined, { numeric: true }));
+
+        allProducts = prods;
+        syncStatusEl.textContent = `Sincronizado en tiempo real · ${allProducts.length} piezas en catálogo`;
+        
+        renderCategories();
+        renderProducts();
+      }, (error) => {
+        console.error('Firestore listener error:', error);
+        syncStatusEl.textContent = 'Modo catálogo local activo';
+      });
+    } catch (err) {
+      console.error('Initialization error:', err);
+    }
+  </script>
 </body>
 </html>
