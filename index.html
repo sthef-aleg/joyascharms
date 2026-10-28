@@ -35,7 +35,6 @@
     }
   </script>
   <style>
-    /* Smooth transitions and scrollbar */
     html { scroll-behavior: smooth; }
     .gold-shimmer {
       background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%);
@@ -50,10 +49,10 @@
       background: #fff;
     }
   </style>
+  <script src="firebase-config.js"></script>
 <script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
 <body class="bg-[#fafaf8] text-stone-800 font-sans min-h-screen flex flex-col">
 
-  <!-- Top Announcement Bar -->
   <div class="bg-brand-oliveDark text-stone-200 text-xs py-2 px-4 border-b border-brand-olive text-center flex items-center justify-center gap-3">
     <span class="inline-flex items-center gap-1.5 font-medium text-amber-300">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -65,12 +64,9 @@
     <span class="hidden md:inline">Envíos a todo Paraguay</span>
   </div>
 
-  <!-- Header Navigation -->
   <header class="sticky top-0 z-30 bg-brand-olive text-stone-100 shadow-md border-b border-[#3b4f33]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20 gap-4">
-        
-        <!-- Logo & Brand Name -->
         <a href="#" class="flex items-center gap-3">
           <img src="logoCharms.jpg" alt="Sthefy Joyas en Acero" class="brand-logo">
           <div>
@@ -82,11 +78,10 @@
           </div>
         </a>
 
-        <!-- Contact & WhatsApp CTA -->
         <div class="flex items-center gap-3">
-          <a id="btn-whatsapp-header" href="https://wa.me/595973779707" target="_blank" rel="noopener noreferrer" 
+          <a id="btn-whatsapp-header" href="https://wa.me/595973779707" target="_blank" rel="noopener noreferrer"
              class="px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold text-xs sm:text-sm shadow-sm flex items-center gap-2">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.484 5.234 3.483 8.413-.003 6.557-5.338 11.892-11.894 11.892h-.001c-1.987 0-3.94-.52-5.64-1.505L.057 24zm6.613-3.807c1.745.972 3.267 1.546 5.552 1.546 5.088 0 9.228-4.14 9.231-9.229.002-2.46-.955-4.771-2.691-6.508A9.144 9.144 0 0 0 12.108 2.6c-5.087 0-9.227 4.14-9.229 9.228-.002 1.729.513 3.419 1.487 4.859l-1.013 3.685 3.807-1.018zm.447-5.467c.266-.134 1.516-.758 1.708-.844.193-.087.325-.131.467.131.141.262.551.843.615 1.013.064.171.06.323-.014.457-.075.134-.325.468-.579.724-.154.139-.288.195-.485.07-.196-.125-1.154-.431-2.194-1.372-.811-.724-1.356-1.617-1.516-1.89-.158-.273-.016-.423.117-.563.121-.121.262-.324.393-.486.131-.162.174-.279.262-.465.088-.186.044-.35-.022-.484-.065-.134-.593-1.451-.813-1.987-.214-.52-.431-.449-.593-.458l-.507-.007c-.174 0-.456.065-.694.324-.239.259-1.526 1.495-1.526 3.647 0 2.153 1.561 4.228 1.778 4.52.218.293 3.053 4.673 7.442 6.564 1.35.58 2.403.925 3.227 1.184.406.129.767.11 1.055.067.322-.048 1.036-.422 1.182-.827.145-.405.145-.757.101-1.028-.043-.27-.191-.425-.375-.67-.184-.243-1.045-.613-1.864-.871-.819-.259-1.376-.351-1.606-.357-.229-.005-.493-.063-.75.112-.256.175-.957.94-1.128 1.233-.171.294-.343.327-.686.104-.34-.224-1.467-.541-2.796-1.71-.97-.864-1.633-1.934-1.826-2.258-.192-.324-.02-.512.223-.735.224-.176.496-.437.744-.655.249-.219.331-.368.494-.612.164-.244.072-.459-.042-.643-.113-.183-.445-.9-.666-1.25-.18-.287-.361-.248-.495-.252-.133-.004-.288-.008-.442-.008-.155 0-.403.057-.613.28-.21.224-1.085 1.06-1.085 2.587s1.112 2.994 1.264 3.206c.152.212 2.179 3.325 5.269 4.654z"/></svg>
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.486 2.246 2.247 3.487 5.233 3.487 8.414 0 6.556-5.335 11.892-11.891 11.892h-.004c-1.99 0-3.942-.522-5.65-1.516L.057 24zm6.558-4.016c1.7.9 3.02 1.021 3.17 1.033.407.016.884-.187 1.325-.513.771-.571 1.343-1.343 1.499-1.56.36-.5.592-1.053.267-1.616-.325-.563-1.468-2.062-2.024-2.746-.56-.682-.91-.655-1.513-.149-.602.506-2.519 2.353-2.991 2.806-.473.451-.96.455-1.553.162-.594-.293-2.568-1.032-4.893-3.281-1.807-1.613-2.754-3.43-3.08-4.006-.326-.576-.061-1.258.474-1.625l.406-.309c.292-.223.667-.592.95-.9.308-.321.137-.774.175-1.014.038-.24.179-.84.39-1.158.17-.255.376-.251.54-.255.11-.003.247-.015.375-.015.133 0 .373-.021.561.261.357.535.826 1.637.899 1.759.074.122.163.335.072.612-.092.277-.306.564-.519.839-.213.275-.354.552-.171.771.183.219.905 1.56 1.754 2.37.97.917 1.827 1.13 2.055 1.256.18.101.337.153.449.247.291.246.204.847.1 1.186-.104.34-.421.826-.777 1.169-.357.345-.788.767-1.142 1.029-.589.443-.712.61-.473 1.107.16.318.767 1.182 1.66 1.822z"/></svg>
             <span class="hidden sm:inline">Atención por WhatsApp</span>
             <span class="sm:hidden">WhatsApp</span>
           </a>
@@ -95,7 +90,6 @@
     </div>
   </header>
 
-  <!-- Hero Banner -->
   <section class="bg-gradient-to-b from-[#2d3d27] to-[#1e2a1a] text-stone-100 py-12 px-4 border-b border-[#3b4f33]">
     <div class="max-w-4xl mx-auto text-center space-y-4">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/40 text-xs font-semibold">
@@ -108,7 +102,6 @@
         Resistentes al agua, sudor y perfumes. Hipoalergénicas para uso diario. Consulta disponibilidad inmediata o solicita tu pedido con entrega a domicilio.
       </p>
 
-      <!-- Live Sync Indicator Badge -->
       <div class="pt-2 flex items-center justify-center gap-2 text-xs text-stone-300">
         <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
         <span id="sync-status-text">Conectando con base de datos en tiempo real...</span>
@@ -116,24 +109,14 @@
     </div>
   </section>
 
-  <!-- Main Catalog Content -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
-    
-    <!-- Filter and Search Bar -->
     <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-stone-200/80 space-y-4">
-      
-      <!-- Search Input + Stock toggle -->
       <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
         <div class="relative flex-1">
           <svg class="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
-          <input 
-            type="text" 
-            id="search-input"
-            placeholder="Buscar por nombre, código SKU o material..." 
-            class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all bg-stone-50/50"
-          >
+          <input type="text" id="search-input" placeholder="Buscar por nombre, código SKU o material..." class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all bg-stone-50/50">
         </div>
 
         <div class="flex items-center gap-3 shrink-0">
@@ -144,47 +127,23 @@
 
           <span class="text-stone-300 hidden sm:inline">|</span>
 
-          <span id="product-count-badge" class="text-xs text-stone-500 font-medium">
-            Cargando joyas...
-          </span>
+          <span id="product-count-badge" class="text-xs text-stone-500 font-medium">Cargando joyas...</span>
         </div>
       </div>
 
-      <!-- Category Filter Pills -->
-      <div id="category-pills" class="flex items-center gap-2 overflow-x-auto pb-1 text-xs no-scrollbar">
-        <!-- Rendered dynamically -->
-      </div>
+      <div id="category-pills" class="flex items-center gap-2 overflow-x-auto pb-1 text-xs no-scrollbar"></div>
     </div>
 
-    <!-- Product Grid -->
     <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-      <!-- Loading Skeleton Cards -->
-      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse">
-        <div class="aspect-square bg-stone-200 rounded-xl"></div>
-        <div class="h-4 bg-stone-200 rounded w-3/4"></div>
-        <div class="h-5 bg-stone-200 rounded w-1/2"></div>
-      </div>
-      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse">
-        <div class="aspect-square bg-stone-200 rounded-xl"></div>
-        <div class="h-4 bg-stone-200 rounded w-3/4"></div>
-        <div class="h-5 bg-stone-200 rounded w-1/2"></div>
-      </div>
-      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse">
-        <div class="aspect-square bg-stone-200 rounded-xl"></div>
-        <div class="h-4 bg-stone-200 rounded w-3/4"></div>
-        <div class="h-5 bg-stone-200 rounded w-1/2"></div>
-      </div>
-      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse">
-        <div class="aspect-square bg-stone-200 rounded-xl"></div>
-        <div class="h-4 bg-stone-200 rounded w-3/4"></div>
-        <div class="h-5 bg-stone-200 rounded w-1/2"></div>
-      </div>
+      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse"><div class="aspect-square bg-stone-200 rounded-xl"></div><div class="h-4 bg-stone-200 rounded w-3/4"></div><div class="h-5 bg-stone-200 rounded w-1/2"></div></div>
+      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse"><div class="aspect-square bg-stone-200 rounded-xl"></div><div class="h-4 bg-stone-200 rounded w-3/4"></div><div class="h-5 bg-stone-200 rounded w-1/2"></div></div>
+      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse"><div class="aspect-square bg-stone-200 rounded-xl"></div><div class="h-4 bg-stone-200 rounded w-3/4"></div><div class="h-5 bg-stone-200 rounded w-1/2"></div></div>
+      <div class="bg-white rounded-2xl border border-stone-200/80 p-4 space-y-3 animate-pulse"><div class="aspect-square bg-stone-200 rounded-xl"></div><div class="h-4 bg-stone-200 rounded w-3/4"></div><div class="h-5 bg-stone-200 rounded w-1/2"></div></div>
     </div>
 
-    <!-- Empty State -->
     <div id="empty-state" class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-dashed border-stone-300">
       <div class="w-16 h-16 mx-auto mb-4 text-stone-400">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4 8-4V7"/></svg>
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M"/></svg>
       </div>
       <h3 class="text-base font-semibold text-stone-800">No se encontraron joyas</h3>
       <p class="text-sm text-stone-500 mt-1">Prueba con otra palabra clave o selecciona otra categoría.</p>
@@ -195,7 +154,6 @@
 
   </main>
 
-  <!-- Product Detail Modal -->
   <div id="product-modal" class="fixed inset-0 z-50 bg-stone-950/70 backdrop-blur-xs hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-stone-200 flex flex-col max-h-[90vh]">
       <div class="relative bg-stone-100 aspect-square max-h-80 flex items-center justify-center overflow-hidden">
@@ -217,9 +175,7 @@
             <span class="text-xs text-stone-500 block">Precio Contado</span>
             <span id="modal-price" class="font-serif text-2xl font-bold text-amber-600"></span>
           </div>
-          <div id="modal-stock-badge" class="text-right">
-            <!-- In stock or out of stock -->
-          </div>
+          <div id="modal-stock-badge" class="text-right"></div>
         </div>
 
         <div class="space-y-2 text-xs text-stone-600">
@@ -236,17 +192,14 @@
           </div>
         </div>
 
-        <!-- WhatsApp Buy Button -->
-        <a id="modal-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" 
-           class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2">
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.484 5.234 3.483 8.413-.003 6.557-5.338 11.892-11.894 11.892h-.001c-1.987 0-3.94-.52-5.64-1.505L.057 24zm6.613-3.807c1.745.972 3.267 1.546 5.552 1.546 5.088 0 9.228-4.14 9.231-9.229.002-2.46-.955-4.771-2.691-6.508A9.144 9.144 0 0 0 12.108 2.6c-5.087 0-9.227 4.14-9.229 9.228-.002 1.729.513 3.419 1.487 4.859l-1.013 3.685 3.807-1.018zm.447-5.467c.266-.134 1.516-.758 1.708-.844.193-.087.325-.131.467.131.141.262.551.843.615 1.013.064.171.06.323-.014.457-.075.134-.325.468-.579.724-.154.139-.288.195-.485.07-.196-.125-1.154-.431-2.194-1.372-.811-.724-1.356-1.617-1.516-1.89-.158-.273-.016-.423.117-.563.121-.121.262-.324.393-.486.131-.162.174-.279.262-.465.088-.186.044-.35-.022-.484-.065-.134-.593-1.451-.813-1.987-.214-.52-.431-.449-.593-.458l-.507-.007c-.174 0-.456.065-.694.324-.239.259-1.526 1.495-1.526 3.647 0 2.153 1.561 4.228 1.778 4.52.218.293 3.053 4.673 7.442 6.564 1.35.58 2.403.925 3.227 1.184.406.129.767.11 1.055.067.322-.048 1.036-.422 1.182-.827.145-.405.145-.757.101-1.028-.043-.27-.191-.425-.375-.67-.184-.243-1.045-.613-1.864-.871-.819-.259-1.376-.351-1.606-.357-.229-.005-.493-.063-.75.112-.256.175-.957.94-1.128 1.233-.171.294-.343.327-.686.104-.34-.224-1.467-.541-2.796-1.71-.97-.864-1.633-1.934-1.826-2.258-.192-.324-.02-.512.223-.735.224-.176.496-.437.744-.655.249-.219.331-.368.494-.612.164-.244.072-.459-.042-.643-.113-.183-.445-.9-.666-1.25-.18-.287-.361-.248-.495-.252-.133-.004-.288-.008-.442-.008-.155 0-.403.057-.613.28-.21.224-1.085 1.06-1.085 2.587s1.112 2.994 1.264 3.206c.152.212 2.179 3.325 5.269 4.654z"/></svg>
+        <a id="modal-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.486 2.246 2.247 3.487 5.233 3.487 8.414 0 6.556-5.335 11.892-11.891 11.892h-.004c-1.99 0-3.942-.522-5.65-1.516L.057 24zm6.558-4.016c1.7.9 3.02 1.021 3.17 1.033.407.016.884-.187 1.325-.513.771-.571 1.343-1.343 1.499-1.56.36-.5.592-1.053.267-1.616-.325-.563-1.468-2.062-2.024-2.746-.56-.682-.91-.655-1.513-.149-.602.506-2.519 2.353-2.991 2.806-.473.451-.96.455-1.553.162-.594-.293-2.568-1.032-4.893-3.281-1.807-1.613-2.754-3.43-3.08-4.006-.326-.576-.061-1.258.474-1.625l.406-.309c.292-.223.667-.592.95-.9.308-.321.137-.774.175-1.014.038-.24.179-.84.39-1.158.17-.255.376-.251.54-.255.11-.003.247-.015.375-.015.133 0 .373-.021.561.261.357.535.826 1.637.899 1.759.074.122.163.335.072.612-.092.277-.306.564-.519.839-.213.275-.354.552-.171.771.183.219.905 1.56 1.754 2.37.97.917 1.827 1.13 2.055 1.256.18.101.337.153.449.247.291.246.204.847.1 1.186-.104.34-.421.826-.777 1.169-.357.345-.788.767-1.142 1.029-.589.443-.712.61-.473 1.107.16.318.767 1.182 1.66 1.822z"/></svg>
           <span>Pedir esta Joya por WhatsApp</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="bg-brand-oliveDark text-stone-400 py-12 px-4 border-t border-brand-olive text-xs">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="space-y-1 text-center md:text-left">
@@ -267,28 +220,26 @@
     </div>
   </footer>
 
-  <!-- Firebase Integration Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    // 1. Firebase Configuration for Sthefy Joyas
-    const firebaseConfig = {
-      projectId: "reverberant-overview-501dl",
-      appId: "1:780922365540:web:62f3aacbef4683bad32171",
-      apiKey: "",
-      authDomain: "reverberant-overview-501dl.firebaseapp.com"
-    };
+    const firebaseConfig = window.FIREBASE_CONFIG || {};
+
+    if (!firebaseConfig.projectId || !firebaseConfig.apiKey || !firebaseConfig.appId) {
+      console.error('Firebase config missing. Check firebase-config.js');
+      document.getElementById('sync-status-text').textContent = 'Configuración de Firebase faltante';
+      throw new Error('Firebase config missing');
+    }
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app, "ai-studio-sthefyjoyascontr-b78219b3-4b1d-4d71-83c2-47c9c728a9f0");
 
-    // Store state
     let allProducts = [];
     let selectedCategory = 'todos';
     let searchQuery = '';
     let onlyInStock = false;
-    const whatsappPhone = '595973779707'; // Número de WhatsApp para pedidos
+    const whatsappPhone = '595973779707';
 
     const categoryLabels = {
       todos: 'Todos',
@@ -312,18 +263,15 @@
       perlas_fantasia: 'Perlas'
     };
 
-    // Format currency to Guaraníes (₲)
     function formatMoney(amount) {
       if (!amount && amount !== 0) return '₲ 0';
       return '₲ ' + Math.round(amount).toLocaleString('es-PY');
     }
 
-    // Render Categories
     function renderCategories() {
       const pillsContainer = document.getElementById('category-pills');
       pillsContainer.innerHTML = '';
 
-      // Count products per category
       const counts = { todos: allProducts.length };
       allProducts.forEach(p => {
         counts[p.category] = (counts[p.category] || 0) + 1;
@@ -336,9 +284,7 @@
         const btn = document.createElement('button');
         const isSelected = selectedCategory === cat;
         btn.className = `px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
-          isSelected 
-            ? 'bg-brand-olive text-amber-300 shadow-sm border border-brand-oliveLight' 
-            : 'bg-stone-100 text-stone-600 hover:bg-stone-200 hover:text-stone-900 border border-transparent'
+          isSelected ? 'bg-brand-olive text-amber-300 shadow-sm border border-brand-oliveLight' : 'bg-stone-100 text-stone-600 hover:bg-stone-200 hover:text-stone-900 border border-transparent'
         }`;
         btn.innerHTML = `<span>${categoryLabels[cat] || cat}</span> <span class="text-[10px] opacity-70">(${count})</span>`;
         btn.onclick = () => {
@@ -350,21 +296,15 @@
       });
     }
 
-    // Render Product Cards
     function renderProducts() {
       const grid = document.getElementById('products-grid');
       const emptyState = document.getElementById('empty-state');
       const countBadge = document.getElementById('product-count-badge');
 
-      // Filter products
       const filtered = allProducts.filter(p => {
-        // Category filter
         if (selectedCategory !== 'todos' && p.category !== selectedCategory) return false;
-
-        // Stock filter
         if (onlyInStock && p.stock <= 0) return false;
 
-        // Search filter
         if (searchQuery.trim()) {
           const q = searchQuery.toLowerCase();
           const matchName = (p.name || '').toLowerCase().includes(q);
@@ -391,84 +331,40 @@
         const inStock = product.stock > 0;
         const matText = materialLabels[product.material] || 'Acero Quirúrgico';
         const priceFormatted = formatMoney(product.sellingPrice);
-
-        // WhatsApp prefilled message
         const waText = encodeURIComponent(`¡Hola Sthefy Joyas! Quiero comprar la joya: ${product.name} (Código: ${product.sku}) por ${priceFormatted}. ¿Tienen disponible para entrega?`);
         const waLink = `https://wa.me/${whatsappPhone}?text=${waText}`;
 
         return `
           <div class="bg-white rounded-2xl border border-stone-200/80 overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col group">
-            
-            <!-- Product Image -->
             <div class="relative aspect-square bg-stone-100 overflow-hidden cursor-pointer" onclick="openProductModal('${product.id}')">
-              <img 
-                src="${photoSrc}" 
-                alt="${product.name}" 
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              >
-              
-              <!-- Badges -->
+              <img src="${photoSrc}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
               <div class="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-900/75 text-stone-100 backdrop-blur-xs font-mono">
-                  ${product.sku}
-                </span>
-                ${!inStock ? `
-                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-600 text-white shadow-xs">
-                    Agotado
-                  </span>
-                ` : `
-                  <span class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-emerald-700/80 text-emerald-100 backdrop-blur-xs">
-                    ${product.stock} disp.
-                  </span>
-                `}
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-900/75 text-stone-100 backdrop-blur-xs font-mono">${product.sku}</span>
+                ${!inStock ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-600 text-white shadow-xs">Agotado</span>` : `<span class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-emerald-700/80 text-emerald-100 backdrop-blur-xs">${product.stock} disp.</span>`}
               </div>
-
-              ${product.category === 'anillos' && product.hasSizes ? `
-                <span class="absolute bottom-2.5 right-2.5 text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-400 text-stone-950 shadow-xs">
-                  Con talles
-                </span>
-              ` : ''}
+              ${product.category === 'anillos' && product.hasSizes ? `<span class="absolute bottom-2.5 right-2.5 text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-400 text-stone-950 shadow-xs">Con talles</span>` : ''}
             </div>
-
-            <!-- Product Details -->
             <div class="p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3">
               <div>
-                <span class="text-[11px] font-medium text-amber-700 block line-clamp-1">
-                  ${matText}
-                </span>
-                <h3 class="font-semibold text-xs sm:text-sm text-stone-900 line-clamp-2 mt-0.5 leading-snug cursor-pointer group-hover:text-amber-800 transition-colors" onclick="openProductModal('${product.id}')">
-                  ${product.name}
-                </h3>
+                <span class="text-[11px] font-medium text-amber-700 block line-clamp-1">${matText}</span>
+                <h3 class="font-semibold text-xs sm:text-sm text-stone-900 line-clamp-2 mt-0.5 leading-snug cursor-pointer group-hover:text-amber-800 transition-colors" onclick="openProductModal('${product.id}')">${product.name}</h3>
               </div>
-
               <div class="pt-2 border-t border-stone-100 flex items-center justify-between">
                 <div>
                   <span class="text-[10px] text-stone-400 block uppercase">Precio</span>
-                  <span class="font-bold text-sm sm:text-base text-stone-900 font-serif">
-                    ${priceFormatted}
-                  </span>
+                  <span class="font-bold text-sm sm:text-base text-stone-900 font-serif">${priceFormatted}</span>
                 </div>
-
-                <a 
-                  href="${waLink}" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  title="Pedir por WhatsApp"
-                  class="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs"
-                >
-                  <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.484 5.234 3.483 8.413-.003 6.557-5.338 11.892-11.894 11.892h-.001c-1.987 0-3.94-.52-5.64-1.505L.057 24zm6.613-3.807c1.745.972 3.267 1.546 5.552 1.546 5.088 0 9.228-4.14 9.231-9.229.002-2.46-.955-4.771-2.691-6.508A9.144 9.144 0 0 0 12.108 2.6c-5.087 0-9.227 4.14-9.229 9.228-.002 1.729.513 3.419 1.487 4.859l-1.013 3.685 3.807-1.018zm.447-5.467c.266-.134 1.516-.758 1.708-.844.193-.087.325-.131.467.131.141.262.551.843.615 1.013.064.171.06.323-.014.457-.075.134-.325.468-.579.724-.154.139-.288.195-.485.07-.196-.125-1.154-.431-2.194-1.372-.811-.724-1.356-1.617-1.516-1.89-.158-.273-.016-.423.117-.563.121-.121.262-.324.393-.486.131-.162.174-.279.262-.465.088-.186.044-.35-.022-.484-.065-.134-.593-1.451-.813-1.987-.214-.52-.431-.449-.593-.458l-.507-.007c-.174 0-.456.065-.694.324-.239.259-1.526 1.495-1.526 3.647 0 2.153 1.561 4.228 1.778 4.52.218.293 3.053 4.673 7.442 6.564 1.35.58 2.403.925 3.227 1.184.406.129.767.11 1.055.067.322-.048 1.036-.422 1.182-.827.145-.405.145-.757.101-1.028-.043-.27-.191-.425-.375-.67-.184-.243-1.045-.613-1.864-.871-.819-.259-1.376-.351-1.606-.357-.229-.005-.493-.063-.75.112-.256.175-.957.94-1.128 1.233-.171.294-.343.327-.686.104-.34-.224-1.467-.541-2.796-1.71-.97-.864-1.633-1.934-1.826-2.258-.192-.324-.02-.512.223-.735.224-.176.496-.437.744-.655.249-.219.331-.368.494-.612.164-.244.072-.459-.042-.643-.113-.183-.445-.9-.666-1.25-.18-.287-.361-.248-.495-.252-.133-.004-.288-.008-.442-.008-.155 0-.403.057-.613.28-.21.224-1.085 1.06-1.085 2.587s1.112 2.994 1.264 3.206c.152.212 2.179 3.325 5.269 4.654z"/></svg>
+                <a href="${waLink}" target="_blank" rel="noopener noreferrer" title="Pedir por WhatsApp" class="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs">
+                  <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.486 2.246 2.247 3.487 5.233 3.487 8.414 0 6.556-5.335 11.892-11.891 11.892h-.004c-1.99 0-3.942-.522-5.65-1.516L.057 24zm6.558-4.016c1.7.9 3.02 1.021 3.17 1.033.407.016.884-.187 1.325-.513.771-.571 1.343-1.343 1.499-1.56.36-.5.592-1.053.267-1.616-.325-.563-1.468-2.062-2.024-2.746-.56-.682-.91-.655-1.513-.149-.602.506-2.519 2.353-2.991 2.806-.473.451-.96.455-1.553.162-.594-.293-2.568-1.032-4.893-3.281-1.807-1.613-2.754-3.43-3.08-4.006-.326-.576-.061-1.258.474-1.625l.406-.309c.292-.223.667-.592.95-.9.308-.321.137-.774.175-1.014.038-.24.179-.84.39-1.158.17-.255.376-.251.54-.255.11-.003.247-.015.375-.015.133 0 .373-.021.561.261.357.535.826 1.637.899 1.759.074.122.163.335.072.612-.092.277-.306.564-.519.839-.213.275-.354.552-.171.771.183.219.905 1.56 1.754 2.37.97.917 1.827 1.13 2.055 1.256.18.101.337.153.449.247.291.246.204.847.1 1.186-.104.34-.421.826-.777 1.169-.357.345-.788.767-1.142 1.029-.589.443-.712.61-.473 1.107.16.318.767 1.182 1.66 1.822z"/></svg>
                   <span class="hidden sm:inline">Pedir</span>
                 </a>
               </div>
             </div>
-
           </div>
         `;
       }).join('');
     }
 
-    // Modal Details Opener
     window.openProductModal = function(id) {
       const p = allProducts.find(item => item.id === id);
       if (!p) return;
@@ -479,13 +375,13 @@
       document.getElementById('modal-price').textContent = formatMoney(p.sellingPrice);
       document.getElementById('modal-category-badge').textContent = categoryLabels[p.category] || p.category;
       document.getElementById('modal-material').textContent = materialLabels[p.material] || 'Acero Quirúrgico 316L';
-      document.getElementById('modal-description').textContent = p.description || 'Pieza forjada en acero quirúrgico 316L hipoalergénico. Resiste el agua dulce, salada, perfumes y cremas sin oscurecerse.';
+      document.getElementById('modal-description').textContent = p.description || 'Pieza forjada en acero quirúrgico 316L hipoalergénico. Resiste el agua dulce, salada, perfumes y cremas sin oxidarse ni perder brillo.';
 
       const stockBadge = document.getElementById('modal-stock-badge');
       if (p.stock > 0) {
-        stockBadge.innerHTML = `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Disponibles</span>`;
+        stockBadge.innerHTML = `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> En stock</span>`;
       } else {
-        stockBadge.innerHTML = `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200"><span class="w-2 h-2 rounded-full bg-rose-500"></span>Agotado temporalmente</span>`;
+        stockBadge.innerHTML = `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Sin stock</span>`;
       }
 
       const waText = encodeURIComponent(`Hola Sthefy Joyas, quiero consultar sobre la pieza: ${p.name} (SKU: ${p.sku}) con precio de ${formatMoney(p.sellingPrice)}.`);
@@ -510,7 +406,6 @@
       renderProducts();
     };
 
-    // Event Listeners
     document.getElementById('search-input').addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderProducts();
@@ -521,34 +416,29 @@
       renderProducts();
     });
 
-    // Close modal on background click
     document.getElementById('product-modal').addEventListener('click', (e) => {
       if (e.target.id === 'product-modal') {
         window.closeProductModal();
       }
     });
 
-    // 2. Real-time Firebase Firestore Listener
-    // Whenever products are added, edited, photographed, or sold in Sthefy Joyas app, this triggers instantly!
     const syncStatusEl = document.getElementById('sync-status-text');
-    
+
     try {
       const colRef = collection(db, 'products');
       onSnapshot(colRef, (snapshot) => {
         const prods = [];
         snapshot.forEach(doc => {
           const data = doc.data();
-          // Safety: Do not display wholesale cost on customer website
           const { costPrice, ...publicData } = data;
           prods.push(publicData);
         });
 
-        // Sort by SKU or name
         prods.sort((a, b) => (a.sku || '').localeCompare(b.sku || '', undefined, { numeric: true }));
 
         allProducts = prods;
         syncStatusEl.textContent = `Sincronizado en tiempo real · ${allProducts.length} piezas en catálogo`;
-        
+
         renderCategories();
         renderProducts();
       }, (error) => {
