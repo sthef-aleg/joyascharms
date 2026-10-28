@@ -1,0 +1,72 @@
+<svg width="1400" height="1000" viewBox="0 0 1400 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="flamingoBody" x1="347" y1="152" x2="766" y2="848" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFB8D1"/>
+      <stop offset="0.4" stop-color="#F59BC0"/>
+      <stop offset="1" stop-color="#E33D8B"/>
+    </linearGradient>
+    <linearGradient id="flamingoBodyLight" x1="472" y1="201" x2="739" y2="708" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFDCE8"/>
+      <stop offset="1" stop-color="#FEC0D6"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0C2A1D" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <!-- Background transparent -->
+
+  <!-- Flamingo -->
+  <g filter="url(#dropShadow)">
+    <!-- Body -->
+    <path d="M626 251C529 236 455 277 413 343C366 414 355 487 395 552C437 620 505 661 579 670C643 678 719 663 776 612C820 571 848 517 852 457C857 404 836 356 792 328C742 297 685 279 626 251Z" fill="url(#flamingoBody)"/>
+    <path d="M595 286C549 281 495 303 454 344C429 370 411 398 401 431C389 471 391 513 410 553C455 640 610 633 681 581C746 535 772 465 744 402C721 349 667 315 595 286Z" fill="url(#flamingoBodyLight)" opacity="0.9"/>
+
+    <!-- Head -->
+    <path d="M804 238C860 227 909 255 934 298C960 343 958 409 914 441C875 469 813 465 772 439C726 409 704 360 722 320C738 286 774 249 804 238Z" fill="url(#flamingoBody)"/>
+    <path d="M820 280C843 268 875 272 892 290C917 316 918 360 890 382C861 405 818 404 790 381C761 356 760 316 784 294C795 284 807 281 820 280Z" fill="#F9D8E6" opacity="0.95"/>
+
+    <!-- Beak -->
+    <path d="M934 333C1007 311 1065 332 1084 363C1099 387 1094 423 1064 440C1035 457 990 460 955 448C932 440 905 425 894 409C880 388 890 352 934 333Z" fill="#F8A63F"/>
+    <path d="M928 332C961 299 995 284 1039 287C1009 305 983 322 964 352C951 372 944 392 942 406C926 392 906 372 928 332Z" fill="#F4C257"/>
+
+    <!-- Eye -->
+    <circle cx="864" cy="317" r="10" fill="#171717"/>
+    <circle cx="868" cy="314" r="3" fill="#F7F7F7"/>
+
+    <!-- Neck -->
+    <path d="M714 288C742 332 768 399 757 466C748 521 702 565 648 576C601 585 552 567 525 526C495 481 485 426 503 372C522 315 568 279 626 267C660 260 690 268 714 288Z" fill="url(#flamingoBody)"/>
+    <path d="M651 286C684 309 703 351 702 403C700 443 683 482 643 510C612 531 572 531 538 517C505 503 485 470 489 432C494 391 511 355 539 327C575 291 610 274 651 286Z" fill="#F7D1E0" opacity="0.7"/>
+
+    <!-- Wing feathers -->
+    <g opacity="0.95">
+      <path d="M583 430C536 380 466 365 397 382C412 426 450 457 504 485C541 505 572 513 601 503C595 487 590 462 583 430Z" fill="#FCE3EF"/>
+      <path d="M561 486C510 445 440 438 380 457C396 496 433 522 493 542C532 555 560 560 586 546C581 528 573 508 561 486Z" fill="#F0E0E8"/>
+      <path d="M590 540C548 503 491 498 430 514C447 553 482 577 540 594C571 602 595 602 617 589C611 572 602 559 590 540Z" fill="#F8AFC7"/>
+      <path d="M615 433C673 395 730 383 785 399C765 439 718 470 666 493C639 506 612 512 588 505C594 480 603 456 615 433Z" fill="#F9C5D8"/>
+    </g>
+
+    <!-- Bottom feather details -->
+    <g opacity="0.93">
+      <path d="M563 537C596 562 629 607 640 655C646 681 646 705 638 730C621 724 598 715 573 702C542 686 519 663 504 633C487 600 478 561 485 529C508 536 532 536 563 537Z" fill="#F9B7C9"/>
+      <path d="M626 538C658 566 680 605 694 649C702 675 706 699 704 724C690 720 666 711 635 700C607 689 580 669 562 639C543 607 534 569 538 533C565 540 592 539 626 538Z" fill="#F4A7C1"/>
+    </g>
+
+    <!-- Legs -->
+    <path d="M622 716C633 790 630 864 615 929" stroke="#E13C8F" stroke-width="22" stroke-linecap="round"/>
+    <path d="M754 716C752 791 757 868 768 926" stroke="#E13C8F" stroke-width="22" stroke-linecap="round"/>
+    <path d="M574 934C608 943 633 946 655 944C649 959 638 973 621 983C600 995 571 998 544 988C562 972 569 955 574 934Z" fill="#E13C8F"/>
+    <path d="M728 934C763 944 789 947 812 944C805 958 794 972 777 982C756 994 728 998 702 990C719 973 723 955 728 934Z" fill="#E13C8F"/>
+
+    <!-- Tail/feathers left side -->
+    <path d="M486 614C436 600 390 607 344 631C398 655 450 661 494 656C500 640 499 627 486 614Z" fill="#FEE7F0"/>
+    <path d="M429 586C373 564 322 571 271 601C330 629 385 641 442 632C451 615 450 599 429 586Z" fill="#F6D1E7"/>
+    <path d="M415 533C354 500 302 501 252 533C315 561 371 573 429 564C433 550 432 541 415 533Z" fill="#FCE8F1"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g>
+    <text x="720" y="505" text-anchor="middle" font-size="245" font-weight="700" fill="#F7B7CF" font-family="Segoe Script, Lucida Handwriting, Brush Script MT, cursive" letter-spacing="-12" style="font-style:italic;">Sthefy</text>
+    <text x="720" y="660" text-anchor="middle" font-size="114" font-weight="700" fill="#E9BC44" font-family="Segoe Print, Segoe Script, Lucida Handwriting, cursive" letter-spacing="2">Jewels</text>
+  </g>
+</svg>
