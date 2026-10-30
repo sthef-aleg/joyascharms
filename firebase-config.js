@@ -1,10 +1,10 @@
 window.FIREBASE_CONFIG = {
-  apiKey: "AIzaSyBuRbFjqg4VT9LDP57B8V51o26TcM1-zII",
-  authDomain: "reverberant-overview-501dl.firebaseapp.com",
-  projectId: "reverberant-overview-501dl",
-  storageBucket: "reverberant-overview-501dl.appspot.com",
-  messagingSenderId: "780922365540",
-  appId: "1:780922365540:web:62f3aacbef4683bad32171"
+  apiKey: "AIzaSyDnhRNcnIb0DTg-U5Tj_TZ7SfJ8lFye8Y8",
+  authDomain: "sthefyjoyasprod.firebaseapp.com",
+  projectId: "sthefyjoyasprod",
+  storageBucket: "sthefyjoyasprod.firebasestorage.app",
+  messagingSenderId: "445365780859",
+  appId: "1:445365780859:web:7473d28dffee8b80463dde"
 };
 
 // IMPORTANT:
