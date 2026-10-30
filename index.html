@@ -79,6 +79,10 @@
         </a>
 
         <div class="flex items-center gap-3">
+          <button id="open-cart-button" type="button" class="relative px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm flex items-center gap-2">
+            <span>Mi carrito</span>
+            <span id="cart-count" class="min-w-5 h-5 px-1 rounded-full bg-amber-300 text-stone-900 text-[10px] font-bold flex items-center justify-center">0</span>
+          </button>
           <a id="btn-whatsapp-header" href="https://wa.me/595973779707" target="_blank" rel="noopener noreferrer"
              class="px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold text-xs sm:text-sm shadow-sm flex items-center gap-2">
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.486 2.246 2.247 3.487 5.233 3.487 8.414 0 6.556-5.335 11.892-11.891 11.892h-.004c-1.99 0-3.942-.522-5.65-1.516L.057 24zm6.558-4.016c1.7.9 3.02 1.021 3.17 1.033.407.016.884-.187 1.325-.513.771-.571 1.343-1.343 1.499-1.56.36-.5.592-1.053.267-1.616-.325-.563-1.468-2.062-2.024-2.746-.56-.682-.91-.655-1.513-.149-.602.506-2.519 2.353-2.991 2.806-.473.451-.96.455-1.553.162-.594-.293-2.568-1.032-4.893-3.281-1.807-1.613-2.754-3.43-3.08-4.006-.326-.576-.061-1.258.474-1.625l.406-.309c.292-.223.667-.592.95-.9.308-.321.137-.774.175-1.014.038-.24.179-.84.39-1.158.17-.255.376-.251.54-.255.11-.003.247-.015.375-.015.133 0 .373-.021.561.261.357.535.826 1.637.899 1.759.074.122.163.335.072.612-.092.277-.306.564-.519.839-.213.275-.354.552-.171.771.183.219.905 1.56 1.754 2.37.97.917 1.827 1.13 2.055 1.256.18.101.337.153.449.247.291.246.204.847.1 1.186-.104.34-.421.826-.777 1.169-.357.345-.788.767-1.142 1.029-.589.443-.712.61-.473 1.107.16.318.767 1.182 1.66 1.822z"/></svg>
@@ -154,6 +158,27 @@
 
   </main>
 
+  <div id="cart-modal" class="fixed inset-0 z-50 bg-stone-950/70 backdrop-blur-xs hidden items-center justify-center p-4">
+    <section role="dialog" aria-modal="true" aria-labelledby="cart-title" class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl border border-stone-200 flex flex-col max-h-[90vh]">
+      <div class="flex items-center justify-between p-5 border-b border-stone-100">
+        <h2 id="cart-title" class="font-serif text-2xl font-bold text-stone-900">Mi carrito</h2>
+        <button id="close-cart-button" type="button" aria-label="Cerrar carrito" class="w-9 h-9 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 text-xl">×</button>
+      </div>
+      <div id="cart-items" class="p-5 overflow-y-auto space-y-3"></div>
+      <div class="p-5 border-t border-stone-100 space-y-3">
+        <p id="cart-stock-warning" class="hidden text-sm font-medium text-rose-700 bg-rose-50 rounded-xl p-3"></p>
+        <div class="flex items-center justify-between font-semibold text-stone-900">
+          <span>Total estimado</span>
+          <span id="cart-total" class="font-serif text-xl text-amber-700">₲ 0</span>
+        </div>
+        <p class="text-xs leading-relaxed text-stone-500">El pedido se confirma por WhatsApp. Este carrito no reserva stock; la disponibilidad se verifica al confirmar.</p>
+        <a id="send-cart-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="pointer-events-none opacity-50 w-full py-3 rounded-xl bg-emerald-600 text-white font-bold text-sm flex items-center justify-center">
+          Enviar pedido por WhatsApp
+        </a>
+      </div>
+    </section>
+  </div>
+
   <div id="product-modal" class="fixed inset-0 z-50 bg-stone-950/70 backdrop-blur-xs hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-stone-200 flex flex-col max-h-[90vh]">
       <div class="relative bg-stone-100 aspect-square max-h-80 flex items-center justify-center overflow-hidden">
@@ -191,6 +216,15 @@
             </div>
           </div>
         </div>
+
+        <div id="modal-size-field" class="hidden space-y-1">
+          <label for="modal-size" class="text-xs font-semibold text-stone-700">Talle</label>
+          <select id="modal-size" class="w-full rounded-xl border border-stone-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"></select>
+        </div>
+
+        <button id="modal-add-to-cart" type="button" class="w-full py-3 rounded-xl bg-brand-olive hover:bg-brand-oliveLight text-white font-bold text-sm">
+          Agregar al carrito
+        </button>
 
         <a id="modal-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2">
           <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.486 2.246 2.247 3.487 5.233 3.487 8.414 0 6.556-5.335 11.892-11.891 11.892h-.004c-1.99 0-3.942-.522-5.65-1.516L.057 24zm6.558-4.016c1.7.9 3.02 1.021 3.17 1.033.407.016.884-.187 1.325-.513.771-.571 1.343-1.343 1.499-1.56.36-.5.592-1.053.267-1.616-.325-.563-1.468-2.062-2.024-2.746-.56-.682-.91-.655-1.513-.149-.602.506-2.519 2.353-2.991 2.806-.473.451-.96.455-1.553.162-.594-.293-2.568-1.032-4.893-3.281-1.807-1.613-2.754-3.43-3.08-4.006-.326-.576-.061-1.258.474-1.625l.406-.309c.292-.223.667-.592.95-.9.308-.321.137-.774.175-1.014.038-.24.179-.84.39-1.158.17-.255.376-.251.54-.255.11-.003.247-.015.375-.015.133 0 .373-.021.561.261.357.535.826 1.637.899 1.759.074.122.163.335.072.612-.092.277-.306.564-.519.839-.213.275-.354.552-.171.771.183.219.905 1.56 1.754 2.37.97.917 1.827 1.13 2.055 1.256.18.101.337.153.449.247.291.246.204.847.1 1.186-.104.34-.421.826-.777 1.169-.357.345-.788.767-1.142 1.029-.589.443-.712.61-.473 1.107.16.318.767 1.182 1.66 1.822z"/></svg>
@@ -233,12 +267,14 @@
     }
 
     const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app, "ai-studio-sthefyjoyascontr-b78219b3-4b1d-4d71-83c2-47c9c728a9f0");
+    const db = getFirestore(app);
 
     let allProducts = [];
     let selectedCategory = 'todos';
     let searchQuery = '';
     let onlyInStock = false;
+    let cart = [];
+    let activeModalProductId = null;
     const whatsappPhone = '595973779707';
 
     const categoryLabels = {
@@ -266,6 +302,146 @@
     function formatMoney(amount) {
       if (!amount && amount !== 0) return '₲ 0';
       return '₲ ' + Math.round(amount).toLocaleString('es-PY');
+    }
+
+    function productSizeStock(product, size) {
+      if (!product.hasSizes) return Number(product.stock) || 0;
+      const sizeItem = (product.sizes || []).find(item => String(item.size) === String(size));
+      return sizeItem ? Math.max(0, Number(sizeItem.stock) || 0) : 0;
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cart-count').textContent = String(count);
+    }
+
+    function addProductToCart(product, size = '') {
+      if (!product || (product.hasSizes && !size)) {
+        alert(product?.hasSizes && !size ? 'Selecciona un talle para agregar este producto.' : 'No se encontró el producto.');
+        return;
+      }
+
+      const available = productSizeStock(product, size);
+      const existing = cart.find(item => item.productId === product.id && item.size === size);
+      if (available < 1 || (existing ? existing.quantity : 0) >= available) {
+        alert('No hay más unidades disponibles para la cantidad solicitada.');
+        return;
+      }
+
+      if (existing) existing.quantity += 1;
+      else cart.push({ productId: product.id, size, quantity: 1 });
+      renderCart();
+      document.getElementById('cart-modal').classList.remove('hidden');
+      document.getElementById('cart-modal').classList.add('flex');
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items');
+      const warning = document.getElementById('cart-stock-warning');
+      const checkout = document.getElementById('send-cart-whatsapp');
+      const itemsToRender = cart.map(item => ({
+        item,
+        product: allProducts.find(product => product.id === item.productId)
+      }));
+      const hasUnavailableItems = itemsToRender.some(({ item, product }) =>
+        !product || item.quantity > productSizeStock(product, item.size)
+      );
+      let total = 0;
+      container.replaceChildren();
+
+      if (cart.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'text-sm text-stone-500 text-center py-8';
+        empty.textContent = 'Tu carrito está vacío. Agrega las joyas que te interesan.';
+        container.appendChild(empty);
+      }
+
+      itemsToRender.forEach(({ item, product }) => {
+        if (!product) {
+          const row = document.createElement('div');
+          row.className = 'flex items-center justify-between gap-3 border border-rose-200 rounded-xl p-3';
+          const message = document.createElement('p');
+          message.className = 'text-sm text-rose-700';
+          message.textContent = 'Este producto ya no está disponible en el catálogo.';
+          const remove = document.createElement('button');
+          remove.type = 'button';
+          remove.dataset.cartAction = 'remove';
+          remove.dataset.productId = item.productId;
+          remove.dataset.size = item.size;
+          remove.className = 'text-xs text-rose-700 hover:text-rose-900';
+          remove.textContent = 'Quitar';
+          row.append(message, remove);
+          container.appendChild(row);
+          return;
+        }
+        total += (Number(product.sellingPrice) || 0) * item.quantity;
+
+        const row = document.createElement('div');
+        row.className = 'flex items-center gap-3 border border-stone-200 rounded-xl p-3';
+        const details = document.createElement('div');
+        details.className = 'flex-1 min-w-0';
+        const name = document.createElement('p');
+        name.className = 'font-semibold text-sm text-stone-900 truncate';
+        name.textContent = product.name;
+        const info = document.createElement('p');
+        info.className = 'text-xs text-stone-500 mt-1';
+        info.textContent = `${product.sku || ''}${item.size ? ` · Talle ${item.size}` : ''} · ${formatMoney(product.sellingPrice)}`;
+        details.append(name, info);
+
+        const controls = document.createElement('div');
+        controls.className = 'flex items-center gap-2';
+        [['decrease', '−', 'Quitar una unidad'], ['increase', '+', 'Agregar una unidad'], ['remove', 'Quitar', 'Quitar del carrito']].forEach(([action, label, accessibleLabel]) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.dataset.cartAction = action;
+          button.dataset.productId = item.productId;
+          button.dataset.size = item.size;
+          button.className = action === 'remove'
+            ? 'text-xs text-rose-700 hover:text-rose-900 ml-1'
+            : 'w-7 h-7 rounded-full bg-stone-100 hover:bg-stone-200 font-bold';
+          button.textContent = label;
+          button.setAttribute('aria-label', accessibleLabel);
+          controls.appendChild(button);
+          if (action === 'decrease') {
+            const quantity = document.createElement('span');
+            quantity.className = 'text-sm font-semibold min-w-4 text-center';
+            quantity.textContent = String(item.quantity);
+            controls.appendChild(quantity);
+          }
+        });
+        row.append(details, controls);
+        container.appendChild(row);
+      });
+
+      warning.textContent = hasUnavailableItems
+        ? 'La disponibilidad de uno o más productos cambió. Ajusta el carrito antes de enviar.'
+        : '';
+      warning.classList.toggle('hidden', !hasUnavailableItems);
+      document.getElementById('cart-total').textContent = formatMoney(total);
+      const checkoutDisabled = cart.length === 0 || hasUnavailableItems;
+      checkout.classList.toggle('pointer-events-none', checkoutDisabled);
+      checkout.classList.toggle('opacity-50', checkoutDisabled);
+      checkout.setAttribute('aria-disabled', String(checkoutDisabled));
+      checkout.tabIndex = checkoutDisabled ? -1 : 0;
+
+      const messageItems = itemsToRender.filter(({ product }) => product).map(({ item, product }) =>
+        `• ${item.quantity} x ${product.name}${item.size ? ` (talle ${item.size})` : ''} — ${formatMoney(product.sellingPrice * item.quantity)}`
+      );
+      const message = [
+        'Hola Sthefy Joyas, quisiera solicitar este pedido:',
+        ...messageItems,
+        `Total estimado: ${formatMoney(total)}`,
+        'Entiendo que el stock no se reserva y que la disponibilidad se confirma por este medio.'
+      ].join('\n');
+      checkout.href = checkoutDisabled
+        ? '#'
+        : `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
+      updateCartCount();
+    }
+
+    function closeCart() {
+      document.getElementById('cart-modal').classList.add('hidden');
+      document.getElementById('cart-modal').classList.remove('flex');
     }
 
     function renderCategories() {
@@ -331,9 +507,6 @@
         const inStock = product.stock > 0;
         const matText = materialLabels[product.material] || 'Acero Quirúrgico';
         const priceFormatted = formatMoney(product.sellingPrice);
-        const waText = encodeURIComponent(`¡Hola Sthefy Joyas! Quiero comprar la joya: ${product.name} (Código: ${product.sku}) por ${priceFormatted}. ¿Tienen disponible para entrega?`);
-        const waLink = `https://wa.me/${whatsappPhone}?text=${waText}`;
-
         return `
           <div class="bg-white rounded-2xl border border-stone-200/80 overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col group">
             <div class="relative aspect-square bg-stone-100 overflow-hidden cursor-pointer" onclick="openProductModal('${product.id}')">
@@ -354,10 +527,10 @@
                   <span class="text-[10px] text-stone-400 block uppercase">Precio</span>
                   <span class="font-bold text-sm sm:text-base text-stone-900 font-serif">${priceFormatted}</span>
                 </div>
-                <a href="${waLink}" target="_blank" rel="noopener noreferrer" title="Pedir por WhatsApp" class="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs">
+                <button type="button" data-add-to-cart="${product.id}" ${!inStock ? 'disabled' : ''} title="Agregar al carrito" class="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-brand-olive hover:bg-brand-oliveLight disabled:bg-stone-300 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs">
                   <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.486 2.246 2.247 3.487 5.233 3.487 8.414 0 6.556-5.335 11.892-11.891 11.892h-.004c-1.99 0-3.942-.522-5.65-1.516L.057 24zm6.558-4.016c1.7.9 3.02 1.021 3.17 1.033.407.016.884-.187 1.325-.513.771-.571 1.343-1.343 1.499-1.56.36-.5.592-1.053.267-1.616-.325-.563-1.468-2.062-2.024-2.746-.56-.682-.91-.655-1.513-.149-.602.506-2.519 2.353-2.991 2.806-.473.451-.96.455-1.553.162-.594-.293-2.568-1.032-4.893-3.281-1.807-1.613-2.754-3.43-3.08-4.006-.326-.576-.061-1.258.474-1.625l.406-.309c.292-.223.667-.592.95-.9.308-.321.137-.774.175-1.014.038-.24.179-.84.39-1.158.17-.255.376-.251.54-.255.11-.003.247-.015.375-.015.133 0 .373-.021.561.261.357.535.826 1.637.899 1.759.074.122.163.335.072.612-.092.277-.306.564-.519.839-.213.275-.354.552-.171.771.183.219.905 1.56 1.754 2.37.97.917 1.827 1.13 2.055 1.256.18.101.337.153.449.247.291.246.204.847.1 1.186-.104.34-.421.826-.777 1.169-.357.345-.788.767-1.142 1.029-.589.443-.712.61-.473 1.107.16.318.767 1.182 1.66 1.822z"/></svg>
-                  <span class="hidden sm:inline">Pedir</span>
-                </a>
+                  <span class="hidden sm:inline">${inStock ? (product.hasSizes ? 'Elegir talle' : 'Agregar') : 'Agotado'}</span>
+                </button>
               </div>
             </div>
           </div>
@@ -376,6 +549,25 @@
       document.getElementById('modal-category-badge').textContent = categoryLabels[p.category] || p.category;
       document.getElementById('modal-material').textContent = materialLabels[p.material] || 'Acero Quirúrgico 316L';
       document.getElementById('modal-description').textContent = p.description || 'Pieza forjada en acero quirúrgico 316L hipoalergénico. Resiste el agua dulce, salada, perfumes y cremas sin oxidarse ni perder brillo.';
+      activeModalProductId = p.id;
+      const sizeField = document.getElementById('modal-size-field');
+      const sizeSelect = document.getElementById('modal-size');
+      const addButton = document.getElementById('modal-add-to-cart');
+      sizeSelect.replaceChildren();
+      sizeField.classList.toggle('hidden', !p.hasSizes);
+      addButton.disabled = p.stock <= 0;
+      addButton.classList.toggle('opacity-50', addButton.disabled);
+      if (p.hasSizes) {
+        (p.sizes || []).forEach(sizeItem => {
+          const option = document.createElement('option');
+          option.value = String(sizeItem.size);
+          option.textContent = `${sizeItem.size} · ${Math.max(0, Number(sizeItem.stock) || 0)} disponibles`;
+          option.disabled = Number(sizeItem.stock) <= 0;
+          sizeSelect.appendChild(option);
+        });
+        addButton.disabled = !Array.from(sizeSelect.options).some(option => !option.disabled);
+        addButton.classList.toggle('opacity-50', addButton.disabled);
+      }
 
       const stockBadge = document.getElementById('modal-stock-badge');
       if (p.stock > 0) {
@@ -395,6 +587,56 @@
       document.getElementById('product-modal').classList.add('hidden');
       document.getElementById('product-modal').classList.remove('flex');
     };
+
+    document.getElementById('products-grid').addEventListener('click', (event) => {
+      const button = event.target.closest('[data-add-to-cart]');
+      if (!button) return;
+      const product = allProducts.find(item => item.id === button.dataset.addToCart);
+      if (!product) return;
+      if (product.hasSizes) {
+        window.openProductModal(product.id);
+        return;
+      }
+      addProductToCart(product);
+    });
+
+    document.getElementById('modal-add-to-cart').addEventListener('click', () => {
+      const product = allProducts.find(item => item.id === activeModalProductId);
+      if (!product) return;
+      const size = product.hasSizes ? document.getElementById('modal-size').value : '';
+      addProductToCart(product, size);
+      window.closeProductModal();
+    });
+
+    document.getElementById('open-cart-button').addEventListener('click', () => {
+      renderCart();
+      document.getElementById('cart-modal').classList.remove('hidden');
+      document.getElementById('cart-modal').classList.add('flex');
+    });
+    document.getElementById('close-cart-button').addEventListener('click', closeCart);
+    document.getElementById('cart-modal').addEventListener('click', (event) => {
+      if (event.target.id === 'cart-modal') closeCart();
+    });
+    document.getElementById('cart-items').addEventListener('click', (event) => {
+      const button = event.target.closest('[data-cart-action]');
+      if (!button) return;
+      const { cartAction, productId, size } = button.dataset;
+      const index = cart.findIndex(item => item.productId === productId && item.size === size);
+      if (index < 0) return;
+      if (cartAction === 'remove' || (cartAction === 'decrease' && cart[index].quantity === 1)) {
+        cart.splice(index, 1);
+      } else if (cartAction === 'decrease') {
+        cart[index].quantity -= 1;
+      } else if (cartAction === 'increase') {
+        const product = allProducts.find(item => item.id === productId);
+        if (!product || cart[index].quantity >= productSizeStock(product, size)) {
+          alert('No hay más unidades disponibles para la cantidad solicitada.');
+          return;
+        }
+        cart[index].quantity += 1;
+      }
+      renderCart();
+    });
 
     window.resetFilters = function() {
       selectedCategory = 'todos';
@@ -437,6 +679,7 @@
         prods.sort((a, b) => (a.sku || '').localeCompare(b.sku || '', undefined, { numeric: true }));
 
         allProducts = prods;
+        renderCart();
         syncStatusEl.textContent = `Sincronizado en tiempo real · ${allProducts.length} piezas en catálogo`;
 
         renderCategories();
