@@ -39,6 +39,60 @@
     .gold-shimmer {
       background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #f59e0b 100%);
     }
+    :root {
+      --store-rose: #bd7188;
+      --store-rose-soft: #f8e9ed;
+      --store-olive: #354c3c;
+      --store-olive-dark: #23362c;
+      --store-gold: #c59b4a;
+      --store-paper: #fcf8f6;
+    }
+    body { background: var(--store-paper); }
+    .store-announcement { background: var(--store-olive-dark); }
+    .store-header { background: var(--store-olive); border-color: #70816f; }
+    .store-hero {
+      background:
+        radial-gradient(ellipse at 12% 8%, rgba(210, 145, 161, .32), transparent 35%),
+        linear-gradient(125deg, #354c3c 0%, #263a30 68%, #3b4937 100%);
+      border-color: #69775f;
+    }
+    .store-eyebrow { color: #f4dba6; background: rgba(197, 155, 74, .15); border-color: rgba(226, 190, 123, .5); }
+    .store-tools { border-color: #eadde0; box-shadow: 0 14px 40px rgba(66, 49, 47, .06); }
+    .store-product-card { border-color: #ecdee1; box-shadow: 0 5px 20px rgba(67, 45, 50, .045); }
+    .store-product-card:hover { border-color: #d7b3bd; box-shadow: 0 18px 34px rgba(67, 45, 50, .12); transform: translateY(-3px); }
+    .store-card-image { background: linear-gradient(145deg, #f7e9ec, #f7f1e7); }
+    .store-card-name:hover { color: var(--store-rose); }
+    .store-add-button { min-height: 40px; background: var(--store-olive); }
+    .store-add-button:hover { background: var(--store-olive-dark); }
+    .store-add-button:disabled { background: #e7e1df; color: #817a77; }
+    .store-cart-button { background: var(--store-gold); color: #251f17; }
+    .store-cart-button:hover { background: #d4ae69; }
+    .store-focus:focus-visible { outline: 3px solid #d5ad63; outline-offset: 3px; }
+    #cart-modal > section, #product-modal > div { border-color: #eadde0; }
+    #cart-items > div { border-color: #ecdee1; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+    @media (max-width: 480px) {
+      .store-header .max-w-7xl > div {
+        height: auto;
+        min-height: 104px;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-block: 8px;
+      }
+      .store-header .max-w-7xl > div > a:first-child {
+        flex: 1 1 100%;
+        gap: 8px;
+        min-width: 0;
+      }
+      .store-header .max-w-7xl > div > a:first-child > div { min-width: 0; }
+      .store-header .max-w-7xl > div > a:first-child > div > div { flex-wrap: nowrap; gap: 4px; }
+      .store-header .max-w-7xl > div > a:first-child span { white-space: nowrap; }
+      .store-header .brand-logo { width: 42px; height: 42px; }
+      .store-header .max-w-7xl > div > div:last-child { flex: 1 1 100%; justify-content: space-between; gap: 6px; }
+      .store-header #open-cart-button, .store-header #btn-whatsapp-header { padding: 8px 10px; }
+    }
     .brand-logo {
       width: 52px;
       height: 52px;
@@ -53,7 +107,7 @@
 <script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
 <body class="bg-[#fafaf8] text-stone-800 font-sans min-h-screen flex flex-col">
 
-  <div class="bg-brand-oliveDark text-stone-200 text-xs py-2 px-4 border-b border-brand-olive text-center flex items-center justify-center gap-3">
+  <div class="store-announcement bg-brand-oliveDark text-stone-200 text-xs py-2 px-4 border-b border-brand-olive text-center flex items-center justify-center gap-3">
     <span class="inline-flex items-center gap-1.5 font-medium text-amber-300">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
       Stock y Precios Actualizados en Vivo
@@ -64,7 +118,7 @@
     <span class="hidden md:inline">Envíos a todo Paraguay</span>
   </div>
 
-  <header class="sticky top-0 z-30 bg-brand-olive text-stone-100 shadow-md border-b border-[#3b4f33]">
+  <header class="store-header sticky top-0 z-30 bg-brand-olive text-stone-100 shadow-md border-b border-[#3b4f33]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20 gap-4">
         <a href="#" class="flex items-center gap-3">
@@ -79,9 +133,9 @@
         </a>
 
         <div class="flex items-center gap-3">
-          <button id="open-cart-button" type="button" class="relative px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm flex items-center gap-2">
-            <span>Mi carrito</span>
-            <span id="cart-count" class="min-w-5 h-5 px-1 rounded-full bg-amber-300 text-stone-900 text-[10px] font-bold flex items-center justify-center">0</span>
+          <button id="open-cart-button" type="button" aria-label="Abrir carrito, 0 artículos" class="store-focus relative px-3 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm flex items-center gap-2">
+            <span>Mi selección</span>
+            <span id="cart-count" aria-live="polite" class="min-w-5 h-5 px-1 rounded-full bg-amber-300 text-stone-900 text-[10px] font-bold flex items-center justify-center">0</span>
           </button>
           <a id="btn-whatsapp-header" href="https://wa.me/595973779707" target="_blank" rel="noopener noreferrer"
              class="px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold text-xs sm:text-sm shadow-sm flex items-center gap-2">
@@ -94,44 +148,55 @@
     </div>
   </header>
 
-  <section class="bg-gradient-to-b from-[#2d3d27] to-[#1e2a1a] text-stone-100 py-12 px-4 border-b border-[#3b4f33]">
+  <section class="store-hero bg-gradient-to-b from-[#2d3d27] to-[#1e2a1a] text-stone-100 py-12 sm:py-16 px-4 border-b border-[#3b4f33]">
     <div class="max-w-4xl mx-auto text-center space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 text-amber-200 border border-amber-400/40 text-xs font-semibold">
-        ✨ Colección Actualizada · Acero Quirúrgico 316L
+      <div class="store-eyebrow inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-semibold">
+        ✨ Detalles que te acompañan todos los días
       </div>
       <h1 class="font-serif text-3xl sm:text-5xl font-bold text-pink-100 tracking-tight leading-tight">
-        Joyas que no se manchan ni pierden el brillo
+        Un brillo especial, elegido por vos
       </h1>
-      <p class="text-stone-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-        Resistentes al agua, sudor y perfumes. Hipoalergénicas para uso diario. Consulta disponibilidad inmediata o solicita tu pedido con entrega a domicilio.
+      <p class="text-stone-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+        Explorá la colección, elegí tus favoritas y armá tu pedido en unos simples pasos. Acero quirúrgico y bijouterie fina para regalar o regalarte.
       </p>
+      <a href="#products-grid" class="store-cart-button store-focus inline-flex items-center justify-center px-5 py-3 rounded-full font-semibold text-sm shadow-sm transition-colors">
+        Explorar colección <span class="ml-2" aria-hidden="true">↓</span>
+      </a>
 
       <div class="pt-2 flex items-center justify-center gap-2 text-xs text-stone-300">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-        <span id="sync-status-text">Conectando con base de datos en tiempo real...</span>
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+        <span id="sync-status-text" aria-live="polite">Conectando con base de datos en tiempo real...</span>
       </div>
     </div>
   </section>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
-    <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-stone-200/80 space-y-4">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+      <div>
+        <p class="text-[11px] uppercase tracking-[.2em] text-rose-700 font-semibold">Colección Sthefy</p>
+        <h2 class="font-serif text-2xl sm:text-3xl text-[#354c3c] mt-1">Encontrá tu próxima favorita</h2>
+        <p class="text-sm text-stone-600 mt-1">Agregá todas las joyas que te gusten y revisá tu selección antes de pedir.</p>
+      </div>
+      <span class="text-xs text-stone-500">Pedido sencillo · Atención por WhatsApp</span>
+    </div>
+    <div class="store-tools bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-stone-200/80 space-y-4">
       <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
         <div class="relative flex-1">
           <svg class="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
-          <input type="text" id="search-input" placeholder="Buscar por nombre, código SKU o material..." class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all bg-stone-50/50">
+          <input type="search" id="search-input" aria-label="Buscar joyas por nombre, código o material" placeholder="Buscar por nombre, código SKU o material..." class="store-focus w-full pl-11 pr-4 py-2.5 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-sm transition-all bg-stone-50/50">
         </div>
 
         <div class="flex items-center gap-3 shrink-0">
           <label class="flex items-center gap-2 text-xs font-semibold text-stone-700 cursor-pointer select-none">
-            <input type="checkbox" id="only-stock-checkbox" class="w-4 h-4 text-emerald-600 rounded border-stone-300 focus:ring-emerald-500">
+            <input type="checkbox" id="only-stock-checkbox" class="w-4 h-4 accent-[#354c3c] rounded border-stone-300">
             <span>Solo en stock</span>
           </label>
 
           <span class="text-stone-300 hidden sm:inline">|</span>
 
-          <span id="product-count-badge" class="text-xs text-stone-500 font-medium">Cargando joyas...</span>
+          <span id="product-count-badge" aria-live="polite" class="text-xs text-stone-500 font-medium">Cargando joyas...</span>
         </div>
       </div>
 
@@ -158,6 +223,17 @@
 
   </main>
 
+  <button id="cart-dock" type="button" class="hidden store-focus fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:w-[400px] z-40 rounded-2xl bg-[#23362c] text-white px-4 py-3.5 shadow-2xl flex items-center justify-between gap-4 text-left" aria-label="Abrir mi selección">
+    <span>
+      <span class="block text-sm font-bold">Tu selección</span>
+      <span id="cart-dock-count" class="block text-[11px] text-white/75">0 artículos</span>
+    </span>
+    <span class="flex items-center gap-3">
+      <span id="cart-dock-total" class="text-sm font-semibold"></span>
+      <span class="store-cart-button w-8 h-8 rounded-full flex items-center justify-center font-bold" aria-hidden="true">→</span>
+    </span>
+  </button>
+
   <div id="cart-modal" class="fixed inset-0 z-50 bg-stone-950/70 backdrop-blur-xs hidden items-center justify-center p-4">
     <section role="dialog" aria-modal="true" aria-labelledby="cart-title" class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl border border-stone-200 flex flex-col max-h-[90vh]">
       <div class="flex items-center justify-between p-5 border-b border-stone-100">
@@ -172,7 +248,7 @@
           <span id="cart-total" class="font-serif text-xl text-amber-700">₲ 0</span>
         </div>
         <p class="text-xs leading-relaxed text-stone-500">El pedido se confirma por WhatsApp. Este carrito no reserva stock; la disponibilidad se verifica al confirmar.</p>
-        <a id="send-cart-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="pointer-events-none opacity-50 w-full py-3 rounded-xl bg-emerald-600 text-white font-bold text-sm flex items-center justify-center">
+        <a id="send-cart-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="store-focus pointer-events-none opacity-50 w-full py-3 rounded-xl bg-emerald-600 text-white font-bold text-sm flex items-center justify-center">
           Enviar pedido por WhatsApp
         </a>
       </div>
@@ -312,7 +388,16 @@
 
     function updateCartCount() {
       const count = cart.reduce((total, item) => total + item.quantity, 0);
+      const countLabel = `${count} artículo${count === 1 ? '' : 's'}`;
+      const total = cart.reduce((sum, item) => {
+        const product = allProducts.find(current => current.id === item.productId);
+        return sum + (product ? Number(product.sellingPrice || 0) * item.quantity : 0);
+      }, 0);
       document.getElementById('cart-count').textContent = String(count);
+      document.getElementById('open-cart-button').setAttribute('aria-label', `Abrir carrito, ${countLabel}`);
+      document.getElementById('cart-dock-count').textContent = `${countLabel} · ${cart.length} modelo${cart.length === 1 ? '' : 's'}`;
+      document.getElementById('cart-dock-total').textContent = formatMoney(total);
+      document.getElementById('cart-dock').classList.toggle('hidden', count === 0);
     }
 
     function addProductToCart(product, size = '') {
@@ -331,8 +416,7 @@
       if (existing) existing.quantity += 1;
       else cart.push({ productId: product.id, size, quantity: 1 });
       renderCart();
-      document.getElementById('cart-modal').classList.remove('hidden');
-      document.getElementById('cart-modal').classList.add('flex');
+      renderProducts();
     }
 
     function renderCart() {
@@ -442,6 +526,8 @@
     function closeCart() {
       document.getElementById('cart-modal').classList.add('hidden');
       document.getElementById('cart-modal').classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+      document.getElementById('open-cart-button').focus();
     }
 
     function renderCategories() {
@@ -453,7 +539,7 @@
         counts[p.category] = (counts[p.category] || 0) + 1;
       });
 
-      const categoriesToShow = ['todos', 'anillos', 'collares', 'aros', 'pulseras', 'tobilleras', 'dijes', 'sets'];
+      const categoriesToShow = ['todos', 'anillos', 'collares', 'aros', 'pulseras', 'tobilleras', 'dijes', 'sets', 'relojes', 'accesorios'];
 
       categoriesToShow.forEach(cat => {
         const count = counts[cat] || 0;
@@ -462,6 +548,8 @@
         btn.className = `px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
           isSelected ? 'bg-brand-olive text-amber-300 shadow-sm border border-brand-oliveLight' : 'bg-stone-100 text-stone-600 hover:bg-stone-200 hover:text-stone-900 border border-transparent'
         }`;
+        btn.classList.add('store-focus');
+        if (isSelected) btn.classList.add('ring-2', 'ring-[#d8bd83]', 'ring-offset-1');
         btn.innerHTML = `<span>${categoryLabels[cat] || cat}</span> <span class="text-[10px] opacity-70">(${count})</span>`;
         btn.onclick = () => {
           selectedCategory = cat;
@@ -502,34 +590,35 @@
 
       emptyState.classList.add('hidden');
       grid.innerHTML = filtered.map(product => {
-        const hasPhoto = Boolean(product.imageUrl);
+        const cartQuantity = cart.filter(item => item.productId === product.id)
+          .reduce((total, item) => total + item.quantity, 0);
         const photoSrc = product.imageUrl || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80';
         const inStock = product.stock > 0;
         const matText = materialLabels[product.material] || 'Acero Quirúrgico';
         const priceFormatted = formatMoney(product.sellingPrice);
         return `
-          <div class="bg-white rounded-2xl border border-stone-200/80 overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col group">
-            <div class="relative aspect-square bg-stone-100 overflow-hidden cursor-pointer" onclick="openProductModal('${product.id}')">
+          <div class="store-product-card bg-white rounded-2xl border overflow-hidden transition-all duration-300 flex flex-col group">
+            <button type="button" class="store-card-image store-focus relative block w-full aspect-square overflow-hidden cursor-pointer" aria-label="Ver detalles de ${product.name}" onclick="openProductModal('${product.id}')">
               <img src="${photoSrc}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
               <div class="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-900/75 text-stone-100 backdrop-blur-xs font-mono">${product.sku}</span>
                 ${!inStock ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-600 text-white shadow-xs">Agotado</span>` : `<span class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-emerald-700/80 text-emerald-100 backdrop-blur-xs">${product.stock} disp.</span>`}
-              </div>
+              </button>
               ${product.category === 'anillos' && product.hasSizes ? `<span class="absolute bottom-2.5 right-2.5 text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-400 text-stone-950 shadow-xs">Con talles</span>` : ''}
             </div>
             <div class="p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3">
               <div>
                 <span class="text-[11px] font-medium text-amber-700 block line-clamp-1">${matText}</span>
-                <h3 class="font-semibold text-xs sm:text-sm text-stone-900 line-clamp-2 mt-0.5 leading-snug cursor-pointer group-hover:text-amber-800 transition-colors" onclick="openProductModal('${product.id}')">${product.name}</h3>
+                <button type="button" class="store-card-name store-focus block text-left font-semibold text-xs sm:text-sm text-stone-900 line-clamp-2 mt-0.5 leading-snug transition-colors" onclick="openProductModal('${product.id}')">${product.name}</button>
               </div>
               <div class="pt-2 border-t border-stone-100 flex items-center justify-between">
                 <div>
                   <span class="text-[10px] text-stone-400 block uppercase">Precio</span>
                   <span class="font-bold text-sm sm:text-base text-stone-900 font-serif">${priceFormatted}</span>
                 </div>
-                <button type="button" data-add-to-cart="${product.id}" ${!inStock ? 'disabled' : ''} title="Agregar al carrito" class="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-brand-olive hover:bg-brand-oliveLight disabled:bg-stone-300 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs">
+                <button type="button" data-add-to-cart="${product.id}" ${!inStock ? 'disabled' : ''} aria-label="${inStock ? `Agregar ${product.name} a mi selección` : `${product.name}, agotado`}" title="Agregar a mi selección" class="store-add-button store-focus px-3 py-2 rounded-xl disabled:bg-stone-300 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs">
                   <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.486 2.246 2.247 3.487 5.233 3.487 8.414 0 6.556-5.335 11.892-11.891 11.892h-.004c-1.99 0-3.942-.522-5.65-1.516L.057 24zm6.558-4.016c1.7.9 3.02 1.021 3.17 1.033.407.016.884-.187 1.325-.513.771-.571 1.343-1.343 1.499-1.56.36-.5.592-1.053.267-1.616-.325-.563-1.468-2.062-2.024-2.746-.56-.682-.91-.655-1.513-.149-.602.506-2.519 2.353-2.991 2.806-.473.451-.96.455-1.553.162-.594-.293-2.568-1.032-4.893-3.281-1.807-1.613-2.754-3.43-3.08-4.006-.326-.576-.061-1.258.474-1.625l.406-.309c.292-.223.667-.592.95-.9.308-.321.137-.774.175-1.014.038-.24.179-.84.39-1.158.17-.255.376-.251.54-.255.11-.003.247-.015.375-.015.133 0 .373-.021.561.261.357.535.826 1.637.899 1.759.074.122.163.335.072.612-.092.277-.306.564-.519.839-.213.275-.354.552-.171.771.183.219.905 1.56 1.754 2.37.97.917 1.827 1.13 2.055 1.256.18.101.337.153.449.247.291.246.204.847.1 1.186-.104.34-.421.826-.777 1.169-.357.345-.788.767-1.142 1.029-.589.443-.712.61-.473 1.107.16.318.767 1.182 1.66 1.822z"/></svg>
-                  <span class="hidden sm:inline">${inStock ? (product.hasSizes ? 'Elegir talle' : 'Agregar') : 'Agotado'}</span>
+                  <span>${inStock ? (cartQuantity > 0 ? `✓ Agregar otra (${cartQuantity})` : product.hasSizes ? 'Elegir talle' : '＋ Agregar') : 'Agotado'}</span>
                 </button>
               </div>
             </div>
@@ -612,6 +701,15 @@
       renderCart();
       document.getElementById('cart-modal').classList.remove('hidden');
       document.getElementById('cart-modal').classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+      document.getElementById('close-cart-button').focus();
+    });
+    document.getElementById('cart-dock').addEventListener('click', () => {
+      renderCart();
+      document.getElementById('cart-modal').classList.remove('hidden');
+      document.getElementById('cart-modal').classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+      document.getElementById('close-cart-button').focus();
     });
     document.getElementById('close-cart-button').addEventListener('click', closeCart);
     document.getElementById('cart-modal').addEventListener('click', (event) => {
@@ -660,6 +758,13 @@
 
     document.getElementById('product-modal').addEventListener('click', (e) => {
       if (e.target.id === 'product-modal') {
+        window.closeProductModal();
+      }
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        const cartModal = document.getElementById('cart-modal');
+        if (!cartModal.classList.contains('hidden')) closeCart();
         window.closeProductModal();
       }
     });
