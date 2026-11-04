@@ -79,11 +79,11 @@
     .announcement-track {
       display: flex;
       width: max-content;
-      animation: announcement-travel 22s ease-in-out infinite alternate;
+      animation: announcement-travel 18s linear infinite;
       will-change: transform;
     }
     .announcement-track:hover, .announcement-track:focus-within { animation-play-state: paused; }
-    .announcement-group { display: flex; width: max(100vw, 48rem); flex: none; align-items: center; justify-content: space-around; gap: 1.5rem; padding-inline: .75rem; }
+    .announcement-group { display: flex; width: max-content; flex: none; align-items: center; gap: 1.5rem; padding-inline: .75rem; }
     .announcement-group > span { white-space: nowrap; }
     @keyframes announcement-travel {
       from { transform: translateX(0); }
@@ -95,6 +95,10 @@
     .category-chip[aria-pressed="true"] { box-shadow: 0 5px 14px rgba(53, 76, 60, .18); }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .announcement-track { animation: none; width: 100%; }
+      .announcement-group { width: 100%; flex-wrap: wrap; justify-content: center; }
+      .announcement-group + .announcement-group { display: none; }
+      .announcement-group > span { white-space: normal; }
     }
     @media (max-width: 480px) {
       .store-header .max-w-7xl > div {
