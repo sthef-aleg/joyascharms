@@ -273,11 +273,48 @@
                   <option value="">Cargando pulseras...</option>
                 </select>
               </label>
-              <label id="charms-base-variant-field" class="hidden text-xs font-semibold text-stone-700">
-                Color de la base
-                <select id="charms-base-variant" class="store-focus mt-1 w-full rounded-xl border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal"></select>
-              </label>
+              <div id="charms-base-variant-field" class="hidden text-xs font-semibold text-stone-700">
+                <span>Elige el color</span>
+                <div id="charms-base-variant-options" role="group" aria-label="Colores disponibles de la pulsera" class="mt-1 grid grid-cols-2 gap-2"></div>
+              </div>
               <p id="charms-no-base-message" class="hidden sm:col-span-2 text-xs text-stone-500 bg-stone-50 rounded-lg p-3">No hay pulseras Italian Charms disponibles ahora. Puedes elegir “Ya tengo mi pulsera” y armar tu combinación de charms.</p>
+              <article id="charms-base-preview" class="hidden sm:col-span-2 overflow-hidden rounded-2xl border border-[#ecdee1] bg-[#fcf8f6]">
+                <div class="grid sm:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
+                  <div class="flex min-h-48 items-center justify-center bg-white p-3 sm:min-h-64">
+                    <img id="charms-base-preview-image" src="" alt="" class="hidden max-h-64 w-full rounded-xl object-contain">
+                    <p id="charms-base-preview-placeholder" class="px-4 text-center text-xs text-stone-500">Elige una pulsera para ver su foto.</p>
+                  </div>
+                  <div class="space-y-4 p-4 sm:p-5">
+                    <div>
+                      <p class="text-[10px] font-semibold uppercase tracking-[.16em] text-rose-700">Modelo de pulsera</p>
+                      <h4 id="charms-base-preview-name" class="mt-1 font-serif text-lg font-bold text-[#354c3c]"></h4>
+                      <p id="charms-base-preview-price" class="mt-1 text-sm font-semibold text-amber-700"></p>
+                      <p class="mt-2 text-xs text-stone-600">18 eslabones · 100 % ajustable</p>
+                    </div>
+                    <div>
+                      <p class="mb-2 text-xs font-semibold text-stone-700">Diseños de referencia</p>
+                      <div role="group" aria-label="Diseños de referencia, no seleccionables" class="grid grid-cols-3 gap-2">
+                        <div class="rounded-xl border border-amber-400 bg-amber-50 p-2 text-center">
+                          <span class="block text-lg" aria-hidden="true">◈</span>
+                          <span class="block text-[10px] font-semibold text-stone-800">Clásico</span>
+                          <span class="block text-[9px] text-emerald-700">Disponible</span>
+                        </div>
+                        <div class="rounded-xl border border-stone-200 bg-stone-100 p-2 text-center opacity-70">
+                          <span class="block text-lg" aria-hidden="true">☆</span>
+                          <span class="block text-[10px] font-semibold text-stone-600">Estrellas</span>
+                          <span class="block text-[9px] text-rose-700">Agotado</span>
+                        </div>
+                        <div class="rounded-xl border border-stone-200 bg-stone-100 p-2 text-center opacity-70">
+                          <span class="block text-lg" aria-hidden="true">♡</span>
+                          <span class="block text-[10px] font-semibold text-stone-600">Corazones</span>
+                          <span class="block text-[9px] text-rose-700">Agotado</span>
+                        </div>
+                      </div>
+                      <p class="mt-2 text-[10px] text-stone-500">Los diseños agotados se muestran solo como referencia.</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
             </div>
           </section>
 
@@ -886,6 +923,16 @@
       return (product.colorVariants || []).find(variant => variant.id === colorVariantId);
     }
 
+    function displayColorName(color) {
+      const normalizedColor = String(color || '').trim().toLowerCase();
+      const translations = {
+        gold: 'Dorado',
+        silver: 'Plateado',
+        'rose gold': 'Oro rosa'
+      };
+      return translations[normalizedColor] || color || '';
+    }
+
     function productPrice(product, colorVariantId = '') {
       return Number(productColorVariant(product, colorVariantId)?.sellingPrice ?? product.sellingPrice) || 0;
     }
@@ -1150,7 +1197,7 @@
       const basePicker = document.getElementById('charms-base-picker');
       const baseSelect = document.getElementById('charms-base-product');
       const baseVariantField = document.getElementById('charms-base-variant-field');
-      const baseVariantSelect = document.getElementById('charms-base-variant');
+      const baseVariantOptions = document.getElementById('charms-base-variant-options');
       const noBaseMessage = document.getElementById('charms-no-base-message');
       basePicker.classList.toggle('hidden', italianCharmsBaseMode !== 'buy');
       noBaseMessage.classList.toggle('hidden', italianCharmsBaseMode !== 'buy' || baseProducts.length > 0);
@@ -1178,7 +1225,7 @@
       const baseProduct = baseProducts.find(product => product.id === selectedItalianCharmsBaseId);
       const baseVariants = baseProduct?.colorVariants || [];
       baseVariantField.classList.toggle('hidden', !baseVariants.length);
-      baseVariantSelect.replaceChildren();
+      baseVariantOptions.replaceChildren();
       const availableBaseVariant = baseVariants.find(variant =>
         productSizeStock(baseProduct, '', variant.id) > cartQuantityFor(baseProduct.id, variant.id)
       );
@@ -1186,13 +1233,67 @@
         ? selectedItalianCharmsBaseVariantId
         : availableBaseVariant?.id || baseVariants[0]?.id || '';
       baseVariants.forEach(variant => {
-        const option = document.createElement('option');
-        option.value = variant.id;
-        option.textContent = `${variant.color} · ${Math.max(0, Number(variant.stock) || 0)} disponibles · ${formatMoney(Number(variant.sellingPrice) || 0)}`;
-        option.disabled = productSizeStock(baseProduct, '', variant.id) <= cartQuantityFor(baseProduct.id, variant.id);
-        baseVariantSelect.appendChild(option);
+        const availableStock = Math.max(0,
+          productSizeStock(baseProduct, '', variant.id) - cartQuantityFor(baseProduct.id, variant.id)
+        );
+        const photoUrl = productPhotos(baseProduct, variant.id)[0] || '';
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.dataset.baseVariant = variant.id;
+        button.disabled = availableStock === 0;
+        button.setAttribute('aria-pressed', String(variant.id === selectedItalianCharmsBaseVariantId));
+        button.className = `store-focus flex min-w-0 items-center gap-2 rounded-xl border p-2 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+          variant.id === selectedItalianCharmsBaseVariantId
+            ? 'border-amber-500 bg-amber-50'
+            : 'border-stone-200 bg-white hover:border-amber-300'
+        }`;
+        button.innerHTML = `
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-stone-100">
+            ${photoUrl
+              ? `<img src="${escapeHtml(photoUrl)}" alt="" class="h-full w-full object-cover" loading="lazy">`
+              : '<span aria-hidden="true" class="text-xl text-stone-400">◉</span>'}
+          </span>
+          <span class="min-w-0">
+            <span class="block truncate text-xs font-semibold text-stone-800">${escapeHtml(displayColorName(variant.color))}</span>
+            <span class="mt-0.5 block text-[10px] text-stone-500">${availableStock ? `${availableStock} disponibles` : 'Agotado'}</span>
+            <span class="mt-0.5 block text-[10px] font-semibold text-amber-700">${formatMoney(Number(variant.sellingPrice) || 0)}</span>
+          </span>`;
+        baseVariantOptions.appendChild(button);
       });
-      baseVariantSelect.value = selectedItalianCharmsBaseVariantId;
+
+      const basePreview = document.getElementById('charms-base-preview');
+      const basePreviewImage = document.getElementById('charms-base-preview-image');
+      const basePreviewPlaceholder = document.getElementById('charms-base-preview-placeholder');
+      const basePreviewVariant = baseProduct
+        ? productColorVariant(baseProduct, selectedItalianCharmsBaseVariantId)
+        : null;
+      const basePreviewPhotos = baseProduct ? productPhotos(baseProduct, selectedItalianCharmsBaseVariantId) : [];
+      const basePreviewImageUrl = basePreviewPhotos[0] || '';
+      basePreview.classList.toggle('hidden', italianCharmsBaseMode !== 'buy' || !baseProduct);
+      document.getElementById('charms-base-preview-name').textContent = baseProduct?.name || '';
+      document.getElementById('charms-base-preview-price').textContent = baseProduct
+        ? `${basePreviewVariant ? `${displayColorName(basePreviewVariant.color)} · ` : ''}${formatMoney(productPrice(baseProduct, selectedItalianCharmsBaseVariantId))}`
+        : '';
+      if (basePreviewImageUrl) {
+        basePreviewImage.onerror = () => {
+          basePreviewImage.classList.add('hidden');
+          basePreviewPlaceholder.textContent = 'No se pudo cargar la foto. Verifica la imagen en el inventario.';
+          basePreviewPlaceholder.classList.remove('hidden');
+        };
+        basePreviewImage.src = basePreviewImageUrl;
+        basePreviewImage.alt = `${baseProduct.name}${basePreviewVariant ? `, color ${displayColorName(basePreviewVariant.color)}` : ''}`;
+        basePreviewImage.classList.remove('hidden');
+        basePreviewPlaceholder.classList.add('hidden');
+      } else {
+        basePreviewImage.onerror = null;
+        basePreviewImage.removeAttribute('src');
+        basePreviewImage.alt = '';
+        basePreviewImage.classList.add('hidden');
+        basePreviewPlaceholder.textContent = baseProduct
+          ? 'No hay una foto cargada para este modelo o color.'
+          : 'Elige una pulsera para ver su foto.';
+        basePreviewPlaceholder.classList.remove('hidden');
+      }
 
       const grid = document.getElementById('charms-product-grid');
       const emptyState = document.getElementById('charms-empty-state');
@@ -1303,7 +1404,7 @@
           const baseCartQuantity = cartQuantityFor(baseProduct.id, selectedItalianCharmsBaseVariantId);
           const basePrice = productPrice(baseProduct, selectedItalianCharmsBaseVariantId);
           baseAvailable = baseStock > baseCartQuantity;
-          baseSummary.textContent = `Base: ${baseProduct.name}${baseVariant ? ` · ${baseVariant.color}` : ''} · ${formatMoney(basePrice)}`;
+          baseSummary.textContent = `Base: ${baseProduct.name}${baseVariant ? ` · ${displayColorName(baseVariant.color)}` : ''} · ${formatMoney(basePrice)}`;
           total += basePrice;
         } else {
           baseAvailable = false;
@@ -1844,8 +1945,10 @@
       selectedItalianCharmsBaseVariantId = '';
       renderItalianCharmsBuilder();
     });
-    document.getElementById('charms-base-variant').addEventListener('change', event => {
-      selectedItalianCharmsBaseVariantId = event.target.value;
+    document.getElementById('charms-base-variant-options').addEventListener('click', event => {
+      const button = event.target.closest('[data-base-variant]');
+      if (!button || button.disabled) return;
+      selectedItalianCharmsBaseVariantId = button.dataset.baseVariant;
       renderItalianCharmsBuilder();
     });
     document.getElementById('charms-product-grid').addEventListener('click', event => {
