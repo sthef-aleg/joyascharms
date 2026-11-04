@@ -137,6 +137,9 @@
             <span>Mi selección</span>
             <span id="cart-count" aria-live="polite" class="min-w-5 h-5 px-1 rounded-full bg-amber-300 text-stone-900 text-[10px] font-bold flex items-center justify-center">0</span>
           </button>
+          <button id="customer-account-button" type="button" class="store-focus rounded-full bg-white/10 px-3 py-2 text-xs font-semibold text-white hover:bg-white/20 sm:text-sm">
+            Ingresar
+          </button>
           <a id="btn-whatsapp-header" href="https://wa.me/595973779707" target="_blank" rel="noopener noreferrer"
              class="px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold text-xs sm:text-sm shadow-sm flex items-center gap-2">
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.486 2.246 2.247 3.487 5.233 3.487 8.414 0 6.556-5.335 11.892-11.891 11.892h-.004c-1.99 0-3.942-.522-5.65-1.516L.057 24zm6.558-4.016c1.7.9 3.02 1.021 3.17 1.033.407.016.884-.187 1.325-.513.771-.571 1.343-1.343 1.499-1.56.36-.5.592-1.053.267-1.616-.325-.563-1.468-2.062-2.024-2.746-.56-.682-.91-.655-1.513-.149-.602.506-2.519 2.353-2.991 2.806-.473.451-.96.455-1.553.162-.594-.293-2.568-1.032-4.893-3.281-1.807-1.613-2.754-3.43-3.08-4.006-.326-.576-.061-1.258.474-1.625l.406-.309c.292-.223.667-.592.95-.9.308-.321.137-.774.175-1.014.038-.24.179-.84.39-1.158.17-.255.376-.251.54-.255.11-.003.247-.015.375-.015.133 0 .373-.021.561.261.357.535.826 1.637.899 1.759.074.122.163.335.072.612-.092.277-.306.564-.519.839-.213.275-.354.552-.171.771.183.219.905 1.56 1.754 2.37.97.917 1.827 1.13 2.055 1.256.18.101.337.153.449.247.291.246.204.847.1 1.186-.104.34-.421.826-.777 1.169-.357.345-.788.767-1.142 1.029-.589.443-.712.61-.473 1.107.16.318.767 1.182 1.66 1.822z"/></svg>
@@ -163,9 +166,9 @@
         <a href="#products-grid" class="store-cart-button store-focus inline-flex items-center justify-center px-5 py-3 rounded-full font-semibold text-sm shadow-sm transition-colors">
           Explorar colección <span class="ml-2" aria-hidden="true">↓</span>
         </a>
-        <a href="#italian-charms-builder" class="store-focus inline-flex items-center justify-center px-5 py-3 rounded-full border border-pink-200/50 bg-white/10 hover:bg-white/20 text-pink-100 font-semibold text-sm transition-colors">
+        <button id="toggle-charms-builder" type="button" aria-expanded="false" aria-controls="italian-charms-builder" class="store-focus inline-flex items-center justify-center px-5 py-3 rounded-full border border-pink-200/50 bg-white/10 hover:bg-white/20 text-pink-100 font-semibold text-sm transition-colors">
           Crea tu pulsera Italian Charms
-        </a>
+        </button>
       </div>
 
       <div class="pt-2 flex items-center justify-center gap-2 text-xs text-stone-300">
@@ -175,12 +178,13 @@
     </div>
   </section>
 
-  <section id="italian-charms-builder" aria-labelledby="charms-builder-title" class="px-4 py-10 sm:py-14 bg-gradient-to-b from-[#fffaf7] to-[#f8e9ed] border-b border-[#ecdee1]">
+  <section id="italian-charms-builder" aria-labelledby="charms-builder-title" class="hidden scroll-mt-24 px-4 py-10 sm:py-14 bg-gradient-to-b from-[#fffaf7] to-[#f8e9ed] border-b border-[#ecdee1]">
     <div class="max-w-7xl mx-auto">
-      <div class="max-w-3xl mx-auto text-center mb-8">
+      <div class="relative max-w-3xl mx-auto text-center mb-8">
+        <button id="close-charms-builder" type="button" aria-label="Cerrar creador de pulsera" class="store-focus absolute right-0 top-0 rounded-full bg-white px-3 py-1.5 text-xl leading-none text-stone-600 shadow-sm hover:bg-stone-100">×</button>
         <p class="text-[11px] uppercase tracking-[.2em] text-rose-700 font-semibold">Diseña algo único</p>
-        <h2 id="charms-builder-title" class="font-serif text-3xl sm:text-4xl text-[#354c3c] mt-2">Crea tu pulsera Italian Charms</h2>
-        <p class="text-sm sm:text-base text-stone-600 mt-3">Elige una pulsera base o dinos que ya tienes una. Después, combina tus charms favoritos.</p>
+        <h2 id="charms-builder-title" tabindex="-1" class="font-serif text-3xl sm:text-4xl text-[#354c3c] mt-2">Crea tu pulsera Italian Charms</h2>
+        <p class="text-sm sm:text-base text-stone-600 mt-3">Elige una pulsera italiana o dinos que ya tienes una. Arrastra tus charms a la pulsera y acomódalos a tu gusto.</p>
       </div>
 
       <div class="grid lg:grid-cols-[minmax(0,1fr)_340px] gap-6 items-start">
@@ -190,7 +194,7 @@
               <span class="w-8 h-8 shrink-0 rounded-full bg-[#354c3c] text-amber-200 font-bold text-sm flex items-center justify-center">1</span>
               <div>
                 <h3 id="charms-base-title" class="font-serif text-xl text-stone-900">Tu pulsera</h3>
-                <p class="text-xs text-stone-500 mt-1">Puedes elegir una base disponible o usar la que ya tienes.</p>
+                <p class="text-xs text-stone-500 mt-1">Puedes elegir una pulsera Italian Charms disponible o usar la que ya tienes.</p>
               </div>
             </div>
             <fieldset class="grid sm:grid-cols-2 gap-3">
@@ -205,14 +209,14 @@
               <label class="flex items-start gap-3 rounded-xl border border-stone-200 p-3 cursor-pointer hover:border-amber-500 has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
                 <input type="radio" name="charms-base-mode" value="buy" class="mt-1 accent-[#354c3c]">
                 <span>
-                  <span class="block text-sm font-semibold text-stone-800">Quiero elegir una base</span>
+                  <span class="block text-sm font-semibold text-stone-800">Quiero elegir una pulsera italiana</span>
                   <span class="block text-xs text-stone-500 mt-1">Se agregará al pedido junto con los charms.</span>
                 </span>
               </label>
             </fieldset>
             <div id="charms-base-picker" class="hidden mt-4 grid sm:grid-cols-2 gap-3">
               <label class="text-xs font-semibold text-stone-700">
-                Pulsera base
+                Pulsera Italian Charms
                 <select id="charms-base-product" class="store-focus mt-1 w-full rounded-xl border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal">
                   <option value="">Cargando pulseras...</option>
                 </select>
@@ -221,7 +225,7 @@
                 Color de la base
                 <select id="charms-base-variant" class="store-focus mt-1 w-full rounded-xl border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal"></select>
               </label>
-              <p id="charms-no-base-message" class="hidden sm:col-span-2 text-xs text-stone-500 bg-stone-50 rounded-lg p-3">No hay pulseras base disponibles ahora. Puedes elegir “Ya tengo mi pulsera” y armar tu combinación de charms.</p>
+              <p id="charms-no-base-message" class="hidden sm:col-span-2 text-xs text-stone-500 bg-stone-50 rounded-lg p-3">No hay pulseras Italian Charms disponibles ahora. Puedes elegir “Ya tengo mi pulsera” y armar tu combinación de charms.</p>
             </div>
           </section>
 
@@ -230,12 +234,19 @@
               <span class="w-8 h-8 shrink-0 rounded-full bg-[#354c3c] text-amber-200 font-bold text-sm flex items-center justify-center">2</span>
               <div>
                 <h3 id="charms-products-title" class="font-serif text-xl text-stone-900">Elige tus charms</h3>
-                <p class="text-xs text-stone-500 mt-1">Agrega tus favoritos y ajusta la cantidad en tu combinación.</p>
+                <p class="text-xs text-stone-500 mt-1">Arrastra los charms a la pulsera para agregarlos y reordénalos como quieras.</p>
               </div>
+            </div>
+            <div class="mb-4 rounded-2xl border border-[#ecdee1] bg-gradient-to-r from-[#fffaf7] to-[#f8e9ed] p-4">
+              <p class="mb-3 text-xs font-semibold text-stone-700">Tu diseño · arrastra para acomodar</p>
+              <div id="charms-bracelet-track" role="list" aria-label="Diseño de tu pulsera Italian Charms" class="flex min-h-24 flex-wrap items-center justify-center gap-2 rounded-xl border border-dashed border-rose-200 bg-white/70 p-3">
+                <p id="charms-bracelet-empty" class="text-center text-xs text-stone-500">Arrastra un charm aquí o usa el botón “Agregar charm”.</p>
+              </div>
+              <p id="charms-bracelet-status" aria-live="polite" class="sr-only"></p>
             </div>
             <div id="charms-empty-state" class="hidden rounded-xl border border-dashed border-stone-300 bg-stone-50 p-6 text-center">
               <p class="font-semibold text-stone-700">Pronto encontrarás tus charms aquí</p>
-              <p class="text-xs text-stone-500 mt-1">Estamos preparando esta colección. Los charms aparecerán cuando se agreguen a la categoría “Charms Italianos” en el inventario.</p>
+              <p class="text-xs text-stone-500 mt-1">Agrega tus charms a la categoría “Charms Italianos” en el inventario para que aparezcan aquí.</p>
             </div>
             <div id="charms-product-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
           </section>
@@ -325,6 +336,77 @@
       <span class="store-cart-button w-8 h-8 rounded-full flex items-center justify-center font-bold" aria-hidden="true">→</span>
     </span>
   </button>
+
+  <div id="customer-account-modal" class="fixed inset-0 z-[60] hidden items-center justify-center overflow-y-auto overscroll-contain bg-stone-950/70 p-3 backdrop-blur-xs sm:p-4" aria-hidden="true">
+    <section role="dialog" aria-modal="true" aria-labelledby="customer-account-title" class="my-auto flex max-h-[calc(100dvh-1.5rem)] w-full max-w-lg flex-col overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-2xl sm:max-h-[calc(100dvh-2rem)]">
+      <div class="flex shrink-0 items-center justify-between border-b border-stone-100 p-4 sm:p-5">
+        <div>
+          <p class="text-[10px] font-semibold uppercase tracking-[.18em] text-rose-700">Sthefy Joyas</p>
+          <h2 id="customer-account-title" class="mt-1 font-serif text-2xl font-bold text-stone-900">Mi cuenta</h2>
+        </div>
+        <button id="close-customer-account" type="button" aria-label="Cerrar mi cuenta" class="store-focus h-9 w-9 rounded-full bg-stone-100 text-xl text-stone-700 hover:bg-stone-200">×</button>
+      </div>
+
+      <div id="customer-auth-view" class="min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-6">
+        <p class="mb-4 text-sm text-stone-600">Crea tu cuenta para guardar tus datos y facilitar tus compras.</p>
+        <div class="mb-4 grid grid-cols-2 rounded-xl bg-stone-100 p-1 text-xs font-semibold">
+          <button id="customer-login-tab" type="button" aria-pressed="true" class="rounded-lg bg-white px-3 py-2 text-stone-900 shadow-sm">Iniciar sesión</button>
+          <button id="customer-register-tab" type="button" aria-pressed="false" class="rounded-lg px-3 py-2 text-stone-600">Crear cuenta</button>
+        </div>
+        <form id="customer-auth-form" class="space-y-3">
+          <div id="customer-register-names" class="hidden grid-cols-2 gap-3">
+            <label class="text-xs font-semibold text-stone-700">Nombre
+              <input id="customer-register-first-name" type="text" autocomplete="given-name" maxlength="80" class="store-focus mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm font-normal">
+            </label>
+            <label class="text-xs font-semibold text-stone-700">Apellido
+              <input id="customer-register-last-name" type="text" autocomplete="family-name" maxlength="80" class="store-focus mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm font-normal">
+            </label>
+          </div>
+          <label class="block text-xs font-semibold text-stone-700">Correo electrónico
+            <input id="customer-auth-email" type="email" autocomplete="email" required maxlength="254" class="store-focus mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm font-normal">
+          </label>
+          <label class="block text-xs font-semibold text-stone-700">Contraseña
+            <input id="customer-auth-password" type="password" autocomplete="current-password" required minlength="6" class="store-focus mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm font-normal">
+          </label>
+          <button id="customer-auth-submit" type="submit" class="store-focus w-full rounded-xl bg-[#354c3c] px-4 py-3 text-sm font-semibold text-white hover:bg-[#23362c]">Iniciar sesión</button>
+        </form>
+        <button id="customer-password-reset" type="button" class="mt-3 w-full text-center text-xs font-medium text-stone-600 underline">Olvidé mi contraseña</button>
+        <div class="my-4 flex items-center gap-3 text-[11px] text-stone-400"><span class="h-px flex-1 bg-stone-200"></span>o continúa con<span class="h-px flex-1 bg-stone-200"></span></div>
+        <button id="customer-google-sign-in" type="button" class="store-focus w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-sm font-semibold text-stone-800 hover:bg-stone-50">Continuar con Google</button>
+      </div>
+
+      <div id="customer-profile-view" class="hidden min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-6">
+        <p class="mb-4 text-sm text-stone-600">Completa tu perfil para que podamos atenderte mejor.</p>
+        <p id="customer-profile-email" class="mb-4 break-all rounded-lg bg-stone-50 px-3 py-2 text-xs text-stone-600"></p>
+        <form id="customer-profile-form" class="space-y-3">
+          <div class="grid grid-cols-2 gap-3">
+            <label class="text-xs font-semibold text-stone-700">Nombre
+              <input id="customer-first-name" type="text" autocomplete="given-name" required maxlength="80" class="store-focus mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm font-normal">
+            </label>
+            <label class="text-xs font-semibold text-stone-700">Apellido
+              <input id="customer-last-name" type="text" autocomplete="family-name" required maxlength="80" class="store-focus mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm font-normal">
+            </label>
+          </div>
+          <label class="block text-xs font-semibold text-stone-700">WhatsApp
+            <input id="customer-phone" type="tel" autocomplete="tel" required maxlength="40" placeholder="+595 ..." class="store-focus mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm font-normal">
+          </label>
+          <label class="block text-xs font-semibold text-stone-700">Fecha de cumpleaños
+            <input id="customer-birthday" type="date" autocomplete="bday" required class="store-focus mt-1 w-full rounded-lg border border-stone-300 px-3 py-2.5 text-sm font-normal">
+          </label>
+          <label class="block text-xs font-semibold text-stone-700">Dirección <span class="font-normal text-stone-500">(opcional)</span>
+            <textarea id="customer-address" autocomplete="street-address" rows="2" maxlength="300" class="store-focus mt-1 w-full resize-y rounded-lg border border-stone-300 px-3 py-2.5 text-sm font-normal"></textarea>
+          </label>
+          <label class="flex items-start gap-2 text-[11px] leading-relaxed text-stone-600">
+            <input id="customer-data-consent" type="checkbox" required class="mt-0.5 accent-[#354c3c]">
+            <span>Acepto guardar estos datos en mi perfil para gestionar mi cuenta y recibir atención sobre mis compras.</span>
+          </label>
+          <button id="customer-profile-save" type="submit" class="store-focus w-full rounded-xl bg-[#354c3c] px-4 py-3 text-sm font-semibold text-white hover:bg-[#23362c]">Guardar mis datos</button>
+        </form>
+        <button id="customer-sign-out" type="button" class="mt-3 w-full rounded-xl px-4 py-2 text-xs font-semibold text-stone-600 hover:bg-stone-100">Cerrar sesión</button>
+      </div>
+      <p id="customer-account-status" role="status" aria-live="polite" class="hidden shrink-0 border-t border-stone-100 px-4 py-3 text-xs sm:px-6"></p>
+    </section>
+  </div>
 
   <div id="cart-modal" class="fixed inset-0 z-50 bg-stone-950/70 backdrop-blur-xs hidden items-center justify-center p-4">
     <section role="dialog" aria-modal="true" aria-labelledby="cart-title" class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl border border-stone-200 flex flex-col max-h-[90vh]">
@@ -436,7 +518,8 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, collection, doc, getDoc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
     const firebaseConfig = window.FIREBASE_CONFIG || {};
 
@@ -448,6 +531,7 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const auth = getAuth(app);
 
     let allProducts = [];
     let selectedCategory = 'todos';
@@ -462,7 +546,11 @@
     let selectedItalianCharmsBaseId = '';
     let selectedItalianCharmsBaseVariantId = '';
     const italianCharmSelection = new Map();
+    const italianCharmOrder = [];
     const whatsappPhone = '595973779707';
+    let customerUser = null;
+    let customerAuthMode = 'login';
+    let customerProfileCreatedAt = '';
 
     const categoryLabels = {
       todos: 'Todos',
@@ -470,6 +558,7 @@
       collares: 'Collares & Cadenas',
       aros: 'Aros & Argollas',
       pulseras: 'Pulseras & Charms',
+      pulseras_italianos: 'Pulseras Italian Charms',
       tobilleras: 'Tobilleras',
       dijes: 'Dijes & Medallas',
       charms_italianos: 'Charms Italianos',
@@ -491,6 +580,245 @@
       if (!amount && amount !== 0) return '₲ 0';
       return '₲ ' + Math.round(amount).toLocaleString('es-PY');
     }
+
+    function setCustomerAccountStatus(message, isError = false) {
+      const status = document.getElementById('customer-account-status');
+      status.textContent = message;
+      status.classList.toggle('hidden', !message);
+      status.classList.toggle('text-rose-700', isError);
+      status.classList.toggle('bg-rose-50', isError);
+      status.classList.toggle('text-emerald-800', Boolean(message) && !isError);
+      status.classList.toggle('bg-emerald-50', Boolean(message) && !isError);
+    }
+
+    function getCustomerAuthError(error) {
+      const messages = {
+        'auth/email-already-in-use': 'Ya existe una cuenta con ese correo. Inicia sesión.',
+        'auth/invalid-email': 'Ingresa un correo electrónico válido.',
+        'auth/invalid-credential': 'El correo o la contraseña no son correctos.',
+        'auth/user-disabled': 'Esta cuenta está deshabilitada. Comunícate con Sthefy Joyas.',
+        'auth/weak-password': 'La contraseña debe tener al menos 6 caracteres.',
+        'auth/too-many-requests': 'Hubo demasiados intentos. Espera un momento y vuelve a probar.',
+        'auth/popup-closed-by-user': 'Se cerró la ventana de Google antes de completar el acceso.',
+        'auth/popup-blocked': 'El navegador bloqueó la ventana de Google. Permite ventanas emergentes e intenta de nuevo.',
+        'auth/operation-not-allowed': 'Este método de acceso todavía no está habilitado. Comunícate con Sthefy Joyas.'
+      };
+      return messages[error?.code] || 'No se pudo completar la solicitud. Verifica tu conexión e intenta de nuevo.';
+    }
+
+    function openCustomerAccount() {
+      const modal = document.getElementById('customer-account-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('overflow-hidden');
+      setCustomerAccountStatus('');
+      if (customerUser) void showCustomerProfile(customerUser);
+      else {
+        showCustomerAuth();
+        document.getElementById('customer-auth-email').focus();
+      }
+    }
+
+    function closeCustomerAccount() {
+      const modal = document.getElementById('customer-account-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      modal.setAttribute('aria-hidden', 'true');
+      if (document.getElementById('cart-modal').classList.contains('hidden')
+        && document.getElementById('product-modal').classList.contains('hidden')) {
+        document.body.classList.remove('overflow-hidden');
+      }
+      document.getElementById('customer-account-button').focus();
+    }
+
+    function showCustomerAuth() {
+      document.getElementById('customer-auth-view').classList.remove('hidden');
+      document.getElementById('customer-profile-view').classList.add('hidden');
+    }
+
+    async function showCustomerProfile(user) {
+      document.getElementById('customer-auth-view').classList.add('hidden');
+      document.getElementById('customer-profile-view').classList.remove('hidden');
+      document.getElementById('customer-profile-email').textContent = user.email || '';
+      setCustomerAccountStatus('Cargando tu perfil...');
+      try {
+        const profileSnapshot = await getDoc(doc(db, 'customers', user.uid));
+        if (customerUser?.uid !== user.uid) return;
+        const profile = profileSnapshot.exists() ? profileSnapshot.data() : {};
+        const nameParts = (user.displayName || '').trim().split(/\s+/);
+        const fallbackFirstName = nameParts.shift() || '';
+        document.getElementById('customer-first-name').value = profile.firstName || fallbackFirstName;
+        document.getElementById('customer-last-name').value = profile.lastName || nameParts.join(' ');
+        document.getElementById('customer-phone').value = profile.phone || '';
+        document.getElementById('customer-address').value = profile.address || '';
+        document.getElementById('customer-birthday').value = profile.birthday || '';
+        document.getElementById('customer-data-consent').checked = profile.acceptedPrivacy === true;
+        customerProfileCreatedAt = profile.createdAt || new Date().toISOString();
+        setCustomerAccountStatus(profileSnapshot.exists()
+          ? 'Tus datos de perfil están guardados.'
+          : 'Completa tu perfil y acepta el uso de estos datos para guardarlos.');
+      } catch (error) {
+        console.error('Could not load customer profile:', error);
+        setCustomerAccountStatus('No se pudo cargar tu perfil. Verifica la conexión e intenta nuevamente.', true);
+      }
+    }
+
+    onAuthStateChanged(auth, user => {
+      customerUser = user;
+      const accountButton = document.getElementById('customer-account-button');
+      accountButton.textContent = user
+        ? (user.displayName?.trim().split(/\s+/)[0] || 'Mi cuenta')
+        : 'Ingresar';
+      const accountModal = document.getElementById('customer-account-modal');
+      if (user && !accountModal.classList.contains('hidden')) void showCustomerProfile(user);
+      else if (!user && !accountModal.classList.contains('hidden')) showCustomerAuth();
+    });
+
+    function setCustomerAuthMode(mode) {
+      customerAuthMode = mode;
+      const isRegistering = mode === 'register';
+      const nameFields = document.getElementById('customer-register-names');
+      nameFields.classList.toggle('hidden', !isRegistering);
+      document.getElementById('customer-register-first-name').required = isRegistering;
+      document.getElementById('customer-register-last-name').required = isRegistering;
+      document.getElementById('customer-auth-password').autocomplete = isRegistering ? 'new-password' : 'current-password';
+      document.getElementById('customer-auth-submit').textContent = isRegistering ? 'Crear cuenta' : 'Iniciar sesión';
+      document.getElementById('customer-login-tab').setAttribute('aria-pressed', String(!isRegistering));
+      document.getElementById('customer-register-tab').setAttribute('aria-pressed', String(isRegistering));
+      document.getElementById('customer-login-tab').className = `rounded-lg px-3 py-2 ${!isRegistering ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600'}`;
+      document.getElementById('customer-register-tab').className = `rounded-lg px-3 py-2 ${isRegistering ? 'bg-white text-stone-900 shadow-sm' : 'text-stone-600'}`;
+      setCustomerAccountStatus('');
+    }
+
+    document.getElementById('customer-account-button').addEventListener('click', openCustomerAccount);
+    document.getElementById('close-customer-account').addEventListener('click', closeCustomerAccount);
+    document.getElementById('customer-account-modal').addEventListener('click', event => {
+      if (event.target.id === 'customer-account-modal') closeCustomerAccount();
+    });
+    document.getElementById('customer-login-tab').addEventListener('click', () => setCustomerAuthMode('login'));
+    document.getElementById('customer-register-tab').addEventListener('click', () => setCustomerAuthMode('register'));
+    document.getElementById('customer-auth-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      const email = document.getElementById('customer-auth-email').value.trim();
+      const password = document.getElementById('customer-auth-password').value;
+      const submit = document.getElementById('customer-auth-submit');
+      submit.disabled = true;
+      submit.textContent = customerAuthMode === 'register' ? 'Creando cuenta...' : 'Ingresando...';
+      setCustomerAccountStatus('');
+      try {
+        if (customerAuthMode === 'register') {
+          const firstName = document.getElementById('customer-register-first-name').value.trim();
+          const lastName = document.getElementById('customer-register-last-name').value.trim();
+          const credential = await createUserWithEmailAndPassword(auth, email, password);
+          await updateProfile(credential.user, { displayName: `${firstName} ${lastName}`.trim() });
+          customerUser = credential.user;
+          await showCustomerProfile(credential.user);
+        } else {
+          const credential = await signInWithEmailAndPassword(auth, email, password);
+          customerUser = credential.user;
+          await showCustomerProfile(credential.user);
+        }
+      } catch (error) {
+        console.error('Customer sign-in failed:', error);
+        setCustomerAccountStatus(getCustomerAuthError(error), true);
+      } finally {
+        submit.disabled = false;
+        submit.textContent = customerAuthMode === 'register' ? 'Crear cuenta' : 'Iniciar sesión';
+      }
+    });
+    document.getElementById('customer-google-sign-in').addEventListener('click', async event => {
+      const button = event.currentTarget;
+      button.disabled = true;
+      setCustomerAccountStatus('');
+      try {
+        const credential = await signInWithPopup(auth, new GoogleAuthProvider());
+        customerUser = credential.user;
+        await showCustomerProfile(credential.user);
+      } catch (error) {
+        console.error('Customer Google sign-in failed:', error);
+        setCustomerAccountStatus(getCustomerAuthError(error), true);
+      } finally {
+        button.disabled = false;
+      }
+    });
+    document.getElementById('customer-password-reset').addEventListener('click', async () => {
+      const email = document.getElementById('customer-auth-email').value.trim();
+      if (!email) {
+        setCustomerAccountStatus('Escribe tu correo electrónico y vuelve a tocar “Olvidé mi contraseña”.', true);
+        document.getElementById('customer-auth-email').focus();
+        return;
+      }
+      try {
+        await sendPasswordResetEmail(auth, email);
+        setCustomerAccountStatus('Si existe una cuenta con ese correo, recibirás instrucciones para restablecer la contraseña.');
+      } catch (error) {
+        console.error('Customer password reset failed:', error);
+        setCustomerAccountStatus(getCustomerAuthError(error), true);
+      }
+    });
+    document.getElementById('customer-profile-form').addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!customerUser) return;
+      const birthday = document.getElementById('customer-birthday').value;
+      if (birthday > new Date().toISOString().slice(0, 10)) {
+        setCustomerAccountStatus('La fecha de cumpleaños no puede estar en el futuro.', true);
+        return;
+      }
+      const saveButton = document.getElementById('customer-profile-save');
+      saveButton.disabled = true;
+      saveButton.textContent = 'Guardando...';
+      setCustomerAccountStatus('');
+      const firstName = document.getElementById('customer-first-name').value.trim();
+      const lastName = document.getElementById('customer-last-name').value.trim();
+      try {
+        await setDoc(doc(db, 'customers', customerUser.uid), {
+          uid: customerUser.uid,
+          email: customerUser.email || '',
+          firstName,
+          lastName,
+          phone: document.getElementById('customer-phone').value.trim(),
+          address: document.getElementById('customer-address').value.trim(),
+          birthday,
+          acceptedPrivacy: true,
+          consentAt: new Date().toISOString(),
+          createdAt: customerProfileCreatedAt || new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
+        let displayNameUpdated = true;
+        try {
+          await updateProfile(customerUser, { displayName: `${firstName} ${lastName}`.trim() });
+        } catch (profileError) {
+          console.error('Could not update customer display name:', profileError);
+          displayNameUpdated = false;
+        }
+        document.getElementById('customer-account-button').textContent = firstName || 'Mi cuenta';
+        setCustomerAccountStatus(
+          displayNameUpdated
+            ? 'Tus datos se guardaron correctamente.'
+            : 'Tus datos se guardaron, pero no se pudo actualizar el nombre visible de tu cuenta.',
+          !displayNameUpdated
+        );
+      } catch (error) {
+        console.error('Could not save customer profile:', error);
+        setCustomerAccountStatus('No se pudieron guardar tus datos. Verifica tu conexión e intenta nuevamente.', true);
+      } finally {
+        saveButton.disabled = false;
+        saveButton.textContent = 'Guardar mis datos';
+      }
+    });
+    document.getElementById('customer-sign-out').addEventListener('click', async () => {
+      try {
+        await signOut(auth);
+        customerProfileCreatedAt = '';
+        setCustomerAuthMode('login');
+        showCustomerAuth();
+        setCustomerAccountStatus('Cerraste sesión.');
+      } catch (error) {
+        console.error('Customer sign-out failed:', error);
+        setCustomerAccountStatus('No se pudo cerrar la sesión. Intenta nuevamente.', true);
+      }
+    });
 
     function productColorVariant(product, colorVariantId) {
       return (product.colorVariants || []).find(variant => variant.id === colorVariantId);
@@ -704,26 +1032,56 @@
         : Math.max(0, Number(product.stock) || 0);
     }
 
-    function isItalianCharm(product) {
-      const text = String(product.name || '').toLowerCase();
-      if (product.category === 'charms_italianos') return true;
-      if (/^(pulsera|brazalete)\b/.test(text)) return false;
-      return /charm(s)? italian(o|os)|encantos? italianos?|dijes? italianos?/.test(text);
-    }
-
     function cartQuantityFor(productId, colorVariantId = '') {
       return cart
         .filter(item => item.productId === productId && (item.colorVariantId || '') === colorVariantId)
         .reduce((total, item) => total + item.quantity, 0);
     }
 
+    function addItalianCharmToSelection(product, colorVariantId, insertIndex = italianCharmOrder.length) {
+      const key = `${encodeURIComponent(product.id)}|${encodeURIComponent(colorVariantId)}`;
+      const existing = italianCharmSelection.get(key);
+      const quantity = existing?.quantity || 0;
+      const availableStock = productSizeStock(product, '', colorVariantId);
+      if (quantity + cartQuantityFor(product.id, colorVariantId) >= availableStock) {
+        const color = productColorVariant(product, colorVariantId)?.color;
+        document.getElementById('charms-builder-status').textContent =
+          `No hay más unidades disponibles de ${product.name}${color ? ` en color ${color}` : ''}.`;
+        return false;
+      }
+
+      italianCharmSelection.set(key, {
+        productId: product.id,
+        colorVariantId,
+        quantity: quantity + 1
+      });
+      italianCharmOrder.splice(Math.max(0, Math.min(insertIndex, italianCharmOrder.length)), 0, key);
+      renderItalianCharmsBuilder();
+      return true;
+    }
+
+    function removeItalianCharmUnit(key) {
+      const item = italianCharmSelection.get(key);
+      if (!item) return;
+      const orderIndex = italianCharmOrder.lastIndexOf(key);
+      if (orderIndex >= 0) italianCharmOrder.splice(orderIndex, 1);
+      if (item.quantity <= 1) italianCharmSelection.delete(key);
+      else italianCharmSelection.set(key, { ...item, quantity: item.quantity - 1 });
+    }
+
+    function moveItalianCharmOrder(sourceIndex, targetIndex) {
+      if (sourceIndex < 0 || sourceIndex >= italianCharmOrder.length) return;
+      const [key] = italianCharmOrder.splice(sourceIndex, 1);
+      const adjustedIndex = sourceIndex < targetIndex ? targetIndex - 1 : targetIndex;
+      italianCharmOrder.splice(Math.max(0, Math.min(adjustedIndex, italianCharmOrder.length)), 0, key);
+    }
+
     function renderItalianCharmsBuilder() {
       const baseProducts = allProducts.filter(product =>
-        (product.category === 'pulseras' || /^(pulsera|brazalete)\b/i.test(product.name || ''))
-        && !isItalianCharm(product)
+        product.category === 'pulseras_italianos'
         && productTotalStock(product) > 0
       );
-      const charmProducts = allProducts.filter(isItalianCharm);
+      const charmProducts = allProducts.filter(product => product.category === 'charms_italianos');
       const baseModeInput = document.querySelector('input[name="charms-base-mode"]:checked');
       italianCharmsBaseMode = baseModeInput?.value || italianCharmsBaseMode;
 
@@ -793,10 +1151,10 @@
         card.className = 'charm-product-card overflow-hidden rounded-xl border border-stone-200 bg-white';
         card.dataset.charmProduct = product.id;
         card.innerHTML = `
-          <div class="aspect-square bg-[#f7e9ec]">
+          <div data-charm-drag-source="${escapeHtml(product.id)}" draggable="true" class="aspect-square cursor-grab bg-[#f7e9ec] active:cursor-grabbing" aria-label="Arrastra ${escapeHtml(product.name)} a tu pulsera">
             ${imageUrl
-              ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(product.name)}" class="h-full w-full object-cover" loading="lazy">`
-              : `<div class="flex h-full items-center justify-center text-xs text-stone-400">Foto no disponible</div>`}
+              ? `<img src="${escapeHtml(imageUrl)}" alt="" draggable="false" class="h-full w-full object-cover" loading="lazy">`
+              : `<div class="flex h-full items-center justify-center text-xs text-stone-400">Arrastra este charm</div>`}
           </div>
           <div class="space-y-2 p-3">
             <p class="line-clamp-2 min-h-9 text-xs font-semibold text-stone-800">${escapeHtml(product.name)}</p>
@@ -818,6 +1176,51 @@
             </button>
           </div>`;
         grid.appendChild(card);
+      });
+
+      const braceletTrack = document.getElementById('charms-bracelet-track');
+      const braceletEmpty = document.getElementById('charms-bracelet-empty');
+      const availableOrderCounts = new Map(
+        Array.from(italianCharmSelection, ([key, item]) => [key, item.quantity])
+      );
+      for (let index = italianCharmOrder.length - 1; index >= 0; index -= 1) {
+        const key = italianCharmOrder[index];
+        const remaining = availableOrderCounts.get(key) || 0;
+        if (remaining === 0) {
+          italianCharmOrder.splice(index, 1);
+        } else {
+          availableOrderCounts.set(key, remaining - 1);
+        }
+      }
+      availableOrderCounts.forEach((quantity, key) => {
+        for (let index = 0; index < quantity; index += 1) italianCharmOrder.push(key);
+      });
+      braceletTrack.querySelectorAll('[data-bracelet-charm]').forEach(charm => charm.remove());
+      braceletEmpty.classList.toggle('hidden', italianCharmOrder.length > 0);
+      italianCharmOrder.forEach((key, index) => {
+        const item = italianCharmSelection.get(key);
+        const product = item && allProducts.find(current => current.id === item.productId);
+        if (!item || !product) return;
+        const variant = productColorVariant(product, item.colorVariantId);
+        const imageUrl = productPhotos(product, item.colorVariantId)[0] || product.imageUrl || '';
+        const charm = document.createElement('div');
+        charm.dataset.braceletCharm = '';
+        charm.dataset.braceletIndex = String(index);
+        charm.draggable = true;
+        charm.setAttribute('role', 'listitem');
+        charm.setAttribute('aria-label', `${product.name}${variant ? `, ${variant.color}` : ''}, posición ${index + 1}. Arrastra para reordenar.`);
+        charm.className = 'group relative w-16 shrink-0 cursor-grab rounded-lg border border-rose-200 bg-white p-1.5 text-center shadow-sm active:cursor-grabbing';
+        charm.innerHTML = `
+          ${imageUrl
+            ? `<img src="${escapeHtml(imageUrl)}" alt="" draggable="false" class="mx-auto h-10 w-10 rounded-md object-cover">`
+            : `<span class="mx-auto flex h-10 w-10 items-center justify-center rounded-md bg-rose-50 text-[9px] text-stone-500">Charm</span>`}
+          <span class="mt-1 block truncate text-[9px] font-medium text-stone-700">${escapeHtml(variant?.color || product.name)}</span>
+          <span class="mt-1 flex justify-center gap-1">
+            <button type="button" data-move-charm="previous" data-charm-index="${index}" aria-label="Mover ${escapeHtml(product.name)} a la izquierda" ${index === 0 ? 'disabled' : ''} class="store-focus rounded px-1 text-[10px] text-stone-600 disabled:opacity-30">←</button>
+            <button type="button" data-move-charm="next" data-charm-index="${index}" aria-label="Mover ${escapeHtml(product.name)} a la derecha" ${index === italianCharmOrder.length - 1 ? 'disabled' : ''} class="store-focus rounded px-1 text-[10px] text-stone-600 disabled:opacity-30">→</button>
+            <button type="button" data-remove-bracelet-charm="${index}" aria-label="Quitar ${escapeHtml(product.name)} de la pulsera" class="store-focus rounded px-1 text-[10px] font-bold text-rose-700">×</button>
+          </span>`;
+        braceletTrack.appendChild(charm);
       });
 
       const selection = document.getElementById('charms-builder-selection');
@@ -877,7 +1280,7 @@
       });
 
       document.getElementById('charms-builder-total').textContent = formatMoney(total);
-      addButton.disabled = italianCharmSelection.size === 0 || !baseAvailable;
+      addButton.disabled = italianCharmOrder.length === 0 || !baseAvailable;
     }
 
     function closeCart() {
@@ -896,7 +1299,7 @@
         counts[p.category] = (counts[p.category] || 0) + 1;
       });
 
-      const categoriesToShow = ['todos', 'anillos', 'collares', 'aros', 'pulseras', 'tobilleras', 'dijes', 'charms_italianos', 'sets', 'relojes', 'accesorios'];
+      const categoriesToShow = ['todos', 'anillos', 'collares', 'aros', 'pulseras', 'pulseras_italianos', 'tobilleras', 'dijes', 'charms_italianos', 'sets', 'relojes', 'accesorios'];
 
       categoriesToShow.forEach(cat => {
         const count = counts[cat] || 0;
@@ -1327,6 +1730,26 @@
       renderModalPhotos(product);
     });
 
+    function setItalianCharmsBuilderOpen(isOpen) {
+      const builder = document.getElementById('italian-charms-builder');
+      const toggle = document.getElementById('toggle-charms-builder');
+      builder.classList.toggle('hidden', !isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen) {
+        builder.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('charms-builder-title').focus({ preventScroll: true });
+      } else {
+        toggle.focus({ preventScroll: true });
+      }
+    }
+
+    document.getElementById('toggle-charms-builder').addEventListener('click', () => {
+      const isOpen = document.getElementById('italian-charms-builder').classList.contains('hidden');
+      setItalianCharmsBuilderOpen(isOpen);
+    });
+    document.getElementById('close-charms-builder').addEventListener('click', () => setItalianCharmsBuilderOpen(false));
+    document.querySelector('a[href="#products-grid"]').addEventListener('click', () => setItalianCharmsBuilderOpen(false));
+
     document.querySelectorAll('input[name="charms-base-mode"]').forEach(input => {
       input.addEventListener('change', () => {
         italianCharmsBaseMode = input.value;
@@ -1349,20 +1772,18 @@
       if (!product) return;
       const card = button.closest('[data-charm-product]');
       const colorVariantId = card.querySelector('[data-charm-variant]')?.value || '';
-      const key = `${encodeURIComponent(product.id)}|${encodeURIComponent(colorVariantId)}`;
-      const existing = italianCharmSelection.get(key);
-      const quantity = existing?.quantity || 0;
-      const availableStock = productSizeStock(product, '', colorVariantId);
-      if (quantity + cartQuantityFor(product.id, colorVariantId) >= availableStock) {
-        document.getElementById('charms-builder-status').textContent = `No hay más unidades disponibles de ${product.name}${productColorVariant(product, colorVariantId) ? ` en color ${productColorVariant(product, colorVariantId).color}` : ''}.`;
-        return;
-      }
-      italianCharmSelection.set(key, {
-        productId: product.id,
-        colorVariantId,
-        quantity: quantity + 1
-      });
-      renderItalianCharmsBuilder();
+      addItalianCharmToSelection(product, colorVariantId);
+    });
+    document.getElementById('charms-product-grid').addEventListener('dragstart', event => {
+      const source = event.target.closest('[data-charm-drag-source]');
+      if (!source || !event.dataTransfer) return;
+      const card = source.closest('[data-charm-product]');
+      const payload = {
+        productId: source.dataset.charmDragSource,
+        colorVariantId: card.querySelector('[data-charm-variant]')?.value || ''
+      };
+      event.dataTransfer.setData('application/x-italian-charm', JSON.stringify(payload));
+      event.dataTransfer.effectAllowed = 'copy';
     });
     document.getElementById('charms-builder-selection').addEventListener('click', event => {
       const button = event.target.closest('[data-charm-selection-action]');
@@ -1372,8 +1793,11 @@
       if (!item) return;
       if (button.dataset.charmSelectionAction === 'remove' || (button.dataset.charmSelectionAction === 'decrease' && item.quantity === 1)) {
         italianCharmSelection.delete(key);
+        for (let index = italianCharmOrder.length - 1; index >= 0; index -= 1) {
+          if (italianCharmOrder[index] === key) italianCharmOrder.splice(index, 1);
+        }
       } else if (button.dataset.charmSelectionAction === 'decrease') {
-        italianCharmSelection.set(key, { ...item, quantity: item.quantity - 1 });
+        removeItalianCharmUnit(key);
       } else if (button.dataset.charmSelectionAction === 'increase') {
         const availableStock = productSizeStock(
           allProducts.find(product => product.id === item.productId),
@@ -1385,8 +1809,66 @@
           return;
         }
         italianCharmSelection.set(key, { ...item, quantity: item.quantity + 1 });
+        italianCharmOrder.push(key);
       }
       renderItalianCharmsBuilder();
+    });
+    document.getElementById('charms-bracelet-track').addEventListener('click', event => {
+      const moveButton = event.target.closest('[data-move-charm]');
+      const removeButton = event.target.closest('[data-remove-bracelet-charm]');
+      if (moveButton) {
+        const index = Number(moveButton.dataset.charmIndex);
+        const targetIndex = moveButton.dataset.moveCharm === 'previous' ? index : index + 2;
+        moveItalianCharmOrder(index, targetIndex);
+        renderItalianCharmsBuilder();
+      } else if (removeButton) {
+        const index = Number(removeButton.dataset.removeBraceletCharm);
+        const key = italianCharmOrder[index];
+        removeItalianCharmUnit(key);
+        renderItalianCharmsBuilder();
+      }
+    });
+    const braceletTrack = document.getElementById('charms-bracelet-track');
+    braceletTrack.addEventListener('dragstart', event => {
+      const charm = event.target.closest('[data-bracelet-charm]');
+      if (!charm || event.target.closest('button') || !event.dataTransfer) return;
+      event.dataTransfer.setData('application/x-italian-charm-order', charm.dataset.braceletIndex);
+      event.dataTransfer.effectAllowed = 'move';
+    });
+    braceletTrack.addEventListener('dragover', event => {
+      event.preventDefault();
+      if (event.dataTransfer) event.dataTransfer.dropEffect = 'move';
+    });
+    braceletTrack.addEventListener('drop', event => {
+      event.preventDefault();
+      const target = event.target.closest('[data-bracelet-charm]');
+      let targetIndex = target ? Number(target.dataset.braceletIndex) : italianCharmOrder.length;
+      if (target && event.clientX > target.getBoundingClientRect().left + target.getBoundingClientRect().width / 2) {
+        targetIndex += 1;
+      }
+      const sourceIndex = event.dataTransfer?.getData('application/x-italian-charm-order');
+      if (sourceIndex !== '' && sourceIndex !== undefined) {
+        moveItalianCharmOrder(Number(sourceIndex), targetIndex);
+        renderItalianCharmsBuilder();
+        document.getElementById('charms-bracelet-status').textContent = 'Orden de los charms actualizado.';
+        return;
+      }
+
+      const payload = event.dataTransfer?.getData('application/x-italian-charm');
+      if (!payload) return;
+      let draggedProduct;
+      try {
+        const { productId, colorVariantId } = JSON.parse(payload);
+        draggedProduct = allProducts.find(product =>
+          product.id === productId && product.category === 'charms_italianos'
+        );
+        if (!draggedProduct) return;
+        if (addItalianCharmToSelection(draggedProduct, colorVariantId, targetIndex)) {
+          document.getElementById('charms-bracelet-status').textContent = `${draggedProduct.name} agregado a la pulsera.`;
+        }
+      } catch {
+        document.getElementById('charms-builder-status').textContent = 'No se pudo agregar ese charm. Intenta de nuevo.';
+      }
     });
     document.getElementById('charms-builder-add').addEventListener('click', () => {
       const lines = Array.from(italianCharmSelection.values());
@@ -1423,6 +1905,7 @@
         addProductToCart(product, '', colorVariantId, quantity, false);
       }
       italianCharmSelection.clear();
+      italianCharmOrder.length = 0;
       italianCharmsBaseMode = 'own';
       selectedItalianCharmsBaseId = '';
       selectedItalianCharmsBaseVariantId = '';
@@ -1503,6 +1986,11 @@
     });
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
+        const accountModal = document.getElementById('customer-account-modal');
+        if (!accountModal.classList.contains('hidden')) {
+          closeCustomerAccount();
+          return;
+        }
         const cartModal = document.getElementById('cart-modal');
         if (!cartModal.classList.contains('hidden')) closeCart();
         window.closeProductModal();
