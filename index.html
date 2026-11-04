@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sthefy Joyas en Acero | Catálogo Online en Tiempo Real</title>
-  <meta name="description" content="Joyas en Acero, Dijes Italianos y Bijouterie Fina. Catálogo con stock y precios en tiempo real. Asunción, Paraguay.">
+  <meta name="description" content="Joyas en Acero, Charms Italianos y Bijouterie Fina. Catálogo con stock y precios en tiempo real. Asunción, Paraguay.">
   <link rel="icon" type="image/png" href="assets/sthefy-joyas-logo.png">
   <link rel="apple-touch-icon" href="assets/sthefy-joyas-logo.png">
   <meta property="og:image" content="assets/sthefy-joyas-logo.png">
@@ -159,13 +159,105 @@
       <p class="text-stone-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
         Explorá la colección, elegí tus favoritas y armá tu pedido en unos simples pasos. Acero quirúrgico y bijouterie fina para regalar o regalarte.
       </p>
-      <a href="#products-grid" class="store-cart-button store-focus inline-flex items-center justify-center px-5 py-3 rounded-full font-semibold text-sm shadow-sm transition-colors">
-        Explorar colección <span class="ml-2" aria-hidden="true">↓</span>
-      </a>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a href="#products-grid" class="store-cart-button store-focus inline-flex items-center justify-center px-5 py-3 rounded-full font-semibold text-sm shadow-sm transition-colors">
+          Explorar colección <span class="ml-2" aria-hidden="true">↓</span>
+        </a>
+        <a href="#italian-charms-builder" class="store-focus inline-flex items-center justify-center px-5 py-3 rounded-full border border-pink-200/50 bg-white/10 hover:bg-white/20 text-pink-100 font-semibold text-sm transition-colors">
+          Crea tu pulsera Italian Charms
+        </a>
+      </div>
 
       <div class="pt-2 flex items-center justify-center gap-2 text-xs text-stone-300">
         <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
         <span id="sync-status-text" aria-live="polite">Conectando con base de datos en tiempo real...</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="italian-charms-builder" aria-labelledby="charms-builder-title" class="px-4 py-10 sm:py-14 bg-gradient-to-b from-[#fffaf7] to-[#f8e9ed] border-b border-[#ecdee1]">
+    <div class="max-w-7xl mx-auto">
+      <div class="max-w-3xl mx-auto text-center mb-8">
+        <p class="text-[11px] uppercase tracking-[.2em] text-rose-700 font-semibold">Diseña algo único</p>
+        <h2 id="charms-builder-title" class="font-serif text-3xl sm:text-4xl text-[#354c3c] mt-2">Crea tu pulsera Italian Charms</h2>
+        <p class="text-sm sm:text-base text-stone-600 mt-3">Elige una pulsera base o dinos que ya tienes una. Después, combina tus charms favoritos.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-[minmax(0,1fr)_340px] gap-6 items-start">
+        <div class="space-y-6">
+          <section class="bg-white rounded-2xl border border-[#ecdee1] p-4 sm:p-5 shadow-sm" aria-labelledby="charms-base-title">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="w-8 h-8 shrink-0 rounded-full bg-[#354c3c] text-amber-200 font-bold text-sm flex items-center justify-center">1</span>
+              <div>
+                <h3 id="charms-base-title" class="font-serif text-xl text-stone-900">Tu pulsera</h3>
+                <p class="text-xs text-stone-500 mt-1">Puedes elegir una base disponible o usar la que ya tienes.</p>
+              </div>
+            </div>
+            <fieldset class="grid sm:grid-cols-2 gap-3">
+              <legend class="sr-only">Elige si necesitas una pulsera base</legend>
+              <label class="flex items-start gap-3 rounded-xl border border-stone-200 p-3 cursor-pointer hover:border-amber-500 has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
+                <input type="radio" name="charms-base-mode" value="own" checked class="mt-1 accent-[#354c3c]">
+                <span>
+                  <span class="block text-sm font-semibold text-stone-800">Ya tengo mi pulsera</span>
+                  <span class="block text-xs text-stone-500 mt-1">Solo elegiré los charms.</span>
+                </span>
+              </label>
+              <label class="flex items-start gap-3 rounded-xl border border-stone-200 p-3 cursor-pointer hover:border-amber-500 has-[:checked]:border-amber-600 has-[:checked]:bg-amber-50">
+                <input type="radio" name="charms-base-mode" value="buy" class="mt-1 accent-[#354c3c]">
+                <span>
+                  <span class="block text-sm font-semibold text-stone-800">Quiero elegir una base</span>
+                  <span class="block text-xs text-stone-500 mt-1">Se agregará al pedido junto con los charms.</span>
+                </span>
+              </label>
+            </fieldset>
+            <div id="charms-base-picker" class="hidden mt-4 grid sm:grid-cols-2 gap-3">
+              <label class="text-xs font-semibold text-stone-700">
+                Pulsera base
+                <select id="charms-base-product" class="store-focus mt-1 w-full rounded-xl border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal">
+                  <option value="">Cargando pulseras...</option>
+                </select>
+              </label>
+              <label id="charms-base-variant-field" class="hidden text-xs font-semibold text-stone-700">
+                Color de la base
+                <select id="charms-base-variant" class="store-focus mt-1 w-full rounded-xl border border-stone-300 bg-white px-3 py-2.5 text-sm font-normal"></select>
+              </label>
+              <p id="charms-no-base-message" class="hidden sm:col-span-2 text-xs text-stone-500 bg-stone-50 rounded-lg p-3">No hay pulseras base disponibles ahora. Puedes elegir “Ya tengo mi pulsera” y armar tu combinación de charms.</p>
+            </div>
+          </section>
+
+          <section class="bg-white rounded-2xl border border-[#ecdee1] p-4 sm:p-5 shadow-sm" aria-labelledby="charms-products-title">
+            <div class="flex items-start gap-3 mb-4">
+              <span class="w-8 h-8 shrink-0 rounded-full bg-[#354c3c] text-amber-200 font-bold text-sm flex items-center justify-center">2</span>
+              <div>
+                <h3 id="charms-products-title" class="font-serif text-xl text-stone-900">Elige tus charms</h3>
+                <p class="text-xs text-stone-500 mt-1">Agrega tus favoritos y ajusta la cantidad en tu combinación.</p>
+              </div>
+            </div>
+            <div id="charms-empty-state" class="hidden rounded-xl border border-dashed border-stone-300 bg-stone-50 p-6 text-center">
+              <p class="font-semibold text-stone-700">Pronto encontrarás tus charms aquí</p>
+              <p class="text-xs text-stone-500 mt-1">Estamos preparando esta colección. Los charms aparecerán cuando se agreguen a la categoría “Charms Italianos” en el inventario.</p>
+            </div>
+            <div id="charms-product-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+          </section>
+        </div>
+
+        <aside class="bg-white rounded-2xl border border-[#ecdee1] p-4 sm:p-5 shadow-sm lg:sticky lg:top-24" aria-labelledby="charms-summary-title">
+          <p class="text-[11px] uppercase tracking-[.18em] text-rose-700 font-semibold">Tu combinación</p>
+          <h3 id="charms-summary-title" class="font-serif text-2xl text-[#354c3c] mt-1">Tu pulsera</h3>
+          <div id="charms-builder-base-summary" class="text-sm text-stone-600 mt-4">Ya tengo mi pulsera</div>
+          <div id="charms-builder-selection" class="mt-3 space-y-2">
+            <p id="charms-builder-empty" class="text-xs text-stone-500 rounded-xl bg-stone-50 p-3">Agrega uno o más charms para comenzar.</p>
+          </div>
+          <div class="border-t border-stone-100 mt-4 pt-4 flex items-center justify-between">
+            <span class="text-sm font-semibold text-stone-700">Total estimado</span>
+            <span id="charms-builder-total" aria-live="polite" class="font-serif text-xl font-bold text-amber-700">₲ 0</span>
+          </div>
+          <p id="charms-builder-status" aria-live="polite" class="text-xs text-rose-700 mt-3"></p>
+          <button id="charms-builder-add" type="button" disabled class="store-focus w-full mt-2 px-4 py-3 rounded-xl bg-[#354c3c] hover:bg-[#23362c] disabled:bg-stone-300 disabled:text-stone-500 text-white font-semibold text-sm transition-colors">
+            Agregar combinación al carrito
+          </button>
+          <p class="text-[11px] text-stone-500 mt-3 leading-relaxed">El pedido se confirma por WhatsApp. El stock se verifica al confirmar y no queda reservado.</p>
+        </aside>
       </div>
     </div>
   </section>
@@ -366,6 +458,10 @@
     let activeModalColorVariantId = '';
     let activeModalPhotoIndex = 0;
     let modalSelectedVariantQuantities = new Map();
+    let italianCharmsBaseMode = 'own';
+    let selectedItalianCharmsBaseId = '';
+    let selectedItalianCharmsBaseVariantId = '';
+    const italianCharmSelection = new Map();
     const whatsappPhone = '595973779707';
 
     const categoryLabels = {
@@ -376,6 +472,7 @@
       pulseras: 'Pulseras & Charms',
       tobilleras: 'Tobilleras',
       dijes: 'Dijes & Medallas',
+      charms_italianos: 'Charms Italianos',
       sets: 'Sets & Conjuntos',
       relojes: 'Relojes',
       accesorios: 'Accesorios'
@@ -600,6 +697,189 @@
       updateCartCount();
     }
 
+    function productTotalStock(product) {
+      const variants = Array.isArray(product.colorVariants) ? product.colorVariants : [];
+      return variants.length
+        ? variants.reduce((total, variant) => total + Math.max(0, Number(variant.stock) || 0), 0)
+        : Math.max(0, Number(product.stock) || 0);
+    }
+
+    function isItalianCharm(product) {
+      const text = String(product.name || '').toLowerCase();
+      if (product.category === 'charms_italianos') return true;
+      if (/^(pulsera|brazalete)\b/.test(text)) return false;
+      return /charm(s)? italian(o|os)|encantos? italianos?|dijes? italianos?/.test(text);
+    }
+
+    function cartQuantityFor(productId, colorVariantId = '') {
+      return cart
+        .filter(item => item.productId === productId && (item.colorVariantId || '') === colorVariantId)
+        .reduce((total, item) => total + item.quantity, 0);
+    }
+
+    function renderItalianCharmsBuilder() {
+      const baseProducts = allProducts.filter(product =>
+        (product.category === 'pulseras' || /^(pulsera|brazalete)\b/i.test(product.name || ''))
+        && !isItalianCharm(product)
+        && productTotalStock(product) > 0
+      );
+      const charmProducts = allProducts.filter(isItalianCharm);
+      const baseModeInput = document.querySelector('input[name="charms-base-mode"]:checked');
+      italianCharmsBaseMode = baseModeInput?.value || italianCharmsBaseMode;
+
+      const basePicker = document.getElementById('charms-base-picker');
+      const baseSelect = document.getElementById('charms-base-product');
+      const baseVariantField = document.getElementById('charms-base-variant-field');
+      const baseVariantSelect = document.getElementById('charms-base-variant');
+      const noBaseMessage = document.getElementById('charms-no-base-message');
+      basePicker.classList.toggle('hidden', italianCharmsBaseMode !== 'buy');
+      noBaseMessage.classList.toggle('hidden', italianCharmsBaseMode !== 'buy' || baseProducts.length > 0);
+      baseSelect.disabled = baseProducts.length === 0;
+      baseSelect.replaceChildren();
+
+      const emptyBaseOption = document.createElement('option');
+      emptyBaseOption.value = '';
+      emptyBaseOption.textContent = baseProducts.length ? 'Selecciona una pulsera' : 'No hay bases disponibles';
+      baseSelect.appendChild(emptyBaseOption);
+      baseProducts.forEach(product => {
+        const option = document.createElement('option');
+        option.value = product.id;
+        const price = (product.colorVariants || []).length
+          ? Math.min(...product.colorVariants.map(variant => Number(variant.sellingPrice) || 0))
+          : Number(product.sellingPrice) || 0;
+        option.textContent = `${product.name} · ${formatMoney(price)}`;
+        baseSelect.appendChild(option);
+      });
+      selectedItalianCharmsBaseId = baseProducts.some(product => product.id === selectedItalianCharmsBaseId)
+        ? selectedItalianCharmsBaseId
+        : '';
+      baseSelect.value = selectedItalianCharmsBaseId;
+
+      const baseProduct = baseProducts.find(product => product.id === selectedItalianCharmsBaseId);
+      const baseVariants = baseProduct?.colorVariants || [];
+      baseVariantField.classList.toggle('hidden', !baseVariants.length);
+      baseVariantSelect.replaceChildren();
+      const availableBaseVariant = baseVariants.find(variant =>
+        productSizeStock(baseProduct, '', variant.id) > cartQuantityFor(baseProduct.id, variant.id)
+      );
+      selectedItalianCharmsBaseVariantId = baseVariants.some(variant => variant.id === selectedItalianCharmsBaseVariantId)
+        ? selectedItalianCharmsBaseVariantId
+        : availableBaseVariant?.id || baseVariants[0]?.id || '';
+      baseVariants.forEach(variant => {
+        const option = document.createElement('option');
+        option.value = variant.id;
+        option.textContent = `${variant.color} · ${Math.max(0, Number(variant.stock) || 0)} disponibles · ${formatMoney(Number(variant.sellingPrice) || 0)}`;
+        option.disabled = productSizeStock(baseProduct, '', variant.id) <= cartQuantityFor(baseProduct.id, variant.id);
+        baseVariantSelect.appendChild(option);
+      });
+      baseVariantSelect.value = selectedItalianCharmsBaseVariantId;
+
+      const grid = document.getElementById('charms-product-grid');
+      const emptyState = document.getElementById('charms-empty-state');
+      emptyState.classList.toggle('hidden', charmProducts.length > 0);
+      grid.replaceChildren();
+      charmProducts.forEach(product => {
+        const variants = Array.isArray(product.colorVariants) ? product.colorVariants : [];
+        const defaultVariant = variants.find(variant =>
+          productSizeStock(product, '', variant.id) > cartQuantityFor(product.id, variant.id)
+        ) || variants[0];
+        const variantId = defaultVariant?.id || '';
+        const imageUrl = productPhotos(product, variantId)[0] || product.imageUrl || '';
+        const stock = productTotalStock(product);
+        const price = variants.length
+          ? Math.min(...variants.map(variant => Number(variant.sellingPrice) || 0))
+          : Number(product.sellingPrice) || 0;
+        const card = document.createElement('article');
+        card.className = 'charm-product-card overflow-hidden rounded-xl border border-stone-200 bg-white';
+        card.dataset.charmProduct = product.id;
+        card.innerHTML = `
+          <div class="aspect-square bg-[#f7e9ec]">
+            ${imageUrl
+              ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(product.name)}" class="h-full w-full object-cover" loading="lazy">`
+              : `<div class="flex h-full items-center justify-center text-xs text-stone-400">Foto no disponible</div>`}
+          </div>
+          <div class="space-y-2 p-3">
+            <p class="line-clamp-2 min-h-9 text-xs font-semibold text-stone-800">${escapeHtml(product.name)}</p>
+            <p class="text-sm font-bold text-amber-700">${variants.length ? 'Desde ' : ''}${formatMoney(price)}</p>
+            ${variants.length ? `
+              <label class="block text-[11px] font-medium text-stone-600">
+                Color
+                <select data-charm-variant class="store-focus mt-1 w-full rounded-lg border border-stone-300 bg-white px-2 py-1.5 text-xs">
+                  ${variants.map(variant => `
+                    <option value="${escapeHtml(variant.id)}" ${variant.id === variantId ? 'selected' : ''} ${productSizeStock(product, '', variant.id) <= cartQuantityFor(product.id, variant.id) ? 'disabled' : ''}>
+                      ${escapeHtml(variant.color)} · ${formatMoney(Number(variant.sellingPrice) || 0)}
+                    </option>
+                  `).join('')}
+                </select>
+              </label>
+            ` : `<p class="text-[11px] text-stone-500">${stock} disponibles</p>`}
+            <button type="button" data-add-charm="${escapeHtml(product.id)}" ${stock < 1 ? 'disabled' : ''} class="store-focus w-full rounded-lg bg-[#354c3c] px-2 py-2 text-xs font-semibold text-white hover:bg-[#23362c] disabled:bg-stone-300 disabled:text-stone-500">
+              ${stock > 0 ? 'Agregar charm' : 'Agotado'}
+            </button>
+          </div>`;
+        grid.appendChild(card);
+      });
+
+      const selection = document.getElementById('charms-builder-selection');
+      const emptySelection = document.getElementById('charms-builder-empty');
+      const baseSummary = document.getElementById('charms-builder-base-summary');
+      const status = document.getElementById('charms-builder-status');
+      const addButton = document.getElementById('charms-builder-add');
+      selection.querySelectorAll('[data-charm-selection-row]').forEach(row => row.remove());
+      emptySelection.classList.toggle('hidden', italianCharmSelection.size > 0);
+      status.textContent = '';
+
+      let total = 0;
+      let baseAvailable = true;
+      if (italianCharmsBaseMode === 'buy') {
+        if (baseProduct) {
+          const baseVariant = productColorVariant(baseProduct, selectedItalianCharmsBaseVariantId);
+          const baseStock = productSizeStock(baseProduct, '', selectedItalianCharmsBaseVariantId);
+          const baseCartQuantity = cartQuantityFor(baseProduct.id, selectedItalianCharmsBaseVariantId);
+          const basePrice = productPrice(baseProduct, selectedItalianCharmsBaseVariantId);
+          baseAvailable = baseStock > baseCartQuantity;
+          baseSummary.textContent = `Base: ${baseProduct.name}${baseVariant ? ` · ${baseVariant.color}` : ''} · ${formatMoney(basePrice)}`;
+          total += basePrice;
+        } else {
+          baseAvailable = false;
+          baseSummary.textContent = baseProducts.length ? 'Selecciona una pulsera base' : 'No hay pulseras base disponibles';
+        }
+      } else {
+        baseSummary.textContent = 'Ya tengo mi pulsera';
+      }
+
+      italianCharmSelection.forEach((item, key) => {
+        const product = allProducts.find(current => current.id === item.productId);
+        if (!product) return;
+        const variant = productColorVariant(product, item.colorVariantId);
+        const unitPrice = productPrice(product, item.colorVariantId);
+        const availableStock = productSizeStock(product, '', item.colorVariantId);
+        const row = document.createElement('div');
+        row.dataset.charmSelectionRow = '';
+        row.className = 'flex items-center justify-between gap-2 rounded-xl bg-stone-50 p-3';
+        row.innerHTML = `
+          <div class="min-w-0">
+            <p class="truncate text-xs font-semibold text-stone-800">${escapeHtml(product.name)}</p>
+            <p class="mt-1 text-[11px] text-stone-500">${variant ? `${escapeHtml(variant.color)} · ` : ''}${formatMoney(unitPrice)} c/u</p>
+          </div>
+          <div class="flex shrink-0 items-center gap-1">
+            <button type="button" data-charm-selection-action="decrease" data-selection-key="${escapeHtml(key)}" aria-label="Quitar una unidad de ${escapeHtml(product.name)}" class="store-focus h-7 w-7 rounded-full bg-white font-bold text-stone-700">−</button>
+            <span class="min-w-5 text-center text-xs font-semibold">${item.quantity}</span>
+            <button type="button" data-charm-selection-action="increase" data-selection-key="${escapeHtml(key)}" aria-label="Agregar una unidad de ${escapeHtml(product.name)}" class="store-focus h-7 w-7 rounded-full bg-white font-bold text-stone-700">+</button>
+            <button type="button" data-charm-selection-action="remove" data-selection-key="${escapeHtml(key)}" aria-label="Quitar ${escapeHtml(product.name)} de la combinación" class="store-focus ml-1 text-[11px] font-semibold text-rose-700">Quitar</button>
+          </div>`;
+        selection.appendChild(row);
+        total += unitPrice * item.quantity;
+        if (item.quantity + cartQuantityFor(product.id, item.colorVariantId) > availableStock) {
+          baseAvailable = false;
+          status.textContent = 'La disponibilidad de un charm cambió. Ajusta la combinación antes de continuar.';
+        }
+      });
+
+      document.getElementById('charms-builder-total').textContent = formatMoney(total);
+      addButton.disabled = italianCharmSelection.size === 0 || !baseAvailable;
+    }
+
     function closeCart() {
       document.getElementById('cart-modal').classList.add('hidden');
       document.getElementById('cart-modal').classList.remove('flex');
@@ -616,7 +896,7 @@
         counts[p.category] = (counts[p.category] || 0) + 1;
       });
 
-      const categoriesToShow = ['todos', 'anillos', 'collares', 'aros', 'pulseras', 'tobilleras', 'dijes', 'sets', 'relojes', 'accesorios'];
+      const categoriesToShow = ['todos', 'anillos', 'collares', 'aros', 'pulseras', 'tobilleras', 'dijes', 'charms_italianos', 'sets', 'relojes', 'accesorios'];
 
       categoriesToShow.forEach(cat => {
         const count = counts[cat] || 0;
@@ -1047,6 +1327,114 @@
       renderModalPhotos(product);
     });
 
+    document.querySelectorAll('input[name="charms-base-mode"]').forEach(input => {
+      input.addEventListener('change', () => {
+        italianCharmsBaseMode = input.value;
+        renderItalianCharmsBuilder();
+      });
+    });
+    document.getElementById('charms-base-product').addEventListener('change', event => {
+      selectedItalianCharmsBaseId = event.target.value;
+      selectedItalianCharmsBaseVariantId = '';
+      renderItalianCharmsBuilder();
+    });
+    document.getElementById('charms-base-variant').addEventListener('change', event => {
+      selectedItalianCharmsBaseVariantId = event.target.value;
+      renderItalianCharmsBuilder();
+    });
+    document.getElementById('charms-product-grid').addEventListener('click', event => {
+      const button = event.target.closest('[data-add-charm]');
+      if (!button) return;
+      const product = allProducts.find(item => item.id === button.dataset.addCharm);
+      if (!product) return;
+      const card = button.closest('[data-charm-product]');
+      const colorVariantId = card.querySelector('[data-charm-variant]')?.value || '';
+      const key = `${encodeURIComponent(product.id)}|${encodeURIComponent(colorVariantId)}`;
+      const existing = italianCharmSelection.get(key);
+      const quantity = existing?.quantity || 0;
+      const availableStock = productSizeStock(product, '', colorVariantId);
+      if (quantity + cartQuantityFor(product.id, colorVariantId) >= availableStock) {
+        document.getElementById('charms-builder-status').textContent = `No hay más unidades disponibles de ${product.name}${productColorVariant(product, colorVariantId) ? ` en color ${productColorVariant(product, colorVariantId).color}` : ''}.`;
+        return;
+      }
+      italianCharmSelection.set(key, {
+        productId: product.id,
+        colorVariantId,
+        quantity: quantity + 1
+      });
+      renderItalianCharmsBuilder();
+    });
+    document.getElementById('charms-builder-selection').addEventListener('click', event => {
+      const button = event.target.closest('[data-charm-selection-action]');
+      if (!button) return;
+      const key = button.dataset.selectionKey;
+      const item = italianCharmSelection.get(key);
+      if (!item) return;
+      if (button.dataset.charmSelectionAction === 'remove' || (button.dataset.charmSelectionAction === 'decrease' && item.quantity === 1)) {
+        italianCharmSelection.delete(key);
+      } else if (button.dataset.charmSelectionAction === 'decrease') {
+        italianCharmSelection.set(key, { ...item, quantity: item.quantity - 1 });
+      } else if (button.dataset.charmSelectionAction === 'increase') {
+        const availableStock = productSizeStock(
+          allProducts.find(product => product.id === item.productId),
+          '',
+          item.colorVariantId
+        );
+        if (item.quantity + cartQuantityFor(item.productId, item.colorVariantId) >= availableStock) {
+          document.getElementById('charms-builder-status').textContent = 'No hay más unidades disponibles de este charm.';
+          return;
+        }
+        italianCharmSelection.set(key, { ...item, quantity: item.quantity + 1 });
+      }
+      renderItalianCharmsBuilder();
+    });
+    document.getElementById('charms-builder-add').addEventListener('click', () => {
+      const lines = Array.from(italianCharmSelection.values());
+      const baseProduct = italianCharmsBaseMode === 'buy'
+        ? allProducts.find(product => product.id === selectedItalianCharmsBaseId)
+        : null;
+      if (!lines.length || (italianCharmsBaseMode === 'buy' && !baseProduct)) return;
+
+      const orderLines = baseProduct
+        ? [{
+          product: baseProduct,
+          colorVariantId: selectedItalianCharmsBaseVariantId,
+          quantity: 1
+        }, ...lines.map(item => ({
+          product: allProducts.find(product => product.id === item.productId),
+          colorVariantId: item.colorVariantId,
+          quantity: item.quantity
+        }))]
+        : lines.map(item => ({
+          product: allProducts.find(product => product.id === item.productId),
+          colorVariantId: item.colorVariantId,
+          quantity: item.quantity
+        }));
+      const unavailableLine = orderLines.find(({ product, colorVariantId, quantity }) =>
+        !product || quantity + cartQuantityFor(product.id, colorVariantId) > productSizeStock(product, '', colorVariantId)
+      );
+      if (unavailableLine) {
+        document.getElementById('charms-builder-status').textContent = 'La disponibilidad cambió. Ajusta tu combinación antes de agregarla.';
+        renderItalianCharmsBuilder();
+        return;
+      }
+
+      for (const { product, colorVariantId, quantity } of orderLines) {
+        addProductToCart(product, '', colorVariantId, quantity, false);
+      }
+      italianCharmSelection.clear();
+      italianCharmsBaseMode = 'own';
+      selectedItalianCharmsBaseId = '';
+      selectedItalianCharmsBaseVariantId = '';
+      document.querySelector('input[name="charms-base-mode"][value="own"]').checked = true;
+      renderItalianCharmsBuilder();
+      renderProducts();
+      renderCart();
+      document.body.classList.add('overflow-hidden');
+      document.getElementById('cart-modal').classList.remove('hidden');
+      document.getElementById('cart-modal').classList.add('flex');
+    });
+
     document.getElementById('open-cart-button').addEventListener('click', () => {
       renderCart();
       document.getElementById('cart-modal').classList.remove('hidden');
@@ -1137,6 +1525,7 @@
 
         allProducts = prods;
         renderCart();
+        renderItalianCharmsBuilder();
         syncStatusEl.textContent = `Sincronizado en tiempo real · ${allProducts.length} piezas en catálogo`;
 
         renderCategories();
