@@ -279,6 +279,12 @@
           <div id="modal-stock-badge" class="text-right"></div>
         </div>
 
+        <div id="modal-color-field" class="hidden space-y-1">
+          <label for="modal-color" class="text-xs font-semibold text-stone-700">Elegí el color</label>
+          <select id="modal-color" class="w-full rounded-xl border border-stone-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"></select>
+        </div>
+        <div id="modal-photo-thumbnails" class="flex gap-2 overflow-x-auto"></div>
+
         <div class="space-y-2 text-xs text-stone-600">
           <p id="modal-description" class="leading-relaxed"></p>
           <div class="grid grid-cols-2 gap-2 pt-2">
@@ -351,6 +357,8 @@
     let onlyInStock = false;
     let cart = [];
     let activeModalProductId = null;
+    let activeModalColorVariantId = '';
+    let activeModalPhotoIndex = 0;
     const whatsappPhone = '595973779707';
 
     const categoryLabels = {
@@ -380,7 +388,23 @@
       return '₲ ' + Math.round(amount).toLocaleString('es-PY');
     }
 
-    function productSizeStock(product, size) {
+    function productColorVariant(product, colorVariantId) {
+      return (product.colorVariants || []).find(variant => variant.id === colorVariantId);
+    }
+
+    function productPrice(product, colorVariantId = '') {
+      return Number(productColorVariant(product, colorVariantId)?.sellingPrice ?? product.sellingPrice) || 0;
+    }
+
+    function productPhotos(product, colorVariantId = '') {
+      const variant = productColorVariant(product, colorVariantId);
+      if (variant) return variant.photos || [];
+      return product.imageUrls?.length ? product.imageUrls : [product.imageUrl].filter(Boolean);
+    }
+
+    function productSizeStock(product, size, colorVariantId = '') {
+      const variant = productColorVariant(product, colorVariantId);
+      if (variant) return Math.max(0, Number(variant.stock) || 0);
       if (!product.hasSizes) return Number(product.stock) || 0;
       const sizeItem = (product.sizes || []).find(item => String(item.size) === String(size));
       return sizeItem ? Math.max(0, Number(sizeItem.stock) || 0) : 0;
@@ -391,7 +415,7 @@
       const countLabel = `${count} artículo${count === 1 ? '' : 's'}`;
       const total = cart.reduce((sum, item) => {
         const product = allProducts.find(current => current.id === item.productId);
-        return sum + (product ? Number(product.sellingPrice || 0) * item.quantity : 0);
+        return sum + (product ? productPrice(product, item.colorVariantId) * item.quantity : 0);
       }, 0);
       document.getElementById('cart-count').textContent = String(count);
       document.getElementById('open-cart-button').setAttribute('aria-label', `Abrir carrito, ${countLabel}`);
@@ -400,21 +424,21 @@
       document.getElementById('cart-dock').classList.toggle('hidden', count === 0);
     }
 
-    function addProductToCart(product, size = '') {
-      if (!product || (product.hasSizes && !size)) {
-        alert(product?.hasSizes && !size ? 'Selecciona un talle para agregar este producto.' : 'No se encontró el producto.');
+    function addProductToCart(product, size = '', colorVariantId = '') {
+      if (!product || (product.hasSizes && !size) || (product.colorVariants?.length && !colorVariantId)) {
+        alert(product?.colorVariants?.length && !colorVariantId ? 'Selecciona un color para agregar este producto.' : product?.hasSizes && !size ? 'Selecciona un talle para agregar este producto.' : 'No se encontró el producto.');
         return;
       }
 
-      const available = productSizeStock(product, size);
-      const existing = cart.find(item => item.productId === product.id && item.size === size);
+      const available = productSizeStock(product, size, colorVariantId);
+      const existing = cart.find(item => item.productId === product.id && item.size === size && item.colorVariantId === colorVariantId);
       if (available < 1 || (existing ? existing.quantity : 0) >= available) {
         alert('No hay más unidades disponibles para la cantidad solicitada.');
         return;
       }
 
       if (existing) existing.quantity += 1;
-      else cart.push({ productId: product.id, size, quantity: 1 });
+      else cart.push({ productId: product.id, size, colorVariantId, quantity: 1 });
       renderCart();
       renderProducts();
     }
@@ -428,7 +452,7 @@
         product: allProducts.find(product => product.id === item.productId)
       }));
       const hasUnavailableItems = itemsToRender.some(({ item, product }) =>
-        !product || item.quantity > productSizeStock(product, item.size)
+        !product || item.quantity > productSizeStock(product, item.size, item.colorVariantId)
       );
       let total = 0;
       container.replaceChildren();
@@ -452,13 +476,16 @@
           remove.dataset.cartAction = 'remove';
           remove.dataset.productId = item.productId;
           remove.dataset.size = item.size;
+          remove.dataset.colorVariantId = item.colorVariantId || '';
           remove.className = 'text-xs text-rose-700 hover:text-rose-900';
           remove.textContent = 'Quitar';
           row.append(message, remove);
           container.appendChild(row);
           return;
         }
-        total += (Number(product.sellingPrice) || 0) * item.quantity;
+        const unitPrice = productPrice(product, item.colorVariantId);
+        const variant = productColorVariant(product, item.colorVariantId);
+        total += unitPrice * item.quantity;
 
         const row = document.createElement('div');
         row.className = 'flex items-center gap-3 border border-stone-200 rounded-xl p-3';
@@ -469,7 +496,7 @@
         name.textContent = product.name;
         const info = document.createElement('p');
         info.className = 'text-xs text-stone-500 mt-1';
-        info.textContent = `${product.sku || ''}${item.size ? ` · Talle ${item.size}` : ''} · ${formatMoney(product.sellingPrice)}`;
+        info.textContent = `${product.sku || ''}${item.size ? ` · Talle ${item.size}` : ''}${variant ? ` · ${variant.color}` : ''} · ${formatMoney(unitPrice)}`;
         details.append(name, info);
 
         const controls = document.createElement('div');
@@ -480,6 +507,7 @@
           button.dataset.cartAction = action;
           button.dataset.productId = item.productId;
           button.dataset.size = item.size;
+          button.dataset.colorVariantId = item.colorVariantId || '';
           button.className = action === 'remove'
             ? 'text-xs text-rose-700 hover:text-rose-900 ml-1'
             : 'w-7 h-7 rounded-full bg-stone-100 hover:bg-stone-200 font-bold';
@@ -509,7 +537,7 @@
       checkout.tabIndex = checkoutDisabled ? -1 : 0;
 
       const messageItems = itemsToRender.filter(({ product }) => product).map(({ item, product }) =>
-        `• ${item.quantity} x ${product.name}${item.size ? ` (talle ${item.size})` : ''} — ${formatMoney(product.sellingPrice * item.quantity)}`
+        `• ${item.quantity} x ${product.name}${item.size ? ` (talle ${item.size})` : ''}${productColorVariant(product, item.colorVariantId) ? ` (${productColorVariant(product, item.colorVariantId).color})` : ''} — ${formatMoney(productPrice(product, item.colorVariantId) * item.quantity)}`
       );
       const message = [
         'Hola Sthefy Joyas, quisiera solicitar este pedido:',
@@ -592,7 +620,8 @@
       grid.innerHTML = filtered.map(product => {
         const cartQuantity = cart.filter(item => item.productId === product.id)
           .reduce((total, item) => total + item.quantity, 0);
-        const photoSrc = product.imageUrl || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80';
+        const firstColorVariantId = product.colorVariants?.[0]?.id || '';
+        const photoSrc = productPhotos(product, firstColorVariantId)[0] || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80';
         const inStock = product.stock > 0;
         const matText = materialLabels[product.material] || 'Acero Quirúrgico';
         const priceFormatted = formatMoney(product.sellingPrice);
@@ -603,6 +632,7 @@
               <div class="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-900/75 text-stone-100 backdrop-blur-xs font-mono">${product.sku}</span>
                 ${!inStock ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-600 text-white shadow-xs">Agotado</span>` : `<span class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-emerald-700/80 text-emerald-100 backdrop-blur-xs">${product.stock} disp.</span>`}
+                ${product.colorVariants?.length ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/90 text-stone-800 shadow-xs">${product.colorVariants.length} colores</span>` : ''}
               </button>
               ${product.category === 'anillos' && product.hasSizes ? `<span class="absolute bottom-2.5 right-2.5 text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-400 text-stone-950 shadow-xs">Con talles</span>` : ''}
             </div>
@@ -614,11 +644,11 @@
               <div class="pt-2 border-t border-stone-100 flex items-center justify-between">
                 <div>
                   <span class="text-[10px] text-stone-400 block uppercase">Precio</span>
-                  <span class="font-bold text-sm sm:text-base text-stone-900 font-serif">${priceFormatted}</span>
+                  <span class="font-bold text-sm sm:text-base text-stone-900 font-serif">${product.colorVariants?.length ? `Desde ${formatMoney(Math.min(...product.colorVariants.map(variant => Number(variant.sellingPrice) || 0)))}` : priceFormatted}</span>
                 </div>
                 <button type="button" data-add-to-cart="${product.id}" ${!inStock ? 'disabled' : ''} aria-label="${inStock ? `Agregar ${product.name} a mi selección` : `${product.name}, agotado`}" title="Agregar a mi selección" class="store-add-button store-focus px-3 py-2 rounded-xl disabled:bg-stone-300 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs">
                   <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.486 2.246 2.247 3.487 5.233 3.487 8.414 0 6.556-5.335 11.892-11.891 11.892h-.004c-1.99 0-3.942-.522-5.65-1.516L.057 24zm6.558-4.016c1.7.9 3.02 1.021 3.17 1.033.407.016.884-.187 1.325-.513.771-.571 1.343-1.343 1.499-1.56.36-.5.592-1.053.267-1.616-.325-.563-1.468-2.062-2.024-2.746-.56-.682-.91-.655-1.513-.149-.602.506-2.519 2.353-2.991 2.806-.473.451-.96.455-1.553.162-.594-.293-2.568-1.032-4.893-3.281-1.807-1.613-2.754-3.43-3.08-4.006-.326-.576-.061-1.258.474-1.625l.406-.309c.292-.223.667-.592.95-.9.308-.321.137-.774.175-1.014.038-.24.179-.84.39-1.158.17-.255.376-.251.54-.255.11-.003.247-.015.375-.015.133 0 .373-.021.561.261.357.535.826 1.637.899 1.759.074.122.163.335.072.612-.092.277-.306.564-.519.839-.213.275-.354.552-.171.771.183.219.905 1.56 1.754 2.37.97.917 1.827 1.13 2.055 1.256.18.101.337.153.449.247.291.246.204.847.1 1.186-.104.34-.421.826-.777 1.169-.357.345-.788.767-1.142 1.029-.589.443-.712.61-.473 1.107.16.318.767 1.182 1.66 1.822z"/></svg>
-                  <span>${inStock ? (cartQuantity > 0 ? `✓ Agregar otra (${cartQuantity})` : product.hasSizes ? 'Elegir talle' : '＋ Agregar') : 'Agotado'}</span>
+                  <span>${inStock ? (cartQuantity > 0 ? `✓ Agregar otra (${cartQuantity})` : product.colorVariants?.length ? 'Elegir color' : product.hasSizes ? 'Elegir talle' : '＋ Agregar') : 'Agotado'}</span>
                 </button>
               </div>
             </div>
@@ -627,25 +657,82 @@
       }).join('');
     }
 
+    function renderModalPhotos(product) {
+      const photos = productPhotos(product, activeModalColorVariantId);
+      const image = document.getElementById('modal-image');
+      const thumbnails = document.getElementById('modal-photo-thumbnails');
+      const fallbackImage = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80';
+      image.src = photos[activeModalPhotoIndex] || photos[0] || fallbackImage;
+      image.alt = `${product.name}${productColorVariant(product, activeModalColorVariantId) ? `, ${productColorVariant(product, activeModalColorVariantId).color}` : ''}`;
+      thumbnails.replaceChildren();
+      photos.forEach((photoUrl, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `w-14 h-14 shrink-0 rounded-lg overflow-hidden border-2 ${index === activeModalPhotoIndex ? 'border-amber-600' : 'border-stone-200'}`;
+        button.setAttribute('aria-label', `Ver foto ${index + 1}`);
+        const thumbnail = document.createElement('img');
+        thumbnail.src = photoUrl;
+        thumbnail.alt = '';
+        thumbnail.className = 'w-full h-full object-cover';
+        button.appendChild(thumbnail);
+        button.addEventListener('click', () => {
+          activeModalPhotoIndex = index;
+          renderModalPhotos(product);
+        });
+        thumbnails.appendChild(button);
+      });
+    }
+
+    function updateProductModalVariant(product) {
+      const variant = productColorVariant(product, activeModalColorVariantId);
+      const size = product.hasSizes ? document.getElementById('modal-size').value : '';
+      const available = productSizeStock(product, size, activeModalColorVariantId);
+      const addButton = document.getElementById('modal-add-to-cart');
+      const stockBadge = document.getElementById('modal-stock-badge');
+      const price = productPrice(product, activeModalColorVariantId);
+      addButton.disabled = available <= 0;
+      addButton.classList.toggle('opacity-50', addButton.disabled);
+      addButton.textContent = variant ? `Agregar color ${variant.color}` : 'Agregar al carrito';
+      document.getElementById('modal-price').textContent = formatMoney(price);
+      stockBadge.innerHTML = available > 0
+        ? `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>${available} disponibles${variant ? ` · ${variant.color}` : ''}</span>`
+        : `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200"><span class="w-2 h-2 rounded-full bg-rose-500"></span>Sin stock${variant ? ` · ${variant.color}` : ''}</span>`;
+      renderModalPhotos(product);
+      const colorLabel = variant ? ` en color ${variant.color}` : '';
+      const waText = encodeURIComponent(`Hola Sthefy Joyas, quiero consultar sobre la pieza: ${product.name}${colorLabel} (SKU: ${product.sku}) con precio de ${formatMoney(price)}.`);
+      document.getElementById('modal-whatsapp-btn').href = `https://wa.me/${whatsappPhone}?text=${waText}`;
+    }
+
     window.openProductModal = function(id) {
       const p = allProducts.find(item => item.id === id);
       if (!p) return;
 
-      document.getElementById('modal-image').src = p.imageUrl || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80';
       document.getElementById('modal-sku').textContent = `CÓDIGO: ${p.sku}`;
       document.getElementById('modal-name').textContent = p.name;
-      document.getElementById('modal-price').textContent = formatMoney(p.sellingPrice);
       document.getElementById('modal-category-badge').textContent = categoryLabels[p.category] || p.category;
       document.getElementById('modal-material').textContent = materialLabels[p.material] || 'Acero Quirúrgico 316L';
       document.getElementById('modal-description').textContent = p.description || 'Pieza forjada en acero quirúrgico 316L hipoalergénico. Resiste el agua dulce, salada, perfumes y cremas sin oxidarse ni perder brillo.';
       activeModalProductId = p.id;
+      activeModalColorVariantId = p.colorVariants?.find(variant => Number(variant.stock) > 0)?.id
+        || p.colorVariants?.[0]?.id
+        || '';
+      activeModalPhotoIndex = 0;
+      const colorField = document.getElementById('modal-color-field');
+      const colorSelect = document.getElementById('modal-color');
+      colorSelect.replaceChildren();
+      (p.colorVariants || []).forEach(variant => {
+        const option = document.createElement('option');
+        option.value = variant.id;
+        option.textContent = `${variant.color} · ${variant.stock} disponibles`;
+        option.disabled = Number(variant.stock) <= 0;
+        colorSelect.appendChild(option);
+      });
+      colorSelect.value = activeModalColorVariantId;
+      colorField.classList.toggle('hidden', !p.colorVariants?.length);
       const sizeField = document.getElementById('modal-size-field');
       const sizeSelect = document.getElementById('modal-size');
-      const addButton = document.getElementById('modal-add-to-cart');
       sizeSelect.replaceChildren();
       sizeField.classList.toggle('hidden', !p.hasSizes);
-      addButton.disabled = p.stock <= 0;
-      addButton.classList.toggle('opacity-50', addButton.disabled);
       if (p.hasSizes) {
         (p.sizes || []).forEach(sizeItem => {
           const option = document.createElement('option');
@@ -654,23 +741,25 @@
           option.disabled = Number(sizeItem.stock) <= 0;
           sizeSelect.appendChild(option);
         });
-        addButton.disabled = !Array.from(sizeSelect.options).some(option => !option.disabled);
-        addButton.classList.toggle('opacity-50', addButton.disabled);
       }
 
-      const stockBadge = document.getElementById('modal-stock-badge');
-      if (p.stock > 0) {
-        stockBadge.innerHTML = `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> En stock</span>`;
-      } else {
-        stockBadge.innerHTML = `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-full border border-rose-200"><span class="w-2 h-2 rounded-full bg-rose-500"></span> Sin stock</span>`;
-      }
-
-      const waText = encodeURIComponent(`Hola Sthefy Joyas, quiero consultar sobre la pieza: ${p.name} (SKU: ${p.sku}) con precio de ${formatMoney(p.sellingPrice)}.`);
-      document.getElementById('modal-whatsapp-btn').href = `https://wa.me/${whatsappPhone}?text=${waText}`;
+      updateProductModalVariant(p);
 
       document.getElementById('product-modal').classList.remove('hidden');
       document.getElementById('product-modal').classList.add('flex');
     };
+
+    document.getElementById('modal-color').addEventListener('change', (event) => {
+      const product = allProducts.find(item => item.id === activeModalProductId);
+      if (!product) return;
+      activeModalColorVariantId = event.target.value;
+      activeModalPhotoIndex = 0;
+      updateProductModalVariant(product);
+    });
+    document.getElementById('modal-size').addEventListener('change', () => {
+      const product = allProducts.find(item => item.id === activeModalProductId);
+      if (product) updateProductModalVariant(product);
+    });
 
     window.closeProductModal = function() {
       document.getElementById('product-modal').classList.add('hidden');
@@ -682,7 +771,7 @@
       if (!button) return;
       const product = allProducts.find(item => item.id === button.dataset.addToCart);
       if (!product) return;
-      if (product.hasSizes) {
+      if (product.hasSizes || product.colorVariants?.length) {
         window.openProductModal(product.id);
         return;
       }
@@ -693,7 +782,7 @@
       const product = allProducts.find(item => item.id === activeModalProductId);
       if (!product) return;
       const size = product.hasSizes ? document.getElementById('modal-size').value : '';
-      addProductToCart(product, size);
+      addProductToCart(product, size, activeModalColorVariantId);
       window.closeProductModal();
     });
 
@@ -718,8 +807,10 @@
     document.getElementById('cart-items').addEventListener('click', (event) => {
       const button = event.target.closest('[data-cart-action]');
       if (!button) return;
-      const { cartAction, productId, size } = button.dataset;
-      const index = cart.findIndex(item => item.productId === productId && item.size === size);
+      const { cartAction, productId, size, colorVariantId } = button.dataset;
+      const index = cart.findIndex(item =>
+        item.productId === productId && item.size === size && (item.colorVariantId || '') === colorVariantId
+      );
       if (index < 0) return;
       if (cartAction === 'remove' || (cartAction === 'decrease' && cart[index].quantity === 1)) {
         cart.splice(index, 1);
@@ -727,7 +818,7 @@
         cart[index].quantity -= 1;
       } else if (cartAction === 'increase') {
         const product = allProducts.find(item => item.id === productId);
-        if (!product || cart[index].quantity >= productSizeStock(product, size)) {
+        if (!product || cart[index].quantity >= productSizeStock(product, size, colorVariantId)) {
           alert('No hay más unidades disponibles para la cantidad solicitada.');
           return;
         }
