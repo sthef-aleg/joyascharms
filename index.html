@@ -89,6 +89,54 @@
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
+    #charms-bracelet-track {
+      position: relative;
+      min-height: 12rem;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(252,248,246,.85));
+    }
+    .bracelet-preview-chain {
+      position: absolute;
+      top: 4.05rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      height: 1rem;
+      border: 1px solid #bd914b;
+      border-radius: 9999px;
+      background:
+        repeating-linear-gradient(90deg, transparent 0 13px, rgba(137,98,38,.78) 13px 15px, transparent 15px 20px),
+        linear-gradient(180deg, #f8e6bb, #c99d54 48%, #f6e2b4);
+      box-shadow: 0 2px 4px rgba(104,76,34,.18), inset 0 1px 2px rgba(255,255,255,.8);
+      pointer-events: none;
+    }
+    .bracelet-preview-charm {
+      z-index: 1;
+      width: 4.5rem;
+      flex: 0 0 4.5rem;
+      border: 0;
+      background: transparent;
+      padding: .25rem;
+      box-shadow: none;
+    }
+    .bracelet-preview-charm-image {
+      width: 3.5rem;
+      height: 3.5rem;
+      border: 2px solid #d6ae6d;
+      border-radius: 9999px;
+      background: white;
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(104,76,34,.18);
+    }
+    .bracelet-preview-connector {
+      width: 2px;
+      height: .75rem;
+      margin: 0 auto;
+      background: linear-gradient(90deg, #bd914b, #f6e2b4, #bd914b);
+    }
     @media (max-width: 480px) {
       #product-modal { padding: .5rem; }
       #product-modal > .product-modal-panel { max-height: 94dvh; border-radius: 1.25rem; }
@@ -327,8 +375,10 @@
               </div>
             </div>
             <div class="mb-4 rounded-2xl border border-[#ecdee1] bg-gradient-to-r from-[#fffaf7] to-[#f8e9ed] p-4">
-              <p class="mb-3 text-xs font-semibold text-stone-700">Tu diseño · arrastra para acomodar</p>
-              <div id="charms-bracelet-track" role="list" aria-label="Diseño de tu pulsera Italian Charms" class="flex min-h-24 flex-wrap items-center justify-center gap-2 rounded-xl border border-dashed border-rose-200 bg-white/70 p-3">
+              <p class="mb-1 text-xs font-semibold text-stone-700">Así queda tu pulsera</p>
+              <p class="mb-3 text-[11px] text-stone-500">Los charms se colocan sobre la cadena en el orden que eliges. Arrástralos para reacomodarlos.</p>
+              <div id="charms-bracelet-track" role="list" aria-label="Vista previa de tu pulsera con los charms elegidos" class="flex min-h-24 flex-wrap items-center justify-center gap-2 rounded-xl border border-rose-200 bg-white/70 p-3">
+                <span class="bracelet-preview-chain" aria-hidden="true"></span>
                 <p id="charms-bracelet-empty" class="text-center text-xs text-stone-500">Arrastra un charm aquí o usa el botón “Agregar charm”.</p>
               </div>
               <p id="charms-bracelet-status" aria-live="polite" class="sr-only"></p>
@@ -1372,13 +1422,14 @@
         charm.draggable = true;
         charm.setAttribute('role', 'listitem');
         charm.setAttribute('aria-label', `${product.name}${variant ? `, ${variant.color}` : ''}, posición ${index + 1}. Arrastra para reordenar.`);
-        charm.className = 'group relative w-16 shrink-0 cursor-grab rounded-lg border border-rose-200 bg-white p-1.5 text-center shadow-sm active:cursor-grabbing';
+        charm.className = 'bracelet-preview-charm group relative cursor-grab text-center active:cursor-grabbing';
         charm.innerHTML = `
           ${imageUrl
-            ? `<img src="${escapeHtml(imageUrl)}" alt="" draggable="false" class="mx-auto h-10 w-10 rounded-md object-cover">`
-            : `<span class="mx-auto flex h-10 w-10 items-center justify-center rounded-md bg-rose-50 text-[9px] text-stone-500">Charm</span>`}
-          <span class="mt-1 block truncate text-[9px] font-medium text-stone-700">${escapeHtml(variant?.color || product.name)}</span>
-          <span class="mt-1 flex justify-center gap-1">
+            ? `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(product.name)}" draggable="false" class="bracelet-preview-charm-image mx-auto">`
+            : `<span class="bracelet-preview-charm-image mx-auto flex items-center justify-center text-[9px] text-stone-500">Charm</span>`}
+          <span class="bracelet-preview-connector" aria-hidden="true"></span>
+          <span class="block truncate text-[9px] font-medium text-stone-700">${escapeHtml(variant?.color || product.name)}</span>
+          <span class="mt-1 flex justify-center gap-1 rounded-full bg-white/90">
             <button type="button" data-move-charm="previous" data-charm-index="${index}" aria-label="Mover ${escapeHtml(product.name)} a la izquierda" ${index === 0 ? 'disabled' : ''} class="store-focus rounded px-1 text-[10px] text-stone-600 disabled:opacity-30">←</button>
             <button type="button" data-move-charm="next" data-charm-index="${index}" aria-label="Mover ${escapeHtml(product.name)} a la derecha" ${index === italianCharmOrder.length - 1 ? 'disabled' : ''} class="store-focus rounded px-1 text-[10px] text-stone-600 disabled:opacity-30">→</button>
             <button type="button" data-remove-bracelet-charm="${index}" aria-label="Quitar ${escapeHtml(product.name)} de la pulsera" class="store-focus rounded px-1 text-[10px] font-bold text-rose-700">×</button>
