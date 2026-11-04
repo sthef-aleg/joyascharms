@@ -89,6 +89,12 @@
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
+    @media (max-width: 480px) {
+      #product-modal { padding: .5rem; }
+      #product-modal > .product-modal-panel { max-height: 94dvh; border-radius: 1.25rem; }
+      .product-modal-gallery { height: min(38dvh, 300px); min-height: 160px; aspect-ratio: auto; }
+      .product-modal-details { min-height: 0; padding: 1rem; }
+    }
     .category-chip { min-height: 42px; }
     .category-chip-icon { transition: transform .2s ease; }
     .category-chip:hover .category-chip-icon { transform: translateY(-2px) rotate(-8deg) scale(1.12); }
@@ -486,8 +492,8 @@
   </div>
 
   <div id="product-modal" class="fixed inset-0 z-50 bg-stone-950/70 backdrop-blur-xs hidden items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-stone-200 flex flex-col max-h-[90vh]">
-      <div class="relative bg-stone-100 aspect-square max-h-80 flex items-center justify-center overflow-hidden">
+    <div class="product-modal-panel bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-stone-200 flex flex-col max-h-[90vh]">
+      <div class="product-modal-gallery relative bg-stone-100 aspect-square max-h-80 flex items-center justify-center overflow-hidden">
         <img id="modal-image" src="" alt="" class="w-full h-full object-contain">
         <button id="modal-photo-prev" type="button" aria-label="Foto anterior" class="hidden absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-stone-800 shadow-md items-center justify-center">‹</button>
         <button id="modal-photo-next" type="button" aria-label="Foto siguiente" class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-stone-800 shadow-md items-center justify-center">›</button>
@@ -498,7 +504,7 @@
         <span id="modal-category-badge" class="absolute bottom-4 left-4 text-xs font-semibold px-3 py-1 rounded-full bg-brand-olive text-stone-100"></span>
       </div>
 
-      <div class="p-6 space-y-4 overflow-y-auto">
+      <div class="product-modal-details p-4 sm:p-6 space-y-4 overflow-y-auto">
         <div>
           <span id="modal-sku" class="text-xs font-mono text-stone-400 uppercase tracking-wider"></span>
           <h2 id="modal-name" class="font-serif text-2xl font-bold text-stone-900 mt-1 leading-snug"></h2>
