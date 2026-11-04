@@ -282,9 +282,12 @@
           <div id="modal-stock-badge" class="text-right"></div>
         </div>
 
-        <div id="modal-color-field" class="hidden space-y-1">
-          <label for="modal-color" class="text-xs font-semibold text-stone-700">Elegí el color</label>
-          <select id="modal-color" class="w-full rounded-xl border border-stone-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"></select>
+        <div id="modal-color-field" class="hidden space-y-2">
+          <div>
+            <p class="text-xs font-semibold text-stone-700">Elige uno o varios colores</p>
+            <p class="text-[11px] text-stone-500">Puedes indicar cuántas unidades quieres de cada color.</p>
+          </div>
+          <div id="modal-color-options" class="space-y-2"></div>
         </div>
         <div id="modal-photo-thumbnails" class="flex gap-2 overflow-x-auto"></div>
 
@@ -305,14 +308,6 @@
         <div id="modal-size-field" class="hidden space-y-1">
           <label for="modal-size" class="text-xs font-semibold text-stone-700">Talle</label>
           <select id="modal-size" class="w-full rounded-xl border border-stone-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"></select>
-        </div>
-
-        <div id="modal-color-field" class="hidden space-y-2">
-          <div>
-            <p class="text-xs font-semibold text-stone-700">Elige uno o varios colores</p>
-            <p class="text-[11px] text-stone-500">Puedes agregar diferentes colores del mismo modelo al carrito.</p>
-          </div>
-          <div id="modal-color-options" class="space-y-2"></div>
         </div>
 
         <button id="modal-add-to-cart" type="button" class="w-full py-3 rounded-xl bg-brand-olive hover:bg-brand-oliveLight text-white font-bold text-sm">
@@ -370,6 +365,7 @@
     let activeModalProductId = null;
     let activeModalColorVariantId = '';
     let activeModalPhotoIndex = 0;
+    let modalSelectedVariantQuantities = new Map();
     const whatsappPhone = '595973779707';
 
     const categoryLabels = {
@@ -409,70 +405,37 @@
 
     function productPhotos(product, colorVariantId = '') {
       const variant = productColorVariant(product, colorVariantId);
-      if (variant) return variant.photos || [];
-      return product.imageUrls?.length ? product.imageUrls : [product.imageUrl].filter(Boolean);
-    }
-
-    function productSizeStock(product, size, colorVariantId = '') {
-      const variant = productColorVariant(product, colorVariantId);
-      if (variant) return Math.max(0, Number(variant.stock) || 0);
-      if (!product.hasSizes) return Number(product.stock) || 0;
-      const sizeItem = (product.sizes || []).find(item => String(item.size) === String(size));
-      return sizeItem ? Math.max(0, Number(sizeItem.stock) || 0) : 0;
-    }
-
-    function productVariants(product) {
-      return Array.isArray(product.colorVariants) ? product.colorVariants : [];
-    }
-
-    function findProductVariant(product, variantId) {
-      return productVariants(product).find(variant => variant.id === variantId);
-    }
-
-    function productVariantStock(product, variantId, size = '') {
-      if (variantId) {
-        const variant = findProductVariant(product, variantId);
-        return variant ? Math.max(0, Number(variant.stock) || 0) : 0;
-      }
-      return productSizeStock(product, size);
-    }
-
-    function productVariantPrice(product, variantId) {
-      const variant = findProductVariant(product, variantId);
-      return variant ? Number(variant.sellingPrice) || 0 : Number(product.sellingPrice) || 0;
-    }
-
-    function productVariantPhotos(product, variant) {
-      const photos = Array.isArray(variant?.photos)
+      const variantPhotos = Array.isArray(variant?.photos)
         ? variant.photos.filter(photo => typeof photo === 'string' && photo)
         : [];
-      if (photos.length) return photos;
-      const hasAnyVariantPhotos = productVariants(product).some(item => Array.isArray(item.photos) && item.photos.length);
-      if (hasAnyVariantPhotos) return [];
-      const productPhotos = Array.isArray(product.imageUrls)
+      if (variantPhotos.length) return variantPhotos;
+      const hasVariantPhotos = (product.colorVariants || []).some(item => Array.isArray(item.photos) && item.photos.length);
+      if (variant && hasVariantPhotos) return [];
+      const photos = Array.isArray(product.imageUrls)
         ? product.imageUrls.filter(photo => typeof photo === 'string' && photo)
         : [];
-      return productPhotos.length ? productPhotos : (product.imageUrl ? [product.imageUrl] : []);
+      return photos.length ? photos : [product.imageUrl].filter(Boolean);
     }
 
     function productPhotoSlides(product) {
-      const variants = productVariants(product);
-      const slides = variants.flatMap(variant => productVariantPhotos(product, variant).map((url, photoIndex) => ({
-        url,
-        variantId: variant.id,
-        color: variant.color || '',
-        photoIndex
-      })));
+      const variants = Array.isArray(product.colorVariants) ? product.colorVariants : [];
+      const slides = variants.flatMap(variant => {
+        const photos = Array.isArray(variant.photos)
+          ? variant.photos.filter(photo => typeof photo === 'string' && photo)
+          : [];
+        return photos.map((url, photoIndex) => ({
+          url,
+          variantId: variant.id,
+          color: variant.color || '',
+          photoIndex
+        }));
+      });
       if (slides.length) return slides;
       const photos = Array.isArray(product.imageUrls)
         ? product.imageUrls.filter(photo => typeof photo === 'string' && photo)
         : [];
-      return (photos.length ? photos : (product.imageUrl ? [product.imageUrl] : [])).map((url, photoIndex) => ({
-        url,
-        variantId: '',
-        color: '',
-        photoIndex
-      }));
+      return (photos.length ? photos : [product.imageUrl].filter(Boolean))
+        .map((url, photoIndex) => ({ url, variantId: '', color: '', photoIndex }));
     }
 
     function escapeHtml(value) {
@@ -483,6 +446,14 @@
         '"': '&quot;',
         "'": '&#39;'
       })[character]);
+    }
+
+    function productSizeStock(product, size, colorVariantId = '') {
+      const variant = productColorVariant(product, colorVariantId);
+      if (variant) return Math.max(0, Number(variant.stock) || 0);
+      if (!product.hasSizes) return Number(product.stock) || 0;
+      const sizeItem = (product.sizes || []).find(item => String(item.size) === String(size));
+      return sizeItem ? Math.max(0, Number(sizeItem.stock) || 0) : 0;
     }
 
     function updateCartCount() {
@@ -499,23 +470,26 @@
       document.getElementById('cart-dock').classList.toggle('hidden', count === 0);
     }
 
-    function addProductToCart(product, size = '', colorVariantId = '') {
+    function addProductToCart(product, size = '', colorVariantId = '', quantity = 1, shouldRender = true) {
       if (!product || (product.hasSizes && !size) || (product.colorVariants?.length && !colorVariantId)) {
         alert(product?.colorVariants?.length && !colorVariantId ? 'Selecciona un color para agregar este producto.' : product?.hasSizes && !size ? 'Selecciona un talle para agregar este producto.' : 'No se encontró el producto.');
-        return;
+        return false;
       }
 
       const available = productSizeStock(product, size, colorVariantId);
       const existing = cart.find(item => item.productId === product.id && item.size === size && item.colorVariantId === colorVariantId);
-      if (available < 1 || (existing ? existing.quantity : 0) >= available) {
+      if (!Number.isInteger(quantity) || quantity < 1 || available < 1 || (existing ? existing.quantity : 0) + quantity > available) {
         alert('No hay más unidades disponibles para la cantidad solicitada.');
         return false;
       }
 
-      if (existing) existing.quantity += 1;
-      else cart.push({ productId: product.id, size, colorVariantId, quantity: 1 });
-      renderCart();
-      renderProducts();
+      if (existing) existing.quantity += quantity;
+      else cart.push({ productId: product.id, size, colorVariantId, quantity });
+      if (shouldRender) {
+        renderCart();
+        renderProducts();
+      }
+      return true;
     }
 
     function renderCart() {
@@ -670,7 +644,11 @@
 
       const filtered = allProducts.filter(p => {
         if (selectedCategory !== 'todos' && p.category !== selectedCategory) return false;
-        if (onlyInStock && p.stock <= 0) return false;
+        const variants = Array.isArray(p.colorVariants) ? p.colorVariants : [];
+        const hasStock = variants.length
+          ? variants.some(variant => Number(variant.stock) > 0)
+          : Number(p.stock) > 0;
+        if (onlyInStock && !hasStock) return false;
 
         if (searchQuery.trim()) {
           const q = searchQuery.toLowerCase();
@@ -693,47 +671,59 @@
 
       emptyState.classList.add('hidden');
       grid.innerHTML = filtered.map(product => {
+        const variants = Array.isArray(product.colorVariants) ? product.colorVariants : [];
+        const slides = productPhotoSlides(product);
         const cartQuantity = cart.filter(item => item.productId === product.id)
           .reduce((total, item) => total + item.quantity, 0);
-        const firstColorVariantId = product.colorVariants?.[0]?.id || '';
-        const photoSrc = productPhotos(product, firstColorVariantId)[0] || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80';
-        const inStock = product.stock > 0;
+        const firstSlide = slides[0];
+        const photoSrc = firstSlide?.url || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80';
+        const stockCount = variants.length
+          ? variants.reduce((total, variant) => total + Math.max(0, Number(variant.stock) || 0), 0)
+          : Math.max(0, Number(product.stock) || 0);
+        const inStock = stockCount > 0;
         const matText = materialLabels[product.material] || 'Acero Quirúrgico';
         const prices = variants.map(variant => Number(variant.sellingPrice) || 0);
         const priceFormatted = variants.length
           ? `Desde ${formatMoney(Math.min(...prices))}`
           : formatMoney(product.sellingPrice);
-        const colorChoices = variants.length > 1
-          ? `<div class="flex flex-wrap gap-1.5" aria-label="Colores disponibles">${variants.map((variant, index) => `
-              <button type="button" data-card-select-variant="${escapeHtml(variant.id)}" data-product-id="${escapeHtml(product.id)}" aria-label="Ver color ${escapeHtml(variant.color)}" title="${escapeHtml(variant.color)} · ${Math.max(0, Number(variant.stock) || 0)} disponibles" class="rounded-full border px-2 py-0.5 text-[10px] ${index === 0 ? 'border-amber-600 bg-amber-50 text-amber-900' : 'border-stone-200 bg-white text-stone-600'}">${escapeHtml(variant.color)}</button>
+        const defaultColorVariantId = firstSlide?.variantId || variants[0]?.id || '';
+        const colorChoices = variants.length
+          ? `<div class="flex flex-wrap gap-1.5" aria-label="Colores disponibles">${variants.map(variant => `
+              <button type="button" data-card-select-variant="${escapeHtml(variant.id)}" aria-pressed="${variant.id === defaultColorVariantId}" aria-label="Ver color ${escapeHtml(variant.color)}" title="${escapeHtml(variant.color)} · ${Math.max(0, Number(variant.stock) || 0)} disponibles" class="rounded-full border px-2 py-0.5 text-[10px] ${variant.id === defaultColorVariantId ? 'border-amber-600 bg-amber-50 text-amber-900' : 'border-stone-200 bg-white text-stone-600'}">${escapeHtml(variant.color)}</button>
             `).join('')}</div>`
-          : variants.length === 1
-            ? `<p class="text-[10px] text-stone-500">Color: ${escapeHtml(variants[0].color)}</p>`
-            : '';
+          : '';
         return `
-          <div class="store-product-card bg-white rounded-2xl border overflow-hidden transition-all duration-300 flex flex-col group">
-            <button type="button" class="store-card-image store-focus relative block w-full aspect-square overflow-hidden cursor-pointer" aria-label="Ver detalles de ${product.name}" onclick="openProductModal('${product.id}')">
-              <img src="${photoSrc}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-              <div class="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-900/75 text-stone-100 backdrop-blur-xs font-mono">${product.sku}</span>
-                ${!inStock ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-600 text-white shadow-xs">Agotado</span>` : `<span class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-emerald-700/80 text-emerald-100 backdrop-blur-xs">${product.stock} disp.</span>`}
-                ${product.colorVariants?.length ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/90 text-stone-800 shadow-xs">${product.colorVariants.length} colores</span>` : ''}
+          <div class="store-product-card bg-white rounded-2xl border overflow-hidden transition-all duration-300 flex flex-col group" data-product-card="${escapeHtml(product.id)}" data-card-slide-index="0" data-card-active-variant="${escapeHtml(defaultColorVariantId)}">
+            <div class="store-card-image relative block w-full aspect-square overflow-hidden">
+              <button type="button" data-open-product="${escapeHtml(product.id)}" class="store-focus absolute inset-0 w-full h-full cursor-pointer" aria-label="Ver detalles de ${escapeHtml(product.name)}">
+                <img data-card-image src="${escapeHtml(photoSrc)}" alt="${escapeHtml(product.name)}${firstSlide?.color ? `, color ${escapeHtml(firstSlide.color)}` : ''}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
               </button>
+              <div class="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-900/75 text-stone-100 backdrop-blur-xs font-mono">${escapeHtml(product.sku)}</span>
+                ${!inStock ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-600 text-white shadow-xs">Agotado</span>` : `<span class="text-[10px] font-medium px-2 py-0.5 rounded-md bg-emerald-700/80 text-emerald-100 backdrop-blur-xs">${stockCount} disp.</span>`}
+                ${variants.length ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/90 text-stone-800 shadow-xs">${variants.length} colores</span>` : ''}
+              </div>
+              ${slides.length > 1 ? `
+                <button type="button" data-card-photo-prev aria-label="Foto anterior de ${escapeHtml(product.name)}" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-stone-800 shadow-md">‹</button>
+                <button type="button" data-card-photo-next aria-label="Foto siguiente de ${escapeHtml(product.name)}" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-stone-800 shadow-md">›</button>
+                <span data-card-photo-count class="absolute bottom-2 right-2 rounded-full bg-stone-900/75 px-2 py-0.5 text-[10px] font-semibold text-white">1 / ${slides.length}</span>
+              ` : ''}
               ${product.category === 'anillos' && product.hasSizes ? `<span class="absolute bottom-2.5 right-2.5 text-[9px] font-bold px-2 py-0.5 rounded-md bg-amber-400 text-stone-950 shadow-xs">Con talles</span>` : ''}
             </div>
             <div class="p-3.5 sm:p-4 flex-1 flex flex-col justify-between space-y-3">
               <div>
                 <span class="text-[11px] font-medium text-amber-700 block line-clamp-1">${matText}</span>
-                <button type="button" class="store-card-name store-focus block text-left font-semibold text-xs sm:text-sm text-stone-900 line-clamp-2 mt-0.5 leading-snug transition-colors" onclick="openProductModal('${product.id}')">${product.name}</button>
+                <button type="button" data-open-product="${escapeHtml(product.id)}" class="store-card-name store-focus block text-left font-semibold text-xs sm:text-sm text-stone-900 line-clamp-2 mt-0.5 leading-snug transition-colors">${escapeHtml(product.name)}</button>
+                ${colorChoices}
               </div>
               <div class="pt-2 border-t border-stone-100 flex items-center justify-between">
                 <div>
                   <span class="text-[10px] text-stone-400 block uppercase">Precio</span>
-                  <span class="font-bold text-sm sm:text-base text-stone-900 font-serif">${product.colorVariants?.length ? `Desde ${formatMoney(Math.min(...product.colorVariants.map(variant => Number(variant.sellingPrice) || 0)))}` : priceFormatted}</span>
+                  <span class="font-bold text-sm sm:text-base text-stone-900 font-serif">${priceFormatted}</span>
                 </div>
-                <button type="button" data-add-to-cart="${product.id}" ${!inStock ? 'disabled' : ''} aria-label="${inStock ? `Agregar ${product.name} a mi selección` : `${product.name}, agotado`}" title="Agregar a mi selección" class="store-add-button store-focus px-3 py-2 rounded-xl disabled:bg-stone-300 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs">
+                <button type="button" data-add-to-cart="${escapeHtml(product.id)}" ${!inStock ? 'disabled' : ''} aria-label="${inStock ? `Agregar ${escapeHtml(product.name)} a mi selección` : `${escapeHtml(product.name)}, agotado`}" title="Agregar a mi selección" class="store-add-button store-focus px-3 py-2 rounded-xl disabled:bg-stone-300 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-xs">
                   <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.486 2.246 2.247 3.487 5.233 3.487 8.414 0 6.556-5.335 11.892-11.891 11.892h-.004c-1.99 0-3.942-.522-5.65-1.516L.057 24zm6.558-4.016c1.7.9 3.02 1.021 3.17 1.033.407.016.884-.187 1.325-.513.771-.571 1.343-1.343 1.499-1.56.36-.5.592-1.053.267-1.616-.325-.563-1.468-2.062-2.024-2.746-.56-.682-.91-.655-1.513-.149-.602.506-2.519 2.353-2.991 2.806-.473.451-.96.455-1.553.162-.594-.293-2.568-1.032-4.893-3.281-1.807-1.613-2.754-3.43-3.08-4.006-.326-.576-.061-1.258.474-1.625l.406-.309c.292-.223.667-.592.95-.9.308-.321.137-.774.175-1.014.038-.24.179-.84.39-1.158.17-.255.376-.251.54-.255.11-.003.247-.015.375-.015.133 0 .373-.021.561.261.357.535.826 1.637.899 1.759.074.122.163.335.072.612-.092.277-.306.564-.519.839-.213.275-.354.552-.171.771.183.219.905 1.56 1.754 2.37.97.917 1.827 1.13 2.055 1.256.18.101.337.153.449.247.291.246.204.847.1 1.186-.104.34-.421.826-.777 1.169-.357.345-.788.767-1.142 1.029-.589.443-.712.61-.473 1.107.16.318.767 1.182 1.66 1.822z"/></svg>
-                  <span>${inStock ? (cartQuantity > 0 ? `✓ Agregar otra (${cartQuantity})` : product.colorVariants?.length ? 'Elegir color' : product.hasSizes ? 'Elegir talle' : '＋ Agregar') : 'Agotado'}</span>
+                  <span>${inStock ? (cartQuantity > 0 ? `✓ Agregar otra (${cartQuantity})` : variants.length ? 'Elegir color' : product.hasSizes ? 'Elegir talle' : '＋ Agregar') : 'Agotado'}</span>
                 </button>
               </div>
             </div>
@@ -747,8 +737,28 @@
       const image = document.getElementById('modal-image');
       const thumbnails = document.getElementById('modal-photo-thumbnails');
       const fallbackImage = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=500&q=80';
-      image.src = photos[activeModalPhotoIndex] || photos[0] || fallbackImage;
-      image.alt = `${product.name}${productColorVariant(product, activeModalColorVariantId) ? `, ${productColorVariant(product, activeModalColorVariantId).color}` : ''}`;
+      const variant = productColorVariant(product, activeModalColorVariantId);
+      const hasVariantPhotos = (product.colorVariants || []).some(item => Array.isArray(item.photos) && item.photos.length);
+      if (!photos.length && variant && hasVariantPhotos) {
+        image.removeAttribute('src');
+        image.alt = `${product.name}, sin fotos para el color ${variant.color}`;
+      } else {
+        image.src = photos[activeModalPhotoIndex] || photos[0] || fallbackImage;
+        const colorLabel = variant && Array.isArray(variant.photos) && variant.photos.length
+          ? `, ${variant.color}`
+          : '';
+        image.alt = `${product.name}${colorLabel}`;
+      }
+      const hasCarousel = photos.length > 1;
+      const previousButton = document.getElementById('modal-photo-prev');
+      const nextButton = document.getElementById('modal-photo-next');
+      const counter = document.getElementById('modal-photo-count');
+      previousButton.classList.toggle('hidden', !hasCarousel);
+      previousButton.classList.toggle('flex', hasCarousel);
+      nextButton.classList.toggle('hidden', !hasCarousel);
+      nextButton.classList.toggle('flex', hasCarousel);
+      counter.classList.toggle('hidden', !hasCarousel);
+      counter.textContent = hasCarousel ? `${activeModalPhotoIndex + 1} / ${photos.length}` : '';
       thumbnails.replaceChildren();
       photos.forEach((photoUrl, index) => {
         const button = document.createElement('button');
@@ -768,6 +778,28 @@
       });
     }
 
+    function renderModalColorOptions(product) {
+      const container = document.getElementById('modal-color-options');
+      container.replaceChildren();
+      (product.colorVariants || []).forEach(variant => {
+        const stock = Math.max(0, Number(variant.stock) || 0);
+        const selected = modalSelectedVariantQuantities.has(variant.id);
+        const quantity = modalSelectedVariantQuantities.get(variant.id) || 1;
+        const option = document.createElement('div');
+        option.className = 'flex items-center justify-between gap-3 rounded-xl border border-stone-200 p-3';
+        option.innerHTML = `
+          <label class="flex min-w-0 items-center gap-2 text-sm text-stone-800">
+            <input type="checkbox" data-modal-variant-select="${escapeHtml(variant.id)}" ${selected ? 'checked' : ''} ${stock < 1 ? 'disabled' : ''} class="h-4 w-4 accent-amber-700">
+            <span class="truncate">${escapeHtml(variant.color)} <span class="text-xs text-stone-500">· ${stock} disponibles · ${formatMoney(Number(variant.sellingPrice) || 0)}</span></span>
+          </label>
+          <div class="flex shrink-0 items-center gap-2">
+            <button type="button" data-preview-variant="${escapeHtml(variant.id)}" class="text-xs font-semibold text-amber-800 underline underline-offset-2">Ver fotos</button>
+            <input type="number" min="1" max="${stock}" value="${quantity}" data-modal-variant-quantity="${escapeHtml(variant.id)}" aria-label="Cantidad de ${escapeHtml(variant.color)}" ${!selected || stock < 1 ? 'disabled' : ''} class="w-16 rounded-lg border border-stone-300 px-2 py-1.5 text-sm disabled:bg-stone-100">
+          </div>`;
+        container.appendChild(option);
+      });
+    }
+
     function updateProductModalVariant(product) {
       const variant = productColorVariant(product, activeModalColorVariantId);
       const size = product.hasSizes ? document.getElementById('modal-size').value : '';
@@ -775,9 +807,21 @@
       const addButton = document.getElementById('modal-add-to-cart');
       const stockBadge = document.getElementById('modal-stock-badge');
       const price = productPrice(product, activeModalColorVariantId);
-      addButton.disabled = available <= 0;
+      const selections = Array.from(modalSelectedVariantQuantities.entries());
+      const canAdd = product.colorVariants?.length
+        ? selections.length > 0 && selections.every(([variantId, quantity]) => {
+          const inCart = cart.find(item =>
+            item.productId === product.id && item.size === size && item.colorVariantId === variantId
+          )?.quantity || 0;
+          return Number.isInteger(quantity) && quantity > 0
+            && quantity + inCart <= productSizeStock(product, size, variantId);
+        })
+        : available > 0;
+      addButton.disabled = !canAdd;
       addButton.classList.toggle('opacity-50', addButton.disabled);
-      addButton.textContent = variant ? `Agregar color ${variant.color}` : 'Agregar al carrito';
+      addButton.textContent = product.colorVariants?.length
+        ? 'Agregar colores seleccionados'
+        : 'Agregar al carrito';
       document.getElementById('modal-price').textContent = formatMoney(price);
       stockBadge.innerHTML = available > 0
         ? `<span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>${available} disponibles${variant ? ` · ${variant.color}` : ''}</span>`
@@ -802,18 +846,12 @@
         || p.colorVariants?.[0]?.id
         || '';
       activeModalPhotoIndex = 0;
+      modalSelectedVariantQuantities = new Map();
+      const firstAvailableVariant = p.colorVariants?.find(variant => Number(variant.stock) > 0);
+      if (firstAvailableVariant) modalSelectedVariantQuantities.set(firstAvailableVariant.id, 1);
       const colorField = document.getElementById('modal-color-field');
-      const colorSelect = document.getElementById('modal-color');
-      colorSelect.replaceChildren();
-      (p.colorVariants || []).forEach(variant => {
-        const option = document.createElement('option');
-        option.value = variant.id;
-        option.textContent = `${variant.color} · ${variant.stock} disponibles`;
-        option.disabled = Number(variant.stock) <= 0;
-        colorSelect.appendChild(option);
-      });
-      colorSelect.value = activeModalColorVariantId;
       colorField.classList.toggle('hidden', !p.colorVariants?.length);
+      renderModalColorOptions(p);
       const sizeField = document.getElementById('modal-size-field');
       const sizeSelect = document.getElementById('modal-size');
       sizeSelect.replaceChildren();
@@ -834,10 +872,32 @@
       document.getElementById('product-modal').classList.add('flex');
     };
 
-    document.getElementById('modal-color').addEventListener('change', (event) => {
+    document.getElementById('modal-color-options').addEventListener('change', (event) => {
       const product = allProducts.find(item => item.id === activeModalProductId);
       if (!product) return;
-      activeModalColorVariantId = event.target.value;
+      const checkbox = event.target.closest('[data-modal-variant-select]');
+      const quantityInput = event.target.closest('[data-modal-variant-quantity]');
+      const variantId = checkbox?.dataset.modalVariantSelect || quantityInput?.dataset.modalVariantQuantity;
+      if (!variantId) return;
+      if (checkbox) {
+        if (checkbox.checked) modalSelectedVariantQuantities.set(variantId, 1);
+        else modalSelectedVariantQuantities.delete(variantId);
+      } else if (quantityInput && modalSelectedVariantQuantities.has(variantId)) {
+        const variant = productColorVariant(product, variantId);
+        const stock = Math.max(0, Number(variant?.stock) || 0);
+        const quantity = Math.min(stock, Math.max(1, Math.floor(Number(quantityInput.value) || 1)));
+        modalSelectedVariantQuantities.set(variantId, quantity);
+        quantityInput.value = String(quantity);
+      }
+      renderModalColorOptions(product);
+      updateProductModalVariant(product);
+    });
+    document.getElementById('modal-color-options').addEventListener('click', (event) => {
+      const button = event.target.closest('[data-preview-variant]');
+      if (!button) return;
+      const product = allProducts.find(item => item.id === activeModalProductId);
+      if (!product) return;
+      activeModalColorVariantId = button.dataset.previewVariant;
       activeModalPhotoIndex = 0;
       updateProductModalVariant(product);
     });
@@ -865,6 +925,7 @@
       if (counter) counter.textContent = `${normalizedIndex + 1} / ${slides.length}`;
       card.querySelectorAll('[data-card-select-variant]').forEach(button => {
         const isActive = button.dataset.cardSelectVariant === slide.variantId;
+        button.setAttribute('aria-pressed', String(isActive));
         button.classList.toggle('border-amber-600', isActive);
         button.classList.toggle('bg-amber-50', isActive);
         button.classList.toggle('text-amber-900', isActive);
@@ -875,27 +936,38 @@
     }
 
     document.getElementById('products-grid').addEventListener('click', (event) => {
-      const button = event.target.closest('[data-add-to-cart]');
-      if (!button) return;
-      const product = allProducts.find(item => item.id === button.dataset.addToCart);
-      if (!product) return;
-      if (product.hasSizes || product.colorVariants?.length) {
-        window.openProductModal(product.id);
-        return;
-      }
-
-      const variantButton = event.target.closest('[data-card-select-variant]');
-      if (variantButton) {
-        const product = allProducts.find(item => item.id === variantButton.dataset.productId);
-        const card = variantButton.closest('[data-product-card]');
-        if (product && card) {
-          const slides = productPhotoSlides(product);
-          const index = slides.findIndex(slide => slide.variantId === variantButton.dataset.cardSelectVariant);
-          card.dataset.cardActiveVariant = variantButton.dataset.cardSelectVariant;
+      const card = event.target.closest('[data-product-card]');
+      if (card) {
+        const product = allProducts.find(item => item.id === card.dataset.productCard);
+        if (!product) return;
+        const slides = productPhotoSlides(product);
+        if (event.target.closest('[data-card-photo-prev]')) {
+          setCardSlide(card, product, Number(card.dataset.cardSlideIndex || 0) - 1);
+          return;
+        }
+        if (event.target.closest('[data-card-photo-next]')) {
+          setCardSlide(card, product, Number(card.dataset.cardSlideIndex || 0) + 1);
+          return;
+        }
+        const variantButton = event.target.closest('[data-card-select-variant]');
+        if (variantButton) {
+          const variantId = variantButton.dataset.cardSelectVariant;
+          const index = slides.findIndex(slide => slide.variantId === variantId);
+          card.dataset.cardActiveVariant = variantId;
           if (index >= 0) setCardSlide(card, product, index);
           else {
+            const hasVariantPhotos = (product.colorVariants || []).some(variant =>
+              Array.isArray(variant.photos) && variant.photos.length
+            );
+            if (hasVariantPhotos) {
+              const image = card.querySelector('[data-card-image]');
+              image.removeAttribute('src');
+              const variant = productColorVariant(product, variantId);
+              image.alt = `${product.name}, sin fotos para el color ${variant?.color || ''}`;
+            }
             card.querySelectorAll('[data-card-select-variant]').forEach(button => {
               const isActive = button === variantButton;
+              button.setAttribute('aria-pressed', String(isActive));
               button.classList.toggle('border-amber-600', isActive);
               button.classList.toggle('bg-amber-50', isActive);
               button.classList.toggle('text-amber-900', isActive);
@@ -904,15 +976,15 @@
               button.classList.toggle('text-stone-600', !isActive);
             });
           }
+          return;
         }
-        return;
       }
 
       const addButton = event.target.closest('[data-add-to-cart]');
       if (addButton) {
         const product = allProducts.find(item => item.id === addButton.dataset.addToCart);
         if (!product) return;
-        if (product.hasSizes || productVariants(product).length) {
+        if (product.hasSizes || product.colorVariants?.length) {
           window.openProductModal(product.id);
           return;
         }
@@ -921,28 +993,58 @@
       }
 
       const productTarget = event.target.closest('[data-open-product]');
-      if (productTarget) window.openProductModal(productTarget.dataset.openProduct);
+      if (productTarget) {
+        window.openProductModal(productTarget.dataset.openProduct);
+        return;
+      }
     });
 
     document.getElementById('modal-add-to-cart').addEventListener('click', () => {
       const product = allProducts.find(item => item.id === activeModalProductId);
       if (!product) return;
       const size = product.hasSizes ? document.getElementById('modal-size').value : '';
-      addProductToCart(product, size, activeModalColorVariantId);
+      const selections = product.colorVariants?.length
+        ? Array.from(modalSelectedVariantQuantities.entries())
+        : [['', 1]];
+      if (!selections.length) return;
+      const hasUnavailableSelection = selections.some(([variantId, quantity]) => {
+        const inCart = cart.find(item =>
+          item.productId === product.id && item.size === size && item.colorVariantId === variantId
+        )?.quantity || 0;
+        return quantity + inCart > productSizeStock(product, size, variantId);
+      });
+      if (hasUnavailableSelection) {
+        alert('La disponibilidad de uno o más colores cambió. Ajusta las cantidades antes de continuar.');
+        updateProductModalVariant(product);
+        return;
+      }
+      for (const [variantId, quantity] of selections) {
+        const added = addProductToCart(product, size, variantId, quantity, false);
+        if (!added) return;
+      }
+      renderProducts();
       window.closeProductModal();
+      document.body.classList.add('overflow-hidden');
+      renderCart();
       document.getElementById('cart-modal').classList.remove('hidden');
       document.getElementById('cart-modal').classList.add('flex');
     });
 
     document.getElementById('modal-photo-prev').addEventListener('click', () => {
-      if (!activeModalPhotos.length) return;
-      activeModalPhotoIndex = (activeModalPhotoIndex - 1 + activeModalPhotos.length) % activeModalPhotos.length;
-      renderModalPhoto();
+      const product = allProducts.find(item => item.id === activeModalProductId);
+      if (!product) return;
+      const photos = productPhotos(product, activeModalColorVariantId);
+      if (!photos.length) return;
+      activeModalPhotoIndex = (activeModalPhotoIndex - 1 + photos.length) % photos.length;
+      renderModalPhotos(product);
     });
     document.getElementById('modal-photo-next').addEventListener('click', () => {
-      if (!activeModalPhotos.length) return;
-      activeModalPhotoIndex = (activeModalPhotoIndex + 1) % activeModalPhotos.length;
-      renderModalPhoto();
+      const product = allProducts.find(item => item.id === activeModalProductId);
+      if (!product) return;
+      const photos = productPhotos(product, activeModalColorVariantId);
+      if (!photos.length) return;
+      activeModalPhotoIndex = (activeModalPhotoIndex + 1) % photos.length;
+      renderModalPhotos(product);
     });
 
     document.getElementById('open-cart-button').addEventListener('click', () => {
