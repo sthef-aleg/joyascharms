@@ -970,7 +970,7 @@
     });
 
     function productColorVariant(product, colorVariantId) {
-      return (product.colorVariants || []).find(variant => variant.id === colorVariantId);
+      return (product.colorVariants || []).find(variant => String(variant.id) === String(colorVariantId));
     }
 
     function displayColorName(color) {
@@ -987,14 +987,36 @@
       return Number(productColorVariant(product, colorVariantId)?.sellingPrice ?? product.sellingPrice) || 0;
     }
 
-    function productPhotos(product, colorVariantId = '') {
-      const variant = productColorVariant(product, colorVariantId);
-      const variantPhotos = Array.isArray(variant?.photos)
+    function variantPhotos(product, variant, variantIndex) {
+      const variantPhotos = Array.isArray(variant.photos)
         ? variant.photos.filter(photo => typeof photo === 'string' && photo)
         : [];
       if (variantPhotos.length) return variantPhotos;
-      const hasVariantPhotos = (product.colorVariants || []).some(item => Array.isArray(item.photos) && item.photos.length);
-      if (variant && hasVariantPhotos) return [];
+
+      const variantImage = [variant.imageUrl, variant.image, variant.photo]
+        .find(photo => typeof photo === 'string' && photo);
+      if (variantImage) return [variantImage];
+
+      const imageNumber = variantIndex + 1;
+      const productImage = [
+        product[`image${imageNumber}`],
+        product[`imagen${imageNumber}`],
+        product[`imageUrl${imageNumber}`],
+        product[`foto${imageNumber}`],
+        product.imageUrls?.[variantIndex]
+      ].find(photo => typeof photo === 'string' && photo);
+      return productImage ? [productImage] : [];
+    }
+
+    function productPhotos(product, colorVariantId = '') {
+      const variants = Array.isArray(product.colorVariants) ? product.colorVariants : [];
+      const variantIndex = variants.findIndex(item => String(item.id) === String(colorVariantId));
+      const variant = variantIndex >= 0 ? variants[variantIndex] : null;
+      if (variant) {
+        const photos = variantPhotos(product, variant, variantIndex);
+        if (photos.length) return photos;
+        if (variants.some((item, index) => variantPhotos(product, item, index).length)) return [];
+      }
       const photos = Array.isArray(product.imageUrls)
         ? product.imageUrls.filter(photo => typeof photo === 'string' && photo)
         : [];
@@ -1003,10 +1025,8 @@
 
     function productPhotoSlides(product) {
       const variants = Array.isArray(product.colorVariants) ? product.colorVariants : [];
-      const slides = variants.flatMap(variant => {
-        const photos = Array.isArray(variant.photos)
-          ? variant.photos.filter(photo => typeof photo === 'string' && photo)
-          : [];
+      const slides = variants.flatMap((variant, variantIndex) => {
+        const photos = variantPhotos(product, variant, variantIndex);
         return photos.map((url, photoIndex) => ({
           url,
           variantId: variant.id,
@@ -1355,7 +1375,7 @@
           productSizeStock(product, '', variant.id) > cartQuantityFor(product.id, variant.id)
         ) || variants[0];
         const variantId = defaultVariant?.id || '';
-        const imageUrl = productPhotos(product, variantId)[0] || product.imageUrl || '';
+        const imageUrl = productPhotos(product, variantId)[0] || '';
         const stock = productTotalStock(product);
         const price = variants.length
           ? Math.min(...variants.map(variant => Number(variant.sellingPrice) || 0))
@@ -1607,7 +1627,7 @@
         const defaultColorVariantId = firstSlide?.variantId || variants[0]?.id || '';
         const colorChoices = variants.length
           ? `<div class="flex flex-wrap gap-1.5" aria-label="Colores disponibles">${variants.map(variant => `
-              <button type="button" data-card-select-variant="${escapeHtml(variant.id)}" aria-pressed="${variant.id === defaultColorVariantId}" aria-label="Ver color ${escapeHtml(variant.color)}" title="${escapeHtml(variant.color)} · ${Math.max(0, Number(variant.stock) || 0)} disponibles" class="rounded-full border px-2 py-0.5 text-[10px] ${variant.id === defaultColorVariantId ? 'border-amber-600 bg-amber-50 text-amber-900' : 'border-stone-200 bg-white text-stone-600'}">${escapeHtml(variant.color)}</button>
+             <button type="button" data-card-select-variant="${escapeHtml(variant.id)}" aria-pressed="${String(variant.id) === String(defaultColorVariantId)}" aria-label="Ver color ${escapeHtml(variant.color)}" title="${escapeHtml(variant.color)} · ${Math.max(0, Number(variant.stock) || 0)} disponibles" class="rounded-full border px-2 py-0.5 text-[10px] ${String(variant.id) === String(defaultColorVariantId) ? 'border-amber-600 bg-amber-50 text-amber-900' : 'border-stone-200 bg-white text-stone-600'}">${escapeHtml(variant.color)}</button>
             `).join('')}</div>`
           : '';
         return `
@@ -1798,8 +1818,17 @@
       const variantId = checkbox?.dataset.modalVariantSelect || quantityInput?.dataset.modalVariantQuantity;
       if (!variantId) return;
       if (checkbox) {
-        if (checkbox.checked) modalSelectedVariantQuantities.set(variantId, 1);
-        else modalSelectedVariantQuantities.delete(variantId);
+        if (checkbox.checked) {
+          modalSelectedVariantQuantities.set(variantId, 1);
+          activeModalColorVariantId = variantId;
+        } else {
+          modalSelectedVariantQuantities.delete(variantId);
+          if (String(activeModalColorVariantId) === variantId) {
+            activeModalColorVariantId = modalSelectedVariantQuantities.keys().next().value
+              || product.colorVariants?.[0]?.id
+              || '';
+          }
+        }
       } else if (quantityInput && modalSelectedVariantQuantities.has(variantId)) {
         const variant = productColorVariant(product, variantId);
         const stock = Math.max(0, Number(variant?.stock) || 0);
@@ -1842,7 +1871,7 @@
       const counter = card.querySelector('[data-card-photo-count]');
       if (counter) counter.textContent = `${normalizedIndex + 1} / ${slides.length}`;
       card.querySelectorAll('[data-card-select-variant]').forEach(button => {
-        const isActive = button.dataset.cardSelectVariant === slide.variantId;
+        const isActive = button.dataset.cardSelectVariant === String(slide.variantId);
         button.setAttribute('aria-pressed', String(isActive));
         button.classList.toggle('border-amber-600', isActive);
         button.classList.toggle('bg-amber-50', isActive);
@@ -1870,12 +1899,12 @@
         const variantButton = event.target.closest('[data-card-select-variant]');
         if (variantButton) {
           const variantId = variantButton.dataset.cardSelectVariant;
-          const index = slides.findIndex(slide => slide.variantId === variantId);
+          const index = slides.findIndex(slide => String(slide.variantId) === variantId);
           card.dataset.cardActiveVariant = variantId;
           if (index >= 0) setCardSlide(card, product, index);
           else {
-            const hasVariantPhotos = (product.colorVariants || []).some(variant =>
-              Array.isArray(variant.photos) && variant.photos.length
+            const hasVariantPhotos = (product.colorVariants || []).some((variant, index) =>
+              variantPhotos(product, variant, index).length > 0
             );
             if (hasVariantPhotos) {
               const image = card.querySelector('[data-card-image]');
@@ -2001,6 +2030,33 @@
       if (!button || button.disabled) return;
       selectedItalianCharmsBaseVariantId = button.dataset.baseVariant;
       renderItalianCharmsBuilder();
+    });
+    document.getElementById('charms-product-grid').addEventListener('change', event => {
+      const select = event.target.closest('[data-charm-variant]');
+      if (!select) return;
+      const card = select.closest('[data-charm-product]');
+      const imageContainer = card?.querySelector('[data-charm-drag-source]');
+      const product = allProducts.find(item => item.id === card?.dataset.charmProduct);
+      if (!product || !imageContainer) return;
+
+      const imageUrl = productPhotos(product, select.value)[0] || '';
+      if (imageUrl) {
+        let image = imageContainer.querySelector('img');
+        if (!image) {
+          image = document.createElement('img');
+          image.alt = '';
+          image.draggable = false;
+          image.className = 'h-full w-full object-cover';
+          image.loading = 'lazy';
+          imageContainer.replaceChildren(image);
+        }
+        image.src = imageUrl;
+      } else {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'flex h-full items-center justify-center text-xs text-stone-400';
+        placeholder.textContent = 'Arrastra este charm';
+        imageContainer.replaceChildren(placeholder);
+      }
     });
     document.getElementById('charms-product-grid').addEventListener('click', event => {
       const button = event.target.closest('[data-add-charm]');
